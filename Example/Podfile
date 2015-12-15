@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'BUKDataSourcesKit_Example', :exclusive => true do
+  pod "BUKDataSourcesKit", :path => "../"
+end
+
+target 'BUKDataSourcesKit_Tests', :exclusive => true do
+  pod "BUKDataSourcesKit", :path => "../"
+
+  
+end
