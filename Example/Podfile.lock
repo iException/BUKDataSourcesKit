@@ -1,0 +1,14 @@
+PODS:
+  - BUKDataSourcesKit (0.1.0)
+
+DEPENDENCIES:
+  - BUKDataSourcesKit (from `../`)
+
+EXTERNAL SOURCES:
+  BUKDataSourcesKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BUKDataSourcesKit: 468e7fb9372b3c1269d5816798a96c9d3c9203b0
+
+COCOAPODS: 0.39.0

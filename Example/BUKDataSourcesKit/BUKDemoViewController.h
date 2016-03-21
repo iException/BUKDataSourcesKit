@@ -1,5 +1,5 @@
 //
-//  BUKAppDelegate.h
+//  BUKViewController.h
 //  BUKDataSourcesKit
 //
 //  Created by Yiming Tang on 12/15/2015.
@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-@interface BUKAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface BUKDemoViewController : UIViewController
 
 @end

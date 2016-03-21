@@ -13,16 +13,16 @@
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
-		6003F59E195388D20070C39A /* BUKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* BUKAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* BUKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BUKViewController.m */; };
+		6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* BUKDemoAppDelegate.m */; };
+		6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BUKDemoViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		D8A619D5DB8FB450C8576AC0 /* Pods_BUKDataSourcesKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A4974030A5612D52749C80 /* Pods_BUKDataSourcesKit_Tests.framework */; };
+		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,10 +47,10 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* BUKDataSourcesKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BUKDataSourcesKit-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* BUKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKAppDelegate.h; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* BUKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* BUKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* BUKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKViewController.m; sourceTree = "<group>"; };
+		6003F59C195388D20070C39A /* BUKDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKDemoAppDelegate.h; sourceTree = "<group>"; };
+		6003F59D195388D20070C39A /* BUKDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKDemoAppDelegate.m; sourceTree = "<group>"; };
+		6003F5A5195388D20070C39A /* BUKDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKDemoViewController.h; sourceTree = "<group>"; };
+		6003F5A6195388D20070C39A /* BUKDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKDemoViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.xctest; path = BUKDataSourcesKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -60,10 +60,10 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		65A4974030A5612D52749C80 /* Pods_BUKDataSourcesKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BUKDataSourcesKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80317861F60E475047CB77FA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C71CC3F5DA33F4B7F496EE5F /* Pods-BUKDataSourcesKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BUKDataSourcesKit_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BUKDataSourcesKit_Example/Pods-BUKDataSourcesKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D3A9FE584BE444AA1E6940D1 /* Pods-BUKDataSourcesKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BUKDataSourcesKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BUKDataSourcesKit_Example/Pods-BUKDataSourcesKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		DA68C964324A9BE46271F4D3 /* Pods_BUKDataSourcesKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BUKDataSourcesKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F8DA807F8413C5419A7580CB /* Pods-BUKDataSourcesKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BUKDataSourcesKit_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BUKDataSourcesKit_Tests/Pods-BUKDataSourcesKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,13 +141,13 @@
 		6003F593195388D20070C39A /* Example for BUKDataSourcesKit */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* BUKAppDelegate.h */,
-				6003F59D195388D20070C39A /* BUKAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* BUKViewController.h */,
-				6003F5A6195388D20070C39A /* BUKViewController.m */,
+				6003F59C195388D20070C39A /* BUKDemoAppDelegate.h */,
+				6003F59D195388D20070C39A /* BUKDemoAppDelegate.m */,
+				6003F5A5195388D20070C39A /* BUKDemoViewController.h */,
+				6003F5A6195388D20070C39A /* BUKDemoViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */,
 			);
 			name = "Example for BUKDataSourcesKit";
 			path = BUKDataSourcesKit;
@@ -276,7 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -390,8 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F59E195388D20070C39A /* BUKAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* BUKViewController.m in Sources */,
+				6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */,
+				6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

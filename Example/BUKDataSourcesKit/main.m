@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 Yiming Tang. All rights reserved.
 //
 
-@import UIKit;
-#import "BUKAppDelegate.h"
+#import "BUKDemoAppDelegate.h"
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([BUKAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([BUKDemoAppDelegate class]));
     }
 }
