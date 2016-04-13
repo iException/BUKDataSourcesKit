@@ -39,9 +39,9 @@
 }
 
 
-- (void)configureSupplementaryView:(UICollectionReusableView *)view item:(BUKCollectionViewItem *)item kind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureSupplementaryView:(UICollectionReusableView *)view item:(BUKCollectionViewItem *)item kind:(NSString *)kind inCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
     if (self.viewConfigurator) {
-        self.viewConfigurator(view, item, kind, indexPath);
+        self.viewConfigurator(view, item, kind, collectionView, indexPath);
     }
 }
 

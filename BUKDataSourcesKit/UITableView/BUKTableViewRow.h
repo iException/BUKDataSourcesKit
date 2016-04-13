@@ -9,6 +9,12 @@
 @import Foundation;
 
 
+@protocol BUKTableViewCellFactoryProtocol;
+
+
 @interface BUKTableViewRow : NSObject
+
+@property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
+@property (nonatomic) id object;
 
 @end

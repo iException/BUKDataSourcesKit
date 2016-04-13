@@ -9,6 +9,10 @@
 @import Foundation;
 
 
+@class BUKTableViewRow;
+
 @interface BUKTableViewSection : NSObject
+
+@property (nonatomic) NSArray<BUKTableViewRow *> *rows;
 
 @end

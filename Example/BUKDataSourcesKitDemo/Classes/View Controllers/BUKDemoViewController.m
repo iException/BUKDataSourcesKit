@@ -7,6 +7,8 @@
 //
 
 #import "BUKDemoViewController.h"
+#import "BUKDemoTableViewController.h"
+#import "BUKDemoCollectionViewController.h"
 
 
 @implementation BUKDemoViewController
@@ -15,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.title = @"BUKDataSourcesKit";
 }
 
 @end

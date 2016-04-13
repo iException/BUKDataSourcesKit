@@ -83,7 +83,7 @@
     if (supplementaryViewFactory) {
         NSString *reuseIdentifier = [supplementaryViewFactory reuseIdentifierForItem:item kind:kind atIndexPath:indexPath];
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-        [supplementaryViewFactory configureSupplementaryView:view item:item kind:kind atIndexPath:indexPath];
+        [supplementaryViewFactory configureSupplementaryView:view item:item kind:kind inCollectionView:collectionView atIndexPath:indexPath];
         return view;
     }
 
