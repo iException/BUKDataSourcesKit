@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "BUKDataSourcesKit_Example.app"
-               BlueprintName = "BUKDataSourcesKit_Example"
+               BuildableName = "BUKDataSourcesKitDemo.app"
+               BlueprintName = "BUKDataSourcesKitDemo"
                ReferencedContainer = "container:BUKDataSourcesKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "BUKDataSourcesKit_Tests.xctest"
-               BlueprintName = "BUKDataSourcesKit_Tests"
+               BuildableName = "BUKDataSourcesKitTests.xctest"
+               BlueprintName = "BUKDataSourcesKitTests"
                ReferencedContainer = "container:BUKDataSourcesKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "BUKDataSourcesKit_Example.app"
-            BlueprintName = "BUKDataSourcesKit_Example"
+            BuildableName = "BUKDataSourcesKitDemo.app"
+            BlueprintName = "BUKDataSourcesKitDemo"
             ReferencedContainer = "container:BUKDataSourcesKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "BUKDataSourcesKit_Example.app"
-            BlueprintName = "BUKDataSourcesKit_Example"
+            BuildableName = "BUKDataSourcesKitDemo.app"
+            BlueprintName = "BUKDataSourcesKitDemo"
             ReferencedContainer = "container:BUKDataSourcesKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "BUKDataSourcesKit_Example.app"
-            BlueprintName = "BUKDataSourcesKit_Example"
+            BuildableName = "BUKDataSourcesKitDemo.app"
+            BlueprintName = "BUKDataSourcesKitDemo"
             ReferencedContainer = "container:BUKDataSourcesKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -8,7 +8,11 @@
 
 @import Foundation;
 
+@class BUKCollectionViewItem;
+
 
 @interface BUKCollectionViewSection : NSObject
+
+@property (nonatomic) NSArray<BUKCollectionViewItem *> *items;
 
 @end
