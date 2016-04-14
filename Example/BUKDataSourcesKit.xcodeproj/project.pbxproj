@@ -625,7 +625,7 @@
 				INFOPLIST_FILE = "Tests/Resources/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUKDataSourcesKit_Example.app/BUKDataSourcesKit_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUKDataSourcesKitDemo.app/BUKDataSourcesKitDemo";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -645,7 +645,7 @@
 				INFOPLIST_FILE = "Tests/Resources/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUKDataSourcesKit_Example.app/BUKDataSourcesKit_Example";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BUKDataSourcesKitDemo.app/BUKDataSourcesKitDemo";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
