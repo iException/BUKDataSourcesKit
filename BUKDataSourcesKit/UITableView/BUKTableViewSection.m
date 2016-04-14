@@ -11,4 +11,21 @@
 
 @implementation BUKTableViewSection
 
+#pragma mark - Initializer
+
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    if ((self = [super init])) {
+        _rows = [rows copy];
+        _headerViewFactory = headerViewFactory;
+        _footerViewFactory = footerViewFactory;
+    }
+
+    return self;
+}
+
+
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows {
+    return [self initWithRows:rows headerViewFactory:nil footerViewFactory:nil];
+}
+
 @end

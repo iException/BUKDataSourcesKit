@@ -11,4 +11,15 @@
 
 @implementation BUKTableViewRow
 
+#pragma mark - Initializer
+
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+    if ((self = [super init])) {
+        _object = object;
+        _cellFactory = cellFactory;
+    }
+
+    return self;
+}
+
 @end

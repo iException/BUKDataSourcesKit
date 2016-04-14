@@ -13,7 +13,7 @@
 
 @interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource>
 
-@property (nonatomic) NSArray<BUKTableViewSection *> *sections;
+@property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;
 
 - (instancetype)init NS_UNAVAILABLE;

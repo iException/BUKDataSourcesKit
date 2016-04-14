@@ -26,6 +26,8 @@
 		DC641DDE572BFAE9685F2971 /* Pods_BUKDataSourcesKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED7AB59563B3A593C2906C /* Pods_BUKDataSourcesKitTests.framework */; };
 		F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */; };
 		F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */; };
+		F111A8B91CBF708E002FE5E6 /* BUKDemoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */; };
+		F111A8C31CBF7F9D002FE5E6 /* BUKDemoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */; };
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,10 @@
 		F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewController.m; sourceTree = "<group>"; };
 		F111A8AF1CBE4543002FE5E6 /* BUKDemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewController.h; sourceTree = "<group>"; };
 		F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewController.m; sourceTree = "<group>"; };
+		F111A8B71CBF708E002FE5E6 /* BUKDemoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewCell.h; sourceTree = "<group>"; };
+		F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewCell.m; sourceTree = "<group>"; };
+		F111A8C11CBF7F9D002FE5E6 /* BUKDemoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoViewModel.h; sourceTree = "<group>"; };
+		F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoViewModel.m; sourceTree = "<group>"; };
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,12 +205,12 @@
 		F111A89E1CBE15F6002FE5E6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5A5195388D20070C39A /* BUKDemoViewController.h */,
-				6003F5A6195388D20070C39A /* BUKDemoViewController.m */,
 				F111A8AC1CBE4523002FE5E6 /* BUKDemoCollectionViewController.h */,
 				F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */,
 				F111A8AF1CBE4543002FE5E6 /* BUKDemoTableViewController.h */,
 				F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */,
+				6003F5A5195388D20070C39A /* BUKDemoViewController.h */,
+				6003F5A6195388D20070C39A /* BUKDemoViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -212,6 +218,8 @@
 		F111A89F1CBE1603002FE5E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F111A8B71CBF708E002FE5E6 /* BUKDemoTableViewCell.h */,
+				F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +227,8 @@
 		F111A8A01CBE1609002FE5E6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F111A8C11CBF7F9D002FE5E6 /* BUKDemoViewModel.h */,
+				F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -451,9 +461,11 @@
 			files = (
 				6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */,
+				F111A8C31CBF7F9D002FE5E6 /* BUKDemoViewModel.m in Sources */,
 				F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */,
+				F111A8B91CBF708E002FE5E6 /* BUKDemoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

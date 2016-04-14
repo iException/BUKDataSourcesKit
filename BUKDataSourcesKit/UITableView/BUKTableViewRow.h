@@ -17,4 +17,6 @@
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id object;
 
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+
 @end

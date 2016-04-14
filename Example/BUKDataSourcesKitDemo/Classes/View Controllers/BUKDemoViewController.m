@@ -9,6 +9,12 @@
 #import "BUKDemoViewController.h"
 #import "BUKDemoTableViewController.h"
 #import "BUKDemoCollectionViewController.h"
+#import "BUKDemoTableViewCell.h"
+#import "BUKDemoViewModel.h"
+#import <BUKDataSourcesKit/BUKTableViewDataSourceProvider.h>
+#import <BUKDataSourcesKit/BUKTableViewSection.h>
+#import <BUKDataSourcesKit/BUKTableViewRow.h>
+#import <BUKDataSourcesKit/BUKTableViewCellFactory.h>
 
 
 @implementation BUKDemoViewController
@@ -19,6 +25,20 @@
     [super viewDidLoad];
 
     self.title = @"BUKDataSourcesKit";
+
+    BUKTableViewCellFactory *cellFactory = [[BUKTableViewCellFactory alloc] initWithCellClass:[BUKDemoTableViewCell class] configurator:^(BUKDemoTableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        BUKDemoViewModel *viewModel = row.object;
+        cell.textLabel.text = viewModel.title;
+        cell.detailTextLabel.text = viewModel.subtitle;
+    }];
+
+    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"Title 1" subtitle:@"Subtitle 1"] cellFactory:cellFactory];
+    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"Title 2" subtitle:@"Subtitle 2"] cellFactory:cellFactory];
+    BUKTableViewSection *section1 = [[BUKTableViewSection alloc] initWithRows:@[row1, row2]];
+
+    self.dataSourceProvider.sections = @[
+        section1
+    ];
 }
 
 @end

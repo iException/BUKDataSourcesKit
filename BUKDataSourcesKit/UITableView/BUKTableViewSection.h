@@ -10,9 +10,16 @@
 
 
 @class BUKTableViewRow;
+@protocol BUKTableViewHeaderFooterViewFactoryProtocol;
 
 @interface BUKTableViewSection : NSObject
 
-@property (nonatomic) NSArray<BUKTableViewRow *> *rows;
+@property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
+@property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
+@property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
+@property (nonatomic) id object;
+
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows;
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory NS_DESIGNATED_INITIALIZER;
 
 @end

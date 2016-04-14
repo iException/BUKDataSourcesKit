@@ -6,10 +6,8 @@
 //  Copyright (c) 2015 Yiming Tang. All rights reserved.
 //
 
-@import UIKit;
+#import <BUKDataSourcesKit/BUKTableViewController.h>
 
-
-@interface BUKDemoViewController : UITableViewController
-
+@interface BUKDemoViewController : BUKTableViewController
 
 @end
