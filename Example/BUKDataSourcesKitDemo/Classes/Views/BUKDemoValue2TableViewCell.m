@@ -1,22 +1,18 @@
 //
-//  BUKDemoTableViewCell.m
+//  BUKDemoValue2TableViewCell.m
 //  BUKDataSourcesKit
 //
 //  Created by Yiming Tang on 4/14/16.
 //  Copyright © 2016 Yiming Tang. All rights reserved.
 //
 
-#import "BUKDemoTableViewCell.h"
+#import "BUKDemoValue2TableViewCell.h"
 
 
-@implementation BUKDemoTableViewCell
+@implementation BUKDemoValue2TableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-
-    }
-    return self;
+    return [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier];
 }
-
 
 @end

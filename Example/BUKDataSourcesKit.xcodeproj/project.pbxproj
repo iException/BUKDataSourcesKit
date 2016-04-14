@@ -24,8 +24,11 @@
 		DC641DDE572BFAE9685F2971 /* Pods_BUKDataSourcesKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED7AB59563B3A593C2906C /* Pods_BUKDataSourcesKitTests.framework */; };
 		F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */; };
 		F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */; };
-		F111A8B91CBF708E002FE5E6 /* BUKDemoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */; };
-		F111A8C31CBF7F9D002FE5E6 /* BUKDemoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */; };
+		F111A8B91CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */; };
+		F111A8C31CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8C21CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m */; };
+		F128CB031CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB021CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m */; };
+		F128CB061CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB051CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m */; };
+		F128CB091CBF9EF2000ADB19 /* BUKDemoImageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB081CBF9EF2000ADB19 /* BUKDemoImageViewModel.m */; };
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -69,10 +72,16 @@
 		F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewController.m; sourceTree = "<group>"; };
 		F111A8AF1CBE4543002FE5E6 /* BUKDemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewController.h; sourceTree = "<group>"; };
 		F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewController.m; sourceTree = "<group>"; };
-		F111A8B71CBF708E002FE5E6 /* BUKDemoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewCell.h; sourceTree = "<group>"; };
-		F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewCell.m; sourceTree = "<group>"; };
-		F111A8C11CBF7F9D002FE5E6 /* BUKDemoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoViewModel.h; sourceTree = "<group>"; };
-		F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoViewModel.m; sourceTree = "<group>"; };
+		F111A8B71CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoSubtitleTableViewCell.h; sourceTree = "<group>"; };
+		F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoSubtitleTableViewCell.m; sourceTree = "<group>"; };
+		F111A8C11CBF7F9D002FE5E6 /* BUKDemoTextViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTextViewModel.h; sourceTree = "<group>"; };
+		F111A8C21CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTextViewModel.m; sourceTree = "<group>"; };
+		F128CB011CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoValue1TableViewCell.h; sourceTree = "<group>"; };
+		F128CB021CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoValue1TableViewCell.m; sourceTree = "<group>"; };
+		F128CB041CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoValue2TableViewCell.h; sourceTree = "<group>"; };
+		F128CB051CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoValue2TableViewCell.m; sourceTree = "<group>"; };
+		F128CB071CBF9EF2000ADB19 /* BUKDemoImageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoImageViewModel.h; sourceTree = "<group>"; };
+		F128CB081CBF9EF2000ADB19 /* BUKDemoImageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoImageViewModel.m; sourceTree = "<group>"; };
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,8 +219,12 @@
 		F111A89F1CBE1603002FE5E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F111A8B71CBF708E002FE5E6 /* BUKDemoTableViewCell.h */,
-				F111A8B81CBF708E002FE5E6 /* BUKDemoTableViewCell.m */,
+				F111A8B71CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.h */,
+				F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */,
+				F128CB011CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.h */,
+				F128CB021CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m */,
+				F128CB041CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.h */,
+				F128CB051CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,8 +232,10 @@
 		F111A8A01CBE1609002FE5E6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F111A8C11CBF7F9D002FE5E6 /* BUKDemoViewModel.h */,
-				F111A8C21CBF7F9D002FE5E6 /* BUKDemoViewModel.m */,
+				F111A8C11CBF7F9D002FE5E6 /* BUKDemoTextViewModel.h */,
+				F111A8C21CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m */,
+				F128CB071CBF9EF2000ADB19 /* BUKDemoImageViewModel.h */,
+				F128CB081CBF9EF2000ADB19 /* BUKDemoImageViewModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -453,11 +468,14 @@
 			files = (
 				6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */,
-				F111A8C31CBF7F9D002FE5E6 /* BUKDemoViewModel.m in Sources */,
+				F111A8C31CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m in Sources */,
 				F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */,
-				F111A8B91CBF708E002FE5E6 /* BUKDemoTableViewCell.m in Sources */,
+				F128CB091CBF9EF2000ADB19 /* BUKDemoImageViewModel.m in Sources */,
+				F128CB061CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m in Sources */,
+				F111A8B91CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m in Sources */,
+				F128CB031CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

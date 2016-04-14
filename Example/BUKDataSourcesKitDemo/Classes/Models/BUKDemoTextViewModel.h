@@ -6,10 +6,8 @@
 //  Copyright © 2016 Yiming Tang. All rights reserved.
 //
 
-@import Foundation;
 
-
-@interface BUKDemoViewModel : NSObject
+@interface BUKDemoTextViewModel : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;

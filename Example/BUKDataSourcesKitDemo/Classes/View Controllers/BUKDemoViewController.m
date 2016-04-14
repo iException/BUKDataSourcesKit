@@ -9,8 +9,8 @@
 #import "BUKDemoViewController.h"
 #import "BUKDemoTableViewController.h"
 #import "BUKDemoCollectionViewController.h"
-#import "BUKDemoTableViewCell.h"
-#import "BUKDemoViewModel.h"
+#import "BUKDemoSubtitleTableViewCell.h"
+#import "BUKDemoTextViewModel.h"
 
 
 @implementation BUKDemoViewController
@@ -22,28 +22,26 @@
 
     self.title = @"BUKDataSourcesKit";
 
-    BUKTableViewCellFactory *cellFactory = [[BUKTableViewCellFactory alloc] initWithCellClass:[BUKDemoTableViewCell class] configurator:^(BUKDemoTableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
-        BUKDemoViewModel *viewModel = row.object;
+    BUKTableViewCellFactory *cellFactory = [[BUKTableViewCellFactory alloc] initWithCellClass:[BUKDemoSubtitleTableViewCell class] configurator:^(BUKDemoSubtitleTableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        BUKDemoTextViewModel *viewModel = row.object;
         cell.textLabel.text = viewModel.title;
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
 
     __weak typeof(self)weakSelf = self;
-    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"UITableViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UITableViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
         BUKDemoTableViewController *viewController = [[BUKDemoTableViewController alloc] init];
         [weakSelf.navigationController pushViewController:viewController animated:YES];
     }];
 
-    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"UICollectionViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UICollectionViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
         BUKDemoCollectionViewController *viewController = [[BUKDemoCollectionViewController alloc] init];
         [weakSelf.navigationController pushViewController:viewController animated:YES];
     }];
 
     BUKTableViewSection *section1 = [[BUKTableViewSection alloc] initWithRows:@[row1, row2]];
 
-    self.dataSourceProvider.sections = @[
-        section1
-    ];
+    self.dataSourceProvider.sections = @[section1];
 }
 
 @end

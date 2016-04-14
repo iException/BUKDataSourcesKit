@@ -6,7 +6,6 @@
 //  Copyright © 2016 Yiming Tang. All rights reserved.
 //
 
-#import <BUKDataSourcesKit/BUKCollectionViewController.h>
 
 @interface BUKDemoCollectionViewController : BUKCollectionViewController
 

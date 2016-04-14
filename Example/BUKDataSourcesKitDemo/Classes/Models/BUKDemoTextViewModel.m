@@ -6,9 +6,9 @@
 //  Copyright © 2016 Yiming Tang. All rights reserved.
 //
 
-#import "BUKDemoViewModel.h"
+#import "BUKDemoTextViewModel.h"
 
-@implementation BUKDemoViewModel
+@implementation BUKDemoTextViewModel
 
 #pragma mark - Class Methods
 
