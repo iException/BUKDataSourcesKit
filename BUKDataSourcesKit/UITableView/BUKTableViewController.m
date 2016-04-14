@@ -60,6 +60,7 @@
     [self clearSelectionsIfNecessary:animated];
 }
 
+
 #pragma mark - Private
 
 - (void)performInitialLoad {
@@ -71,12 +72,12 @@
 
 
 - (void)clearSelectionsIfNecessary:(BOOL)animated {
-    if (self.clearsSelectionOnViewWillAppear) {
+    if (!self.clearsSelectionOnViewWillAppear) {
         return;
     }
 
     NSArray<NSIndexPath *> *selectedIndexPaths = self.tableView.indexPathsForSelectedRows;
-    if (selectedIndexPaths) {
+    if (!selectedIndexPaths) {
         return;
     }
 
