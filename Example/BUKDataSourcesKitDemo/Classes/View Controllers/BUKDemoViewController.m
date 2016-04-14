@@ -11,10 +11,6 @@
 #import "BUKDemoCollectionViewController.h"
 #import "BUKDemoTableViewCell.h"
 #import "BUKDemoViewModel.h"
-#import <BUKDataSourcesKit/BUKTableViewDataSourceProvider.h>
-#import <BUKDataSourcesKit/BUKTableViewSection.h>
-#import <BUKDataSourcesKit/BUKTableViewRow.h>
-#import <BUKDataSourcesKit/BUKTableViewCellFactory.h>
 
 
 @implementation BUKDemoViewController

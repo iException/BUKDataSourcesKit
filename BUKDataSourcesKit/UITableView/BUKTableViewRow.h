@@ -11,7 +11,6 @@
 
 @protocol BUKTableViewCellFactoryProtocol;
 
-
 @interface BUKTableViewRow : NSObject
 
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
