@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
 @property (nonatomic) id object;
 
+- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows;
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory NS_DESIGNATED_INITIALIZER;
 

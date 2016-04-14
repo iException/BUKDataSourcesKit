@@ -111,7 +111,7 @@
 
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {
     if (self.sections.count <= index) {
-        NSAssert1(NO, @"Invalid section index: %d", index);
+        NSAssert1(NO, @"Invalid section index: %ld", index);
         return nil;
     }
 
@@ -160,13 +160,13 @@
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)index {
-    BUKTableViewSection *section = [self sectionAtIndex:section];
+    BUKTableViewSection *section = [self sectionAtIndex:index];
     return [section.headerViewFactory titleForSection:section atIndex:index];
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)index {
-    BUKTableViewSection *section = [self sectionAtIndex:section];
+    BUKTableViewSection *section = [self sectionAtIndex:index];
     return [section.footerViewFactory titleForSection:section atIndex:index];
 }
 

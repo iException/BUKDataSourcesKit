@@ -11,7 +11,7 @@
 
 @class BUKTableViewSection;
 
-@interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource>
+@interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;

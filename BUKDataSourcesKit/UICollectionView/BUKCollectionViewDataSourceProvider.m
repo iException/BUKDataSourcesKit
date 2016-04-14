@@ -44,6 +44,23 @@
 }
 
 
+#pragma mark - Initializer
+
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<BUKCollectionViewSection *> *)sections {
+    if ((self = [super init])) {
+        _collectionView = collectionView;
+        _sections = sections;
+    }
+
+    return self;
+}
+
+
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView {
+    return [self initWithCollectionView:collectionView sections:nil];
+}
+
+
 #pragma mark - Private
 
 - (BUKCollectionViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath {
