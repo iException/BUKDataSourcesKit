@@ -13,10 +13,13 @@
 
 @interface BUKTableViewRow : NSObject
 
+typedef void (^BUKTableViewRowSelectionHandler)(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath);
+
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id object;
+@property (nonatomic, copy) BUKTableViewRowSelectionHandler selection;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(BUKTableViewRowSelectionHandler)selection NS_DESIGNATED_INITIALIZER;
 
 @end

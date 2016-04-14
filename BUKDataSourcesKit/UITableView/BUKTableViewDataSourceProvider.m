@@ -60,6 +60,7 @@
 
 - (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections {
     if ((self = [super init])) {
+        _automaticallyDeselectRows = YES;
         _tableView = tableView;
         _sections = sections;
         [self updateTableView];
@@ -172,5 +173,16 @@
 
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.automaticallyDeselectRows) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if (row.selection) {
+        row.selection(row, tableView, indexPath);
+    }
+}
 
 @end

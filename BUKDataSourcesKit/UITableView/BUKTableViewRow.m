@@ -13,10 +13,11 @@
 
 #pragma mark - Initializer
 
-- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(BUKTableViewRowSelectionHandler)selection {
     if ((self = [super init])) {
         _object = object;
         _cellFactory = cellFactory;
+        _selection = [selection copy];
     }
 
     return self;

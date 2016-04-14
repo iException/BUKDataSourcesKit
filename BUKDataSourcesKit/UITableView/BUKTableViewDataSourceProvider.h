@@ -15,6 +15,7 @@
 
 @property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic) BOOL automaticallyDeselectRows;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTableView:(UITableView *)tableView;

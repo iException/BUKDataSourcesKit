@@ -28,8 +28,17 @@
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
 
-    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"Title 1" subtitle:@"Subtitle 1"] cellFactory:cellFactory];
-    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"Title 2" subtitle:@"Subtitle 2"] cellFactory:cellFactory];
+    __weak typeof(self)weakSelf = self;
+    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"UITableViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        BUKDemoTableViewController *viewController = [[BUKDemoTableViewController alloc] init];
+        [weakSelf.navigationController pushViewController:viewController animated:YES];
+    }];
+
+    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoViewModel viewModelWithTitle:@"UICollectionViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        BUKDemoCollectionViewController *viewController = [[BUKDemoCollectionViewController alloc] init];
+        [weakSelf.navigationController pushViewController:viewController animated:YES];
+    }];
+
     BUKTableViewSection *section1 = [[BUKTableViewSection alloc] initWithRows:@[row1, row2]];
 
     self.dataSourceProvider.sections = @[
