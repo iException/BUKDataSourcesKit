@@ -117,7 +117,7 @@
 
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {
     if (self.sections.count <= index) {
-        NSAssert1(NO, @"Invalid section index: %ld", index);
+        NSAssert1(NO, @"Invalid section index: %ld", (long)index);
         return nil;
     }
 
@@ -128,10 +128,7 @@
 - (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath {
     BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
     if (section) {
-        NSArray<BUKTableViewRow *> *rows = section.rows;
-        if (indexPath.row < rows.count) {
-            return rows[indexPath.row];
-        }
+        return [section rowAtIndex:indexPath.row];
     }
 
     NSAssert1(NO, @"Invalid index path: %@", indexPath);

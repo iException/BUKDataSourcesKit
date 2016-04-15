@@ -23,6 +23,14 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows;
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows
+           headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows
+           headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
+                 cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+
+- (BUKTableViewRow *)rowAtIndex:(NSInteger)index;
 
 @end
