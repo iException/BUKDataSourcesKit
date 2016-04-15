@@ -221,4 +221,60 @@
     }
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)index {
+    BUKTableViewSection *section = [self sectionAtIndex:index];
+    if (!section.headerViewFactory) {
+        return nil;
+    }
+
+    NSString *reuseIdentifier = [section.headerViewFactory reuseIdentifierForSection:section atIndex:index];
+    if (!reuseIdentifier) {
+        return nil;
+    }
+
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    if (!headerView) {
+        Class headerViewClass = [section.headerViewFactory headerFooterViewClassForSection:section atIndex:index];
+        NSAssert1([headerViewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Header class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(headerViewClass));
+        headerView = [[headerViewClass alloc] initWithReuseIdentifier:reuseIdentifier];
+    }
+
+    [section.headerViewFactory configureView:headerView withSection:section inTableView:tableView atIndex:index];
+    return headerView;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)index {
+    BUKTableViewSection *section = [self sectionAtIndex:index];
+    if (!section.footerViewFactory) {
+        return nil;
+    }
+
+    NSString *reuseIdentifier = [section.footerViewFactory reuseIdentifierForSection:section atIndex:index];
+    if (!reuseIdentifier) {
+        return nil;
+    }
+
+    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    if (!footerView) {
+        Class footerViewClass = [section.footerViewFactory headerFooterViewClassForSection:section atIndex:index];
+        NSAssert1([footerViewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Footer class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(footerViewClass));
+        footerView = [[footerViewClass alloc] initWithReuseIdentifier:reuseIdentifier];
+    }
+
+    [section.footerViewFactory configureView:footerView withSection:section inTableView:tableView atIndex:index];
+    return footerView;
+}
+
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 52.0f;
+//}
+
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 60.0f;
+//}
+
 @end

@@ -30,6 +30,7 @@
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _titleLabel.font = [UIFont systemFontOfSize:16.0f];
         _titleLabel.textColor = [UIColor darkGrayColor];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _titleLabel;
 }
@@ -57,8 +58,8 @@
         @"titleLabel" : self.titleLabel,
     };
 
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[imageView]-10-|" options:kNilOptions metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[imageView]-20-[titleLabel]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[imageView(32)]" options:kNilOptions metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[imageView(32)]-20-[titleLabel]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
 }
 
 @end
