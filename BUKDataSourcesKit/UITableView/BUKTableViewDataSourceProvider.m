@@ -16,9 +16,9 @@
 @interface BUKTableViewDataSourceProvider ()
 
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
+@property (nonatomic, readonly) NSMutableSet<NSString *> *registeredHeaderFooterViewIdentifiers;
 
 @end
-
 
 
 @implementation BUKTableViewDataSourceProvider
@@ -26,12 +26,21 @@
 #pragma mark - Accessors
 
 @synthesize registeredCellIdentifiers = _registeredCellIdentifiers;
+@synthesize registeredHeaderFooterViewIdentifiers = _registeredHeaderFooterViewIdentifiers;
 
 - (NSMutableSet<NSString *> *)registeredCellIdentifiers {
     if (!_registeredCellIdentifiers) {
         _registeredCellIdentifiers = [[NSMutableSet alloc] init];
     }
     return _registeredCellIdentifiers;
+}
+
+
+- (NSMutableSet<NSString *> *)registeredHeaderFooterViewIdentifiers {
+    if (!_registeredHeaderFooterViewIdentifiers) {
+        _registeredHeaderFooterViewIdentifiers = [[NSMutableSet alloc] init];
+    }
+    return _registeredHeaderFooterViewIdentifiers;
 }
 
 
@@ -60,6 +69,8 @@
 
 - (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections {
     if ((self = [super init])) {
+        NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
+
         _automaticallyDeselectRows = YES;
         _tableView = tableView;
         _sections = sections;
@@ -85,6 +96,7 @@
 
 - (void)refresh {
     [self refreshRegisteredCellIdentifiers];
+    [self refreshRegisteredHeaderFooterViewIdentifiers];
     [self refreshTableSections];
 }
 
@@ -106,6 +118,30 @@
                 }
             }
         }];
+    }];
+}
+
+
+- (void)refreshRegisteredHeaderFooterViewIdentifiers {
+    [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (section.headerViewFactory) {
+            NSString *headerIdentifier = [section.headerViewFactory reuseIdentifierForSection:section atIndex:idx];
+            if (headerIdentifier && ![self.registeredHeaderFooterViewIdentifiers containsObject:headerIdentifier]) {
+                Class headerClass = [section.headerViewFactory headerFooterViewClassForSection:section atIndex:idx];
+                NSAssert1([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Header class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(headerClass));
+                [self.tableView registerClass:headerIdentifier forHeaderFooterViewReuseIdentifier:headerIdentifier];
+                [self.registeredHeaderFooterViewIdentifiers addObject:headerIdentifier];
+            }
+        }
+
+        if (section.footerViewFactory) {
+            NSString *footerIdentifier = [section.footerViewFactory reuseIdentifierForSection:section atIndex:idx];
+            if (footerIdentifier && ![self.registeredHeaderFooterViewIdentifiers containsObject:footerIdentifier]) {
+                Class footerClass = [section.footerViewFactory headerFooterViewClassForSection:section atIndex:idx];
+                NSAssert1([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Footer class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(footerClass));
+                [self.tableView registerClass:footerClass forHeaderFooterViewReuseIdentifier:footerIdentifier];
+            }
+        }
     }];
 }
 
