@@ -135,25 +135,50 @@
 - (void)refreshRegisteredCellIdentifiers {
     [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
         [section.rows enumerateObjectsUsingBlock:^(BUKTableViewRow * _Nonnull row, NSUInteger j, BOOL * _Nonnull stop) {
-            if (row.cellFactory) {
-                NSString *cellIdentifier = [row.cellFactory reuseIdentifierForRow:row atIndexPath:[NSIndexPath indexPathForRow:j inSection:i]];
-                if (![self.registeredCellIdentifiers containsObject:cellIdentifier]) {
-                    Class cellClass = [row.cellFactory cellClassForRow:row atIndexPath:[NSIndexPath indexPathForRow:j inSection:i]];
-                    [self.tableView registerClass:cellClass forCellReuseIdentifier:cellIdentifier];
-                    [self.registeredCellIdentifiers addObject:cellIdentifier];
-                }
-            }
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+            id<BUKTableViewCellFactoryProtocol> cellFactory = [self cellFactoryForRow:row inSection:section];
+            [self registerCellIfNecessary:cellFactory row:row indexPath:indexPath];
         }];
     }];
 }
 
 
+- (void)registerCellIfNecessary:(id<BUKTableViewCellFactoryProtocol>)cellFactory row:(BUKTableViewRow *)row indexPath:(NSIndexPath *)indexPath {
+    if (!cellFactory) {
+        return;
+    }
+
+    NSString *reuseIdentifier = [cellFactory reuseIdentifierForRow:row atIndexPath:indexPath];
+    if (!reuseIdentifier || [self.registeredCellIdentifiers containsObject:reuseIdentifier]) {
+        return;
+    }
+
+    Class cellClass = [cellFactory cellClassForRow:row atIndexPath:indexPath];
+    NSAssert1([cellClass isSubclassOfClass:[UITableViewCell class]], @"View class: %@ isn't subclass of UITableViewCell", NSStringFromClass(cellClass));
+    [self.tableView registerClass:cellClass forCellReuseIdentifier:reuseIdentifier];
+    [self.registeredCellIdentifiers addObject:reuseIdentifier];
+}
+
+
+- (id<BUKTableViewCellFactoryProtocol>)cellFactoryForRow:(BUKTableViewRow *)row inSection:(BUKTableViewSection *)section {
+    if (row.cellFactory) {
+        return row.cellFactory;
+    }
+
+    if (section.cellFactory) {
+        return section.cellFactory;
+    }
+
+    return self.cellFactory;
+}
+
+
 - (void)refreshRegisteredHeaderFooterViewIdentifiers {
     [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self registerHeaderFooterViewIfNecessary:section.headerViewFactory section:section index:idx];
-        [self registerHeaderFooterViewIfNecessary:section.footerViewFactory section:section index:idx];
-        [self registerHeaderFooterViewIfNecessary:self.headerViewFactory section:section index:idx];
-        [self registerHeaderFooterViewIfNecessary:self.footerViewFactory section:section index:idx];
+        id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
+        [self registerHeaderFooterViewIfNecessary:headerViewFactory section:section index:idx];
+        id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
+        [self registerHeaderFooterViewIfNecessary:footerViewFactory section:section index:idx];
     }];
 }
 
@@ -227,16 +252,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
     BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
-    id<BUKTableViewCellFactoryProtocol> cellFactory = row.cellFactory;
-    if (cellFactory) {
-        NSString *reuseIdentifier = [cellFactory reuseIdentifierForRow:row atIndexPath:indexPath];
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-        [cellFactory configureCell:cell withRow:row inTableView:tableView atIndexPath:indexPath];
-        return cell;
-    }
-
-    return nil;
+    id<BUKTableViewCellFactoryProtocol> cellFactory = [self cellFactoryForRow:row inSection:section];
+    NSAssert(cellFactory != nil, @"Cell factory must exist!!!");
+    NSString *reuseIdentifier = [cellFactory reuseIdentifierForRow:row atIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    [cellFactory configureCell:cell withRow:row inTableView:tableView atIndexPath:indexPath];
+    return cell;
 }
 
 

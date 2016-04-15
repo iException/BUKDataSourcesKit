@@ -10,12 +10,14 @@
 
 
 @class BUKTableViewRow;
+@protocol BUKTableViewCellFactoryProtocol;
 @protocol BUKTableViewHeaderFooterViewFactoryProtocol;
 
 @interface BUKTableViewSection : NSObject
 
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
+@property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
 @property (nonatomic) id object;
 
