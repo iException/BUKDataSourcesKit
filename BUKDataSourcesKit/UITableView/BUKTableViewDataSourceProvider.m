@@ -9,8 +9,8 @@
 #import "BUKTableViewDataSourceProvider.h"
 #import "BUKTableViewSection.h"
 #import "BUKTableViewRow.h"
-#import "BUKTableViewCellFactory.h"
-#import "BUKTableViewHeaderFooterViewFactory.h"
+#import "BUKTableViewCellFactoryProtocol.h"
+#import "BUKTableViewHeaderFooterViewFactoryProtocol.h"
 
 
 @interface BUKTableViewDataSourceProvider ()
@@ -286,6 +286,17 @@
     if (row.selection) {
         row.selection(row, tableView, indexPath);
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    id<BUKTableViewCellFactoryProtocol> cellFactory = [self cellFactoryForRow:row inSection:section];
+    if (!cellFactory) {
+        return tableView.rowHeight;
+    }
+
+    return [cellFactory heightForRow:row atIndexPath:indexPath];
 }
 
 

@@ -43,4 +43,9 @@
     }
 }
 
+
+- (CGFloat)heightForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath {
+    return 50.0f;
+}
+
 @end
