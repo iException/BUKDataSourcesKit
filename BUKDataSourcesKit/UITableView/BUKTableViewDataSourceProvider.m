@@ -150,25 +150,67 @@
 
 - (void)refreshRegisteredHeaderFooterViewIdentifiers {
     [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (section.headerViewFactory) {
-            NSString *headerIdentifier = [section.headerViewFactory reuseIdentifierForSection:section atIndex:idx];
-            if (headerIdentifier && ![self.registeredHeaderFooterViewIdentifiers containsObject:headerIdentifier]) {
-                Class headerClass = [section.headerViewFactory headerFooterViewClassForSection:section atIndex:idx];
-                NSAssert1([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Header class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(headerClass));
-                [self.tableView registerClass:headerClass forHeaderFooterViewReuseIdentifier:headerIdentifier];
-                [self.registeredHeaderFooterViewIdentifiers addObject:headerIdentifier];
-            }
-        }
-
-        if (section.footerViewFactory) {
-            NSString *footerIdentifier = [section.footerViewFactory reuseIdentifierForSection:section atIndex:idx];
-            if (footerIdentifier && ![self.registeredHeaderFooterViewIdentifiers containsObject:footerIdentifier]) {
-                Class footerClass = [section.footerViewFactory headerFooterViewClassForSection:section atIndex:idx];
-                NSAssert1([footerClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Footer class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(footerClass));
-                [self.tableView registerClass:footerClass forHeaderFooterViewReuseIdentifier:footerIdentifier];
-            }
-        }
+        [self registerHeaderFooterViewIfNecessary:section.headerViewFactory section:section index:idx];
+        [self registerHeaderFooterViewIfNecessary:section.footerViewFactory section:section index:idx];
+        [self registerHeaderFooterViewIfNecessary:self.headerViewFactory section:section index:idx];
+        [self registerHeaderFooterViewIfNecessary:self.footerViewFactory section:section index:idx];
     }];
+}
+
+
+- (void)registerHeaderFooterViewIfNecessary:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)viewFactory section:(BUKTableViewSection *)section index:(NSInteger)index {
+    if (!viewFactory) {
+        return;
+    }
+
+    NSString *reuseIdentifier = [viewFactory reuseIdentifierForSection:section atIndex:index];
+    if (!reuseIdentifier || [self.registeredHeaderFooterViewIdentifiers containsObject:reuseIdentifier]) {
+        return;
+    }
+
+    Class viewClass = [viewFactory headerFooterViewClassForSection:section atIndex:index];
+    NSAssert1([viewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"View class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(viewClass));
+    [self.tableView registerClass:viewClass forHeaderFooterViewReuseIdentifier:reuseIdentifier];
+}
+
+
+- (id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactoryForSection:(BUKTableViewSection *)section {
+    if (section.headerViewFactory) {
+        return section.headerViewFactory;
+    }
+
+    return self.headerViewFactory;
+}
+
+
+- (id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactoryForSection:(BUKTableViewSection *)section {
+    if (section.footerViewFactory) {
+        return section.footerViewFactory;
+    }
+
+    return self.footerViewFactory;
+}
+
+
+- (UIView *)headerFooterViewForSection:(BUKTableViewSection *)section inTableView:(UITableView *)tableView atIndex:(NSInteger)index factory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)viewFactory {
+    if (!viewFactory) {
+        return nil;
+    }
+
+    NSString *reuseIdentifier = [viewFactory reuseIdentifierForSection:section atIndex:index];
+    if (!reuseIdentifier) {
+        return nil;
+    }
+
+    UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
+    if (!view) {
+        Class viewClass = [viewFactory headerFooterViewClassForSection:section atIndex:index];
+        NSAssert1([viewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"View class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(viewClass));
+        view = [[viewClass alloc] initWithReuseIdentifier:reuseIdentifier];
+    }
+
+    [viewFactory configureView:view withSection:section inTableView:tableView atIndex:index];
+    return view;
 }
 
 
@@ -226,67 +268,37 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    if (!section.headerViewFactory) {
-        return nil;
-    }
-
-    NSString *reuseIdentifier = [section.headerViewFactory reuseIdentifierForSection:section atIndex:index];
-    if (!reuseIdentifier) {
-        return nil;
-    }
-
-    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    if (!headerView) {
-        Class headerViewClass = [section.headerViewFactory headerFooterViewClassForSection:section atIndex:index];
-        NSAssert1([headerViewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Header class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(headerViewClass));
-        headerView = [[headerViewClass alloc] initWithReuseIdentifier:reuseIdentifier];
-    }
-
-    [section.headerViewFactory configureView:headerView withSection:section inTableView:tableView atIndex:index];
-    return headerView;
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
+    return [self headerFooterViewForSection:section inTableView:tableView atIndex:index factory:headerViewFactory];
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    if (!section.footerViewFactory) {
-        return nil;
-    }
-
-    NSString *reuseIdentifier = [section.footerViewFactory reuseIdentifierForSection:section atIndex:index];
-    if (!reuseIdentifier) {
-        return nil;
-    }
-
-    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];
-    if (!footerView) {
-        Class footerViewClass = [section.footerViewFactory headerFooterViewClassForSection:section atIndex:index];
-        NSAssert1([footerViewClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Footer class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(footerViewClass));
-        footerView = [[footerViewClass alloc] initWithReuseIdentifier:reuseIdentifier];
-    }
-
-    [section.footerViewFactory configureView:footerView withSection:section inTableView:tableView atIndex:index];
-    return footerView;
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
+    return [self headerFooterViewForSection:section inTableView:tableView atIndex:index factory:footerViewFactory];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    if (!section.headerViewFactory) {
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
+    if (!headerViewFactory) {
         return 0;
     }
 
-    return [section.headerViewFactory heightForSection:section atIndex:index];
+    return [headerViewFactory heightForSection:section atIndex:index];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    if (!section.footerViewFactory) {
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
+    if (!footerViewFactory) {
         return 0;
     }
 
-    return [section.footerViewFactory heightForSection:section atIndex:index];
+    return [footerViewFactory heightForSection:section atIndex:index];
 }
 
 @end

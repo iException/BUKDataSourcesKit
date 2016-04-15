@@ -11,12 +11,15 @@
 
 @class BUKTableViewRow;
 @class BUKTableViewSection;
+@protocol BUKTableViewHeaderFooterViewFactoryProtocol;
 
 @interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) BOOL automaticallyDeselectRows;
+@property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
+@property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTableView:(UITableView *)tableView;
