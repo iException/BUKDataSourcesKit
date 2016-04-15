@@ -85,6 +85,32 @@
 }
 
 
+#pragma mark - Public
+
+- (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {
+    if (self.sections.count <= index) {
+        NSAssert1(NO, @"Invalid section index: %ld", index);
+        return nil;
+    }
+
+    return self.sections[index];
+}
+
+
+- (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
+    if (section) {
+        NSArray<BUKTableViewRow *> *rows = section.rows;
+        if (indexPath.row < rows.count) {
+            return rows[indexPath.row];
+        }
+    }
+
+    NSAssert1(NO, @"Invalid index path: %@", indexPath);
+    return nil;
+}
+
+
 #pragma mark - Private
 
 - (void)updateTableView {
@@ -143,30 +169,6 @@
             }
         }
     }];
-}
-
-
-- (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {
-    if (self.sections.count <= index) {
-        NSAssert1(NO, @"Invalid section index: %ld", index);
-        return nil;
-    }
-
-    return self.sections[index];
-}
-
-
-- (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath {
-    BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
-    if (section) {
-        NSArray<BUKTableViewRow *> *rows = section.rows;
-        if (indexPath.row < rows.count) {
-            return rows[indexPath.row];
-        }
-    }
-
-    NSAssert1(NO, @"Invalid index path: %@", indexPath);
-    return nil;
 }
 
 

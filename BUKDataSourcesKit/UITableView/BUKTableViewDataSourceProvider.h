@@ -9,6 +9,7 @@
 @import UIKit;
 
 
+@class BUKTableViewRow;
 @class BUKTableViewSection;
 
 @interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource, UITableViewDelegate>
@@ -20,5 +21,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTableView:(UITableView *)tableView;
 - (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections NS_DESIGNATED_INITIALIZER;
+- (BUKTableViewSection *)sectionAtIndex:(NSInteger)index;
+- (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
