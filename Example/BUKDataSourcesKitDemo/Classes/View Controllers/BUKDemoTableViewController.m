@@ -59,6 +59,7 @@
         cell.textLabel.text = viewModel.title;
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
+    value1CellFactory.cellHeight = 40.0f;
 
     NSMutableArray<BUKTableViewRow *> *mutableValue1Rows = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < 10; i++) {

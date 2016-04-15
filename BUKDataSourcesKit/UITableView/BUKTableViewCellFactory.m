@@ -11,6 +11,17 @@
 
 @implementation BUKTableViewCellFactory
 
+#pragma mark - Accessors
+
+- (void)setCellHeight:(CGFloat)cellHeight {
+    if (cellHeight < 0.0f) {
+        return;
+    }
+
+    _cellHeight = cellHeight;
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)initWithCellClass:(Class)cellClass configurator:(BUKTableViewCellConfigurationHandler)configurator {
@@ -20,6 +31,7 @@
         _cellClass = cellClass;
         _reuseIdentifier = NSStringFromClass(cellClass);
         _cellConfigurator = [configurator copy];
+        _cellHeight = 50.0f;
     }
     return self;
 }
@@ -45,7 +57,7 @@
 
 
 - (CGFloat)heightForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath {
-    return 50.0f;
+    return self.cellHeight;
 }
 
 @end
