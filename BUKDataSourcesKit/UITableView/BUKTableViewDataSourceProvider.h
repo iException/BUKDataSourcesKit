@@ -25,7 +25,14 @@
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTableView:(UITableView *)tableView;
-- (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTableView:(UITableView *)tableView
+                         sections:(NSArray<BUKTableViewSection *> *)sections;
+- (instancetype)initWithTableView:(UITableView *)tableView
+                         sections:(NSArray<BUKTableViewSection *> *)sections
+                      cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory
+                    headerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerFactory
+                    footerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerFactory NS_DESIGNATED_INITIALIZER;
+
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index;
 - (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath;
 

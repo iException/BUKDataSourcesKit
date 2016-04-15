@@ -19,6 +19,6 @@ typedef void (^BUKTableViewCellConfigurationHandler)(__kindof UITableViewCell *c
 @property (nonatomic) CGFloat cellHeight;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithCellClass:(Class)cellClass configurator:(BUKTableViewCellConfigurationHandler)configurator;
+- (instancetype)initWithCellClass:(Class)cellClass configurator:(BUKTableViewCellConfigurationHandler)configurator NS_DESIGNATED_INITIALIZER;
 
 @end

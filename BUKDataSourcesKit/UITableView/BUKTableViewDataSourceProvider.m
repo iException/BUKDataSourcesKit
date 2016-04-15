@@ -59,24 +59,52 @@
 
 - (void)setSections:(NSArray<BUKTableViewSection *> *)sections {
     NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
-
     _sections = sections;
+    [self refresh];
+}
+
+
+- (void)setCellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+    NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
+    _cellFactory = cellFactory;
+    [self refresh];
+}
+
+
+- (void)setHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory {
+    NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
+    _headerViewFactory = headerViewFactory;
+    [self refresh];
+}
+
+
+- (void)setFooterViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
+    _footerViewFactory = footerViewFactory;
     [self refresh];
 }
 
 
 #pragma mark - Initializer
 
-- (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections {
+- (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory headerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerFactory footerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerFactory {
     if ((self = [super init])) {
         NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
 
         _automaticallyDeselectRows = YES;
         _tableView = tableView;
         _sections = sections;
+        _cellFactory = cellFactory;
+        _headerViewFactory = headerFactory;
+        _footerViewFactory = footerFactory;
         [self updateTableView];
     }
     return self;
+}
+
+
+- (instancetype)initWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections {
+    return [self initWithTableView:tableView sections:sections cellFactory:nil headerFactory:nil footerFactory:nil];
 }
 
 
