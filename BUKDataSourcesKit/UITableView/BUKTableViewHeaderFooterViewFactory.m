@@ -51,7 +51,7 @@
 }
 
 
-- (void)configureView:(UITableViewHeaderFooterView *)view withSection:(BUKTableViewSection *)section inTableView:(UITableView *)tableView atIndex:(NSInteger)index {
+- (void)configureView:(__kindof UITableViewHeaderFooterView *)view withSection:(BUKTableViewSection *)section inTableView:(UITableView *)tableView atIndex:(NSInteger)index {
     if (self.viewConfigurator) {
         self.viewConfigurator(view, section, tableView, index);
     }

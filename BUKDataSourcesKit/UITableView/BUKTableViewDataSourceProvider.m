@@ -129,7 +129,7 @@
             if (headerIdentifier && ![self.registeredHeaderFooterViewIdentifiers containsObject:headerIdentifier]) {
                 Class headerClass = [section.headerViewFactory headerFooterViewClassForSection:section atIndex:idx];
                 NSAssert1([headerClass isSubclassOfClass:[UITableViewHeaderFooterView class]], @"Header class: %@ isn't subclass of UITableViewHeaderFooterView", NSStringFromClass(headerClass));
-                [self.tableView registerClass:headerIdentifier forHeaderFooterViewReuseIdentifier:headerIdentifier];
+                [self.tableView registerClass:headerClass forHeaderFooterViewReuseIdentifier:headerIdentifier];
                 [self.registeredHeaderFooterViewIdentifiers addObject:headerIdentifier];
             }
         }
