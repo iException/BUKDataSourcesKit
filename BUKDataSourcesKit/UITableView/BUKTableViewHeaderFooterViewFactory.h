@@ -17,6 +17,7 @@
 - (NSString *)reuseIdentifierForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 - (Class)headerFooterViewClassForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 - (void)configureView:(__kindof UITableViewHeaderFooterView *)view withSection:(BUKTableViewSection *)section inTableView:(UITableView *)tableView atIndex:(NSInteger)index;
+- (CGFloat)heightForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 
 @end
 
@@ -29,6 +30,7 @@ typedef void (^BUKTableViewHeaderFooterViewConfigurationHandler)(__kindof UITabl
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, copy, readonly) BUKTableViewHeaderFooterViewConfigurationHandler viewConfigurator;
 @property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic) CGFloat viewHeight;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;

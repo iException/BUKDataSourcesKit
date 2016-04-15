@@ -268,13 +268,23 @@
 }
 
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 52.0f;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)index {
+    BUKTableViewSection *section = [self sectionAtIndex:index];
+    if (!section.headerViewFactory) {
+        return 0;
+    }
+
+    return [section.headerViewFactory heightForSection:section atIndex:index];
+}
 
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 60.0f;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)index {
+    BUKTableViewSection *section = [self sectionAtIndex:index];
+    if (!section.footerViewFactory) {
+        return 0;
+    }
+
+    return [section.footerViewFactory heightForSection:section atIndex:index];
+}
 
 @end

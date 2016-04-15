@@ -49,6 +49,8 @@
     BUKTableViewHeaderFooterViewFactory *imageHeaderViewFactory = [[BUKTableViewHeaderFooterViewFactory alloc] initWithViewClass:[BUKDemoTableViewHeaderFooterView class] configurator:^(BUKDemoTableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
         view.titleLabel.text = @"Section 2 Header";
     }];
+    imageHeaderViewFactory.viewHeight = 52.0f;
+    
     BUKTableViewHeaderFooterViewFactory *imageFooterViewFactory = [[BUKTableViewHeaderFooterViewFactory alloc] initWithTitle:@"Section 2 Footer"];
     BUKTableViewSection *section2 = [[BUKTableViewSection alloc] initWithRows:nil headerViewFactory:imageHeaderViewFactory footerViewFactory:imageFooterViewFactory];
 
