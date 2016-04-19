@@ -9,8 +9,8 @@
 #import "BUKCollectionViewDataSourceProvider.h"
 #import "BUKCollectionViewSection.h"
 #import "BUKCollectionViewItem.h"
-#import "BUKCollectionViewCellFactory.h"
-#import "BUKCollectionViewSupplementaryViewFactory.h"
+#import "BUKCollectionViewCellFactoryProtocol.h"
+#import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 
 
 @interface BUKCollectionViewDataSourceProvider ()

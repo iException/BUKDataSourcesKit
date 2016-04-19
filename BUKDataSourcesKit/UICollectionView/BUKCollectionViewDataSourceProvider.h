@@ -11,7 +11,6 @@
 
 @class BUKCollectionViewSection;
 
-
 @interface BUKCollectionViewDataSourceProvider : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, copy) NSArray<BUKCollectionViewSection *> *sections;

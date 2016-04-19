@@ -6,18 +6,7 @@
 //  Copyright (c) 2016 Yiming Tang. All rights reserved.
 //
 
-@import UIKit;
-
-@class BUKCollectionViewItem;
-
-@protocol BUKCollectionViewSupplementaryViewFactoryProtocol <NSObject>
-
-@required
-- (Class)supplementaryViewClassForItem:(BUKCollectionViewItem *)item kind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
-- (NSString *)reuseIdentifierForItem:(BUKCollectionViewItem *)item kind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
-- (void)configureSupplementaryView:(UICollectionReusableView *)view item:(BUKCollectionViewItem *)item kind:(NSString *)kind inCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath;
-
-@end
+#import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 
 
 typedef void (^BUKCollectionSupplementaryViewConfigurationHandler)(UICollectionReusableView *view, BUKCollectionViewItem *item, NSString *kind, UICollectionView *collectionView, NSIndexPath *indexPath);
