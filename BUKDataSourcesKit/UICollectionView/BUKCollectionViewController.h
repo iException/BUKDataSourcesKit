@@ -9,6 +9,13 @@
 @import UIKit;
 
 
+@class BUKCollectionViewDataSourceProvider;
+
 @interface BUKCollectionViewController : UIViewController
+
+@property (nonatomic, readonly) UICollectionView *collectionView;
+@property (nonatomic, readonly) BUKCollectionViewDataSourceProvider *dataSourceProvider;
+
+- (instancetype)initWithLayout:(UICollectionViewLayout *)layout;
 
 @end

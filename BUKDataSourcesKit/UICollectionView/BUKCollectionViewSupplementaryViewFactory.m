@@ -29,6 +29,11 @@
 
 #pragma mark - BUKCollectionViewSupplementaryViewFactoryProtocol
 
+- (NSArray<NSString *> *)supplementaryViewKindsForItem:(BUKCollectionViewItem *)item atIndexPath:(NSIndexPath *)indexPath {
+    return @[self.supplementaryViewKind];
+}
+
+
 - (Class)supplementaryViewClassForItem:(BUKCollectionViewItem *)item kind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     return self.supplementaryViewClass;
 }

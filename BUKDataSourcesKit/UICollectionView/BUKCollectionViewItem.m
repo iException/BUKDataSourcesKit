@@ -11,4 +11,21 @@
 
 @implementation BUKCollectionViewItem
 
+#pragma mark - Initializer
+
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
+    if ((self = [super init])) {
+        _object = object;
+        _cellFactory = cellFactory;
+        _supplementaryViewFactory = supplementaryViewFactory;
+    }
+
+    return self;
+}
+
+
+- (instancetype)initWithObject:(id)object {
+    return [self initWithObject:object cellFactory:nil supplementaryViewFactory:nil];
+}
+
 @end

@@ -7,18 +7,43 @@
 //
 
 #import "BUKCollectionViewController.h"
+#import "BUKCollectionViewDataSourceProvider.h"
 
 
 @interface BUKCollectionViewController ()
+
+@property (nonatomic) UICollectionViewLayout *layout;
+@property (nonatomic, readwrite) BUKCollectionViewDataSourceProvider *dataSourceProvider;
 
 @end
 
 
 @implementation BUKCollectionViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+#pragma mark - Initializer
+
+- (instancetype)initWithLayout:(UICollectionViewLayout *)layout {
+    if ((self = [super initWithNibName:nil bundle:nil])) {
+        _layout = layout;
+    }
+
+    return self;
 }
 
+
+#pragma mark - UIViewController
+
+- (void)loadView {
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
+    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.view = _collectionView;
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.dataSourceProvider = [[BUKCollectionViewDataSourceProvider alloc] initWithCollectionView:self.collectionView];
+}
 
 @end

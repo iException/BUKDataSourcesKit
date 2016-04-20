@@ -21,6 +21,7 @@ typedef void (^BUKCollectionViewItemSelectionHandler)(BUKCollectionViewItem *ite
 @property (nonatomic, copy, readonly) BUKCollectionViewItemSelectionHandler selection;
 @property (nonatomic, readonly) id object;
 
-//- (instancetype)initWithObject:(id)
+- (instancetype)initWithObject:(id)object;
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory;
 
 @end
