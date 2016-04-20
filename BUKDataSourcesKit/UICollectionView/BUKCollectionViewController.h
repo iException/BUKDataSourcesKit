@@ -14,8 +14,10 @@
 @interface BUKCollectionViewController : UIViewController
 
 @property (nonatomic, readonly) UICollectionView *collectionView;
-@property (nonatomic, readonly) BUKCollectionViewDataSourceProvider *dataSourceProvider;
+@property (nonatomic, readonly) UICollectionViewLayout *collectionViewLayout;
+@property (nonatomic) BUKCollectionViewDataSourceProvider *dataSourceProvider;
+@property (nonatomic) BOOL clearsSelectionOnViewWillAppear;
 
-- (instancetype)initWithLayout:(UICollectionViewLayout *)layout;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)collectionViewLayout;
 
 @end
