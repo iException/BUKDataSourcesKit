@@ -22,18 +22,10 @@
 
 #pragma mark - Initializer
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        _tableViewStyle = UITableViewStylePlain;
-        _clearsSelectionOnViewWillAppear = YES;
-    }
-    return self;
-}
-
-
 - (instancetype)initWithStyle:(UITableViewStyle)style {
-    if ((self = [self initWithNibName:nil bundle:nil])) {
+    if ((self = [super initWithNibName:nil bundle:nil])) {
         _tableViewStyle = style;
+        _clearsSelectionOnViewWillAppear = YES;
     }
     return self;
 }
@@ -58,6 +50,12 @@
     [super viewWillAppear:animated];
     [self performInitialLoad];
     [self clearSelectionsIfNecessary:animated];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tableView flashScrollIndicators];
 }
 
 
