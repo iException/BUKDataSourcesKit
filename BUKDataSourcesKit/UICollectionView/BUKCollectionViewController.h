@@ -18,6 +18,8 @@
 @property (nonatomic) BUKCollectionViewDataSourceProvider *dataSourceProvider;
 @property (nonatomic) BOOL clearsSelectionOnViewWillAppear;
 
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)collectionViewLayout;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)collectionViewLayout NS_DESIGNATED_INITIALIZER;
 
 @end
