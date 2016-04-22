@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) BUKTableViewDataSourceProvider *dataSourceProvider;
 @property (nonatomic) BOOL clearsSelectionOnViewWillAppear;
 
-- (instancetype)initWithStyle:(UITableViewStyle)style;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithStyle:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;
 
 @end

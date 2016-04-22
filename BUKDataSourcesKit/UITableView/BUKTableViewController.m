@@ -22,6 +22,20 @@
 
 #pragma mark - Initializer
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        _tableViewStyle = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(tableViewStyle))];
+        _clearsSelectionOnViewWillAppear = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(clearsSelectionOnViewWillAppear))];
+    }
+    return self;
+}
+
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    return [self initWithStyle:UITableViewStylePlain];
+}
+
+
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     if ((self = [super initWithNibName:nil bundle:nil])) {
         _tableViewStyle = style;
@@ -111,6 +125,14 @@
     [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
     }];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeBool:self.clearsSelectionOnViewWillAppear forKey:NSStringFromSelector(@selector(clearsSelectionOnViewWillAppear))];
+    [aCoder encodeInteger:self.tableViewStyle forKey:NSStringFromSelector(@selector(tableViewStyle))];
 }
 
 @end
