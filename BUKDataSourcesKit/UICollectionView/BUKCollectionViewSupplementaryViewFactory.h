@@ -9,7 +9,7 @@
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 
 
-typedef void (^BUKCollectionSupplementaryViewConfigurationHandler)(UICollectionReusableView *view, BUKCollectionViewItem *item, NSString *kind, UICollectionView *collectionView, NSIndexPath *indexPath);
+typedef void (^BUKCollectionSupplementaryViewConfigurationHandler)(__kindof UICollectionReusableView *view, BUKCollectionViewItem *item, NSString *kind, UICollectionView *collectionView, NSIndexPath *indexPath);
 
 @interface BUKCollectionViewSupplementaryViewFactory : NSObject <BUKCollectionViewSupplementaryViewFactoryProtocol>
 

@@ -30,6 +30,8 @@
 		F128CB061CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB051CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m */; };
 		F128CB091CBF9EF2000ADB19 /* BUKDemoImageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB081CBF9EF2000ADB19 /* BUKDemoImageViewModel.m */; };
 		F128CB0C1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB0B1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m */; };
+		F13860521CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */; };
+		F13860551CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */; };
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,10 @@
 		F128CB081CBF9EF2000ADB19 /* BUKDemoImageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoImageViewModel.m; sourceTree = "<group>"; };
 		F128CB0A1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewHeaderFooterView.h; sourceTree = "<group>"; };
 		F128CB0B1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewHeaderFooterView.m; sourceTree = "<group>"; };
+		F13860501CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoSubtitleCollectionViewCell.h; sourceTree = "<group>"; };
+		F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoSubtitleCollectionViewCell.m; sourceTree = "<group>"; };
+		F13860531CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoCollectionViewSectionHeaderView.h; sourceTree = "<group>"; };
+		F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewSectionHeaderView.m; sourceTree = "<group>"; };
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +236,10 @@
 				F128CB051CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m */,
 				F128CB0A1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.h */,
 				F128CB0B1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m */,
+				F13860501CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.h */,
+				F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */,
+				F13860531CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.h */,
+				F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,10 +485,12 @@
 				6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */,
 				F111A8C31CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m in Sources */,
 				F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */,
+				F13860521CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F128CB0C1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m in Sources */,
 				F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */,
 				F128CB091CBF9EF2000ADB19 /* BUKDemoImageViewModel.m in Sources */,
+				F13860551CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m in Sources */,
 				F128CB061CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m in Sources */,
 				F111A8B91CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m in Sources */,
 				F128CB031CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m in Sources */,
