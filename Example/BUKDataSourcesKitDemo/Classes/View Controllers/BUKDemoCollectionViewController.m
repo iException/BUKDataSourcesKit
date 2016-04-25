@@ -16,10 +16,21 @@
 
 @implementation BUKDemoCollectionViewController
 
+#pragma mark - Initializer
+
+- (instancetype)init {
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    return [super initWithCollectionViewLayout:flowLayout];
+}
+
+
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.title = @"Collection View";
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
 @end

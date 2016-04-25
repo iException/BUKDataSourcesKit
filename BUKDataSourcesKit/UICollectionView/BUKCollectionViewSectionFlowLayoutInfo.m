@@ -11,6 +11,21 @@
 
 @implementation BUKCollectionViewSectionFlowLayoutInfo
 
+#pragma mark - Initializer
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        _minimumLineSpacing = 0;
+        _minimumInteritemSpacing = 0;
+        _headerReferenceSize = CGSizeZero;
+        _footerReferenceSize = CGSizeZero;
+        _sectionInset = UIEdgeInsetsZero;
+    }
+
+    return self;
+}
+
+
 #pragma mark - BUKCollectionViewSectionFlowLayoutInfoProtocol
 
 - (UIEdgeInsets)insetForSection:(BUKCollectionViewSection *)section atIndex:(NSInteger)index inCollectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)layout {

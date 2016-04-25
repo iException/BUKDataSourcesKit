@@ -23,7 +23,6 @@
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
 
-- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTableView:(UITableView *)tableView;
 - (instancetype)initWithTableView:(UITableView *)tableView
                          sections:(NSArray<BUKTableViewSection *> *)sections;

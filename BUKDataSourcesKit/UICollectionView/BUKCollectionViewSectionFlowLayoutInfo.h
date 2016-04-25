@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Yiming Tang. All rights reserved.
 //
 
-#import "BUKCollectionViewSectionFlowLayoutInfoProtocol.h"
+#import "BUKCollectionViewFlowLayoutInfoProtocol.h"
 
 
 @interface BUKCollectionViewSectionFlowLayoutInfo : NSObject <BUKCollectionViewSectionFlowLayoutInfoProtocol>

@@ -97,6 +97,11 @@
 }
 
 
+- (instancetype)init {
+    return [self initWithCollectionView:nil];
+}
+
+
 #pragma mark - Private
 
 - (BUKCollectionViewSection *)sectionAtIndex:(NSInteger)index {

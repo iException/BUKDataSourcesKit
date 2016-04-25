@@ -15,15 +15,15 @@
 
 @interface BUKCollectionViewSection : NSObject
 
-@property (nonatomic) NSArray<BUKCollectionViewItem *> *items;
+@property (nonatomic) NSArray<__kindof BUKCollectionViewItem *> *items;
 @property (nonatomic) id object;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithItems:(NSArray<BUKCollectionViewItem *> *)items;
-- (instancetype)initWithItems:(NSArray<BUKCollectionViewItem *> *)items supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
+- (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
 
-- (BUKCollectionViewItem *)itemAtIndex:(NSInteger)index;
+- (__kindof BUKCollectionViewItem *)itemAtIndex:(NSInteger)index;
 
 @end

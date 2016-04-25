@@ -113,6 +113,10 @@
 }
 
 
+- (instancetype)init {
+    return [self initWithTableView:nil];
+}
+
 #pragma mark - Public
 
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {

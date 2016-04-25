@@ -10,17 +10,21 @@
 
 
 @class BUKCollectionViewSection;
+@class BUKCollectionViewItem;
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
 
 @interface BUKCollectionViewDataSourceProvider : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, copy) NSArray<BUKCollectionViewSection *> *sections;
+@property (nonatomic, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<BUKCollectionViewSection *> *)sections;
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections NS_DESIGNATED_INITIALIZER;
+
+- (__kindof BUKCollectionViewSection *)sectionAtIndex:(NSInteger)index;
+- (__kindof BUKCollectionViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
