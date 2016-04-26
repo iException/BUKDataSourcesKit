@@ -17,6 +17,9 @@ typedef void (^BUKTableViewSelectionHandler)(UITableView *tableView, BUKTableVie
 @property (nonatomic, copy) BUKTableViewSelectionHandler selectionHandler;
 @property (nonatomic, readonly) BOOL isSelectable;
 
-- (instancetype)initWithSelectionHandler:(BUKTableViewSelectionHandler)selectionHandler;
++ (instancetype)selection;
++ (instancetype)selectionWithHandler:(BUKTableViewSelectionHandler)selectionHandler;
+
+- (instancetype)initWithSelectionHandler:(BUKTableViewSelectionHandler)selectionHandler NS_DESIGNATED_INITIALIZER;
 
 @end

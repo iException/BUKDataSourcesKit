@@ -11,6 +11,23 @@
 
 @implementation BUKTableViewRow
 
+#pragma mark - Class Methods
+
++ (instancetype)row {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)rowWithObject:(id)object {
+    return [[self alloc] initWithObject:object];
+}
+
+
++ (instancetype)rowWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(id<BUKTableViewSelectionProtocol>)selection {
+    return [[self alloc] initWithObject:object cellFactory:cellFactory selection:selection];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)init {

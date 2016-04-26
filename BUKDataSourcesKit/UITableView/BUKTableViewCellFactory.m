@@ -11,6 +11,12 @@
 
 @implementation BUKTableViewCellFactory
 
+#pragma mark - Class Methods
+
++ (instancetype)factoryWithCellClass:(Class)cellClass configurator:(BUKTableViewCellConfigurationHandler)configurator {
+    return [[self alloc] initWithCellClass:cellClass configurator:configurator];
+}
+
 #pragma mark - Accessors
 
 - (void)setCellHeight:(CGFloat)cellHeight {

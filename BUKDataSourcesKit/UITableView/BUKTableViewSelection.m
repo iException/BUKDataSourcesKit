@@ -11,6 +11,18 @@
 
 @implementation BUKTableViewSelection
 
+#pragma mark - Class Methods
+
++ (instancetype)selection {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)selectionWithHandler:(BUKTableViewSelectionHandler)selectionHandler {
+    return [[self alloc] initWithSelectionHandler:selectionHandler];
+}
+
+
 #pragma mark - Accessors
 
 - (BOOL)isSelectable {
@@ -26,6 +38,11 @@
     }
 
     return self;
+}
+
+
+- (instancetype)init {
+    return [self initWithSelectionHandler:nil];
 }
 
 

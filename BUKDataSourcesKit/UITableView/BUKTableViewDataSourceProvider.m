@@ -24,6 +24,23 @@
 
 @implementation BUKTableViewDataSourceProvider
 
+#pragma mark - Class Methods
+
++ (instancetype)providerWithTableView:(UITableView *)tableView {
+    return [[self alloc] initWithTableView:tableView];
+}
+
+
++ (instancetype)providerWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections {
+    return [[self alloc] initWithTableView:tableView sections:sections];
+}
+
+
++ (instancetype)providerWithTableView:(UITableView *)tableView sections:(NSArray<BUKTableViewSection *> *)sections cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory headerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerFactory footerFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerFactory {
+    return [[self alloc] initWithTableView:tableView sections:sections cellFactory:cellFactory headerFactory:headerFactory footerFactory:footerFactory];
+}
+
+
 #pragma mark - Accessors
 
 @synthesize registeredCellIdentifiers = _registeredCellIdentifiers;

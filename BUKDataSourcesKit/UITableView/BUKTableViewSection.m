@@ -11,6 +11,28 @@
 
 @implementation BUKTableViewSection
 
+#pragma mark - Class Methods
+
++ (instancetype)section {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows {
+    return [[self alloc] initWithRows:rows];
+}
+
+
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    return [[self alloc] initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory];
+}
+
+
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+    return [[self alloc] initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory cellFactory:cellFactory];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)init {

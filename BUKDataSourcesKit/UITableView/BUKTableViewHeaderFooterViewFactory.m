@@ -10,6 +10,18 @@
 
 @implementation BUKTableViewHeaderFooterViewFactory
 
+#pragma mark - Class Methods
+
++ (instancetype)factoryWithTitle:(NSString *)title {
+    return [[self alloc] initWithTitle:title];
+}
+
+
++ (instancetype)factoryWithClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator {
+    return [[self alloc] initWithViewClass:viewClass configurator:configurator];
+}
+
+
 #pragma mark - Accessors
 
 - (void)setViewHeight:(CGFloat)height {

@@ -18,6 +18,10 @@
 @property (nonatomic, copy) id<BUKTableViewSelectionProtocol> selection;
 @property (nonatomic) id object;
 
++ (instancetype)row;
++ (instancetype)rowWithObject:(id)object;
++ (instancetype)rowWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(id<BUKTableViewSelectionProtocol>)selection;
+
 - (instancetype)initWithObject:(id)object;
 - (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(id<BUKTableViewSelectionProtocol>)selection NS_DESIGNATED_INITIALIZER;
 

@@ -21,6 +21,16 @@
 @property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
 @property (nonatomic) id object;
 
++ (instancetype)section;
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows;
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows
+              headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+              footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
++ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows
+              headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+              footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
+                    cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory;
+
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows;
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows
            headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
