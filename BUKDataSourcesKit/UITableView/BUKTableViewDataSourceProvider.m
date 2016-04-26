@@ -11,6 +11,7 @@
 #import "BUKTableViewRow.h"
 #import "BUKTableViewCellFactoryProtocol.h"
 #import "BUKTableViewHeaderFooterViewFactoryProtocol.h"
+#import "BUKTableViewSelectionProtocol.h"
 
 
 @interface BUKTableViewDataSourceProvider ()
@@ -306,14 +307,68 @@
 
 #pragma mark - UITableViewDelegate
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:shouldHighlightRow:atIndexPath:)]) {
+        return [row.selection tableView:tableView shouldHighlightRow:row atIndexPath:indexPath];
+    } else {
+        return YES;
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:didHighlightRow:atIndexPath:)]) {
+        [row.selection tableView:tableView didHighlightRow:row atIndexPath:indexPath];
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:didUnhighlightRow:atIndexPath:)]) {
+        [row.selection tableView:tableView didUnhighlightRow:row atIndexPath:indexPath];
+    }
+}
+
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:willSelectRow:atIndexPath:)]) {
+        return [row.selection tableView:tableView willSelectRow:row atIndexPath:indexPath];
+    } else {
+        return indexPath;
+    }
+}
+
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:willDeselectRow:atIndexPath:)]) {
+        return [row.selection tableView:tableView willDeselectRow:row atIndexPath:indexPath];
+    } else {
+        return indexPath;
+    }
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.automaticallyDeselectRows) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 
     BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
-    if (row.selection) {
-        row.selection(row, tableView, indexPath);
+    if ([row.selection respondsToSelector:@selector(tableView:didSelectRow:atIndexPath:)]) {
+        [row.selection tableView:tableView didSelectRow:row atIndexPath:indexPath];
+    }
+}
+
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
+    if ([row.selection respondsToSelector:@selector(tableView:didDeselectRow:atIndexPath:)]) {
+        [row.selection tableView:tableView didDeselectRow:row atIndexPath:indexPath];
     }
 }
 

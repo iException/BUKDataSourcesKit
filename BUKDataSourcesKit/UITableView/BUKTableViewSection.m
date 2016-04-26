@@ -13,6 +13,21 @@
 
 #pragma mark - Initializer
 
+- (instancetype)init {
+    return [self initWithRows:nil];
+}
+
+
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows {
+    return [self initWithRows:rows headerViewFactory:nil footerViewFactory:nil];
+}
+
+
+- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    return [self initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory cellFactory:nil];
+}
+
+
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
     if ((self = [super init])) {
         _rows = [rows copy];
@@ -22,16 +37,6 @@
     }
 
     return self;
-}
-
-
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
-    return [self initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory cellFactory:nil];
-}
-
-
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows {
-    return [self initWithRows:rows headerViewFactory:nil footerViewFactory:nil];
 }
 
 

@@ -13,13 +13,22 @@
 
 #pragma mark - Initializer
 
-- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(BUKTableViewRowSelectionHandler)selection {
+- (instancetype)init {
+    return [self initWithObject:nil];
+}
+
+
+- (instancetype)initWithObject:(id)object {
+    return [self initWithObject:object cellFactory:nil selection:nil];
+}
+
+
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(id<BUKTableViewSelectionProtocol>)selection {
     if ((self = [super init])) {
         _object = object;
         _cellFactory = cellFactory;
-        _selection = [selection copy];
+        _selection = selection;
     }
-
     return self;
 }
 

@@ -29,18 +29,25 @@
     }];
 
     __weak typeof(self)weakSelf = self;
-    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UITableViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+
+    // Row 1
+    BUKTableViewSelection *selection1 = [[BUKTableViewSelection alloc] initWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
         BUKDemoTableViewController *viewController = [[BUKDemoTableViewController alloc] init];
         [weakSelf.navigationController pushViewController:viewController animated:YES];
     }];
+    BUKTableViewRow *row1 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UITableViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:selection1];
 
-    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UICollectionViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+    // Row 2
+    BUKTableViewSelection *selection2 = [[BUKTableViewSelection alloc] initWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
         BUKDemoCollectionViewController *viewController = [[BUKDemoCollectionViewController alloc] init];
         [weakSelf.navigationController pushViewController:viewController animated:YES];
     }];
+    BUKTableViewRow *row2 = [[BUKTableViewRow alloc] initWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"UICollectionViewDemo" subtitle:@"Subtitle"] cellFactory:cellFactory selection:selection2];
 
+    // Section 1
     BUKTableViewSection *section1 = [[BUKTableViewSection alloc] initWithRows:@[row1, row2]];
 
+    // Setup data source
     self.dataSourceProvider.sections = @[section1];
 }
 

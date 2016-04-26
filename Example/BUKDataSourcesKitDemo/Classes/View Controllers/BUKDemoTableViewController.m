@@ -34,12 +34,14 @@
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
 
+    BUKTableViewSelection *selection = [[BUKTableViewSelection alloc] initWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
+        NSLog(@"Selected");
+    }];
+
     NSMutableArray<BUKTableViewRow *> *mutableSubtitleRows = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < 10; i++) {
         BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:[NSString stringWithFormat:@"Row %ld", (long)i] subtitle:@"subtitle"];
-        BUKTableViewRow *row = [[BUKTableViewRow alloc] initWithObject:viewModel cellFactory:subtitleCellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
-            NSLog(@"Selected");
-        }];
+        BUKTableViewRow *row = [[BUKTableViewRow alloc] initWithObject:viewModel cellFactory:subtitleCellFactory selection:selection];
         [mutableSubtitleRows addObject:row];
     }
 
@@ -64,9 +66,7 @@
     NSMutableArray<BUKTableViewRow *> *mutableValue1Rows = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < 10; i++) {
         BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:[NSString stringWithFormat:@"Row %ld", (long)i] subtitle:@"detail"];
-        BUKTableViewRow *row = [[BUKTableViewRow alloc] initWithObject:viewModel cellFactory:value1CellFactory selection:^(BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
-            NSLog(@"Selected");
-        }];
+        BUKTableViewRow *row = [[BUKTableViewRow alloc] initWithObject:viewModel cellFactory:value1CellFactory selection:selection];
         [mutableValue1Rows addObject:row];
     }
 
