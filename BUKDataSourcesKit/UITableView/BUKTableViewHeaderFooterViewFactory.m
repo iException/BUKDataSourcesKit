@@ -17,7 +17,7 @@
 }
 
 
-+ (instancetype)factoryWithClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator {
++ (instancetype)factoryWithViewClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator {
     return [[self alloc] initWithViewClass:viewClass configurator:configurator];
 }
 

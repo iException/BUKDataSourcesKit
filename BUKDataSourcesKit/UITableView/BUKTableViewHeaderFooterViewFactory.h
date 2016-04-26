@@ -20,7 +20,7 @@ typedef void (^BUKTableViewHeaderFooterViewConfigurationHandler)(__kindof UITabl
 @property (nonatomic) CGFloat viewHeight;
 
 + (instancetype)factoryWithTitle:(NSString *)title;
-+ (instancetype)factoryWithClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator;
++ (instancetype)factoryWithViewClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
