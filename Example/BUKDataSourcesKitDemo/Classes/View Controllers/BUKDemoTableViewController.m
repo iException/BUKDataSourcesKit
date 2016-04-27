@@ -34,9 +34,9 @@
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
 
-    BUKTableViewSelection *selection = [BUKTableViewSelection selectionWithHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
+    BUKTableViewSelection *selection = [BUKTableViewSelection selectionWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
         NSLog(@"Selected");
-    }];
+    } deselectionHandler:nil];
 
     // Create rows in section 1
     NSMutableArray<BUKTableViewRow *> *mutableSubtitleRows = [NSMutableArray array];

@@ -15,11 +15,12 @@ typedef void (^BUKTableViewSelectionHandler)(UITableView *tableView, BUKTableVie
 @interface BUKTableViewSelection : NSObject <BUKTableViewSelectionProtocol>
 
 @property (nonatomic, copy) BUKTableViewSelectionHandler selectionHandler;
+@property (nonatomic, copy) BUKTableViewSelectionHandler deselectionHandler;
 @property (nonatomic, readonly) BOOL isSelectable;
 
-+ (instancetype)selection;
-+ (instancetype)selectionWithHandler:(BUKTableViewSelectionHandler)selectionHandler;
++ (instancetype)selectionWithSelectionHandler:(BUKTableViewSelectionHandler)selectionHandler deselectionHandler:(BUKTableViewSelectionHandler)deselectionHandler;
 
-- (instancetype)initWithSelectionHandler:(BUKTableViewSelectionHandler)selectionHandler NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithSelectionHandler:(BUKTableViewSelectionHandler)selectionHandler deselectionHandler:(BUKTableViewSelectionHandler)deselectionHandler NS_DESIGNATED_INITIALIZER;
 
 @end
