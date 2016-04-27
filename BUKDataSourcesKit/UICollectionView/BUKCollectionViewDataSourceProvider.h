@@ -20,11 +20,14 @@
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
+@property (nonatomic) BOOL automaticallyDeselectItems;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections NS_DESIGNATED_INITIALIZER;
 
 - (__kindof BUKCollectionViewSection *)sectionAtIndex:(NSInteger)index;
 - (__kindof BUKCollectionViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)refresh;
 
 @end

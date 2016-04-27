@@ -15,7 +15,7 @@
 @interface BUKTableViewRow : NSObject
 
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
-@property (nonatomic, copy) id<BUKTableViewSelectionProtocol> selection;
+@property (nonatomic) id<BUKTableViewSelectionProtocol> selection;
 @property (nonatomic) id object;
 
 + (instancetype)row;

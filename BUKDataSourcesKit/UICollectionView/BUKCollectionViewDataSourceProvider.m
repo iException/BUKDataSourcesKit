@@ -11,6 +11,7 @@
 #import "BUKCollectionViewItem.h"
 #import "BUKCollectionViewCellFactoryProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
+#import "BUKCollectionViewSelectionProtocol.h"
 
 
 @interface BUKCollectionViewDataSourceProvider ()
@@ -102,7 +103,14 @@
 }
 
 
-#pragma mark - Private
+#pragma mark - Public
+
+- (void)refresh {
+    [self refreshRegisteredCellIdentifiers];
+    [self refreshRegisteredSupplementaryViewIdentifiers];
+    [self refreshCollectionSections];
+}
+
 
 - (BUKCollectionViewSection *)sectionAtIndex:(NSInteger)index {
     if (self.sections.count <= index) {
@@ -125,17 +133,12 @@
 }
 
 
+#pragma mark - Private
+
 - (void)updateCollectionView {
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self refresh];
-}
-
-
-- (void)refresh {
-    [self refreshRegisteredCellIdentifiers];
-    [self refreshRegisteredSupplementaryViewIdentifiers];
-    [self refreshCollectionSections];
 }
 
 
@@ -276,9 +279,69 @@
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:shouldHighlightItem:atIndexPath:)]) {
+        return [item.selection collectionView:collectionView shouldHighlightItem:item atIndexPath:indexPath];
+    } else {
+        return YES;
+    }
 }
 
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:didHighlightItem:atIndexPath:)]) {
+        [item.selection collectionView:collectionView didHighlightItem:item atIndexPath:indexPath];
+    }
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:didUnhighlightItem:atIndexPath:)]) {
+        [item.selection collectionView:collectionView didUnhighlightItem:item atIndexPath:indexPath];
+    }
+}
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:shouldSelectItem:atIndexPath:)]) {
+        return [item.selection collectionView:collectionView shouldSelectItem:item atIndexPath:indexPath];
+    } else {
+        return YES;
+    }
+}
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:shouldDeselectItem:atIndexPath:)]) {
+        return [item.selection collectionView:collectionView shouldDeselectItem:item atIndexPath:indexPath];
+    } else {
+        return YES;
+    }
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.automaticallyDeselectItems) {
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    }
+
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:didSelectItem:atIndexPath:)]) {
+        [item.selection collectionView:collectionView didSelectItem:item atIndexPath:indexPath];
+    }
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([item.selection respondsToSelector:@selector(collectionView:didDeselectItem:atIndexPath:)]) {
+        [item.selection collectionView:collectionView didDeselectItem:item atIndexPath:indexPath];
+    }
+}
 
 @end

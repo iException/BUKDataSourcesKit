@@ -11,17 +11,16 @@
 
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
+@protocol BUKCollectionViewSelectionProtocol;
 
 @interface BUKCollectionViewItem : NSObject
 
-typedef void (^BUKCollectionViewItemSelectionHandler)(BUKCollectionViewItem *item);
-
-@property (nonatomic, readonly) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
-@property (nonatomic, readonly) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
-@property (nonatomic, copy, readonly) BUKCollectionViewItemSelectionHandler selection;
-@property (nonatomic, readonly) id object;
+@property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
+@property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
+@property (nonatomic) id<BUKCollectionViewSelectionProtocol> selection;
+@property (nonatomic) id object;
 
 - (instancetype)initWithObject:(id)object;
-- (instancetype)initWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory;
+- (instancetype)initWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory selection:(id<BUKCollectionViewSelectionProtocol>)selection NS_DESIGNATED_INITIALIZER;
 
 @end

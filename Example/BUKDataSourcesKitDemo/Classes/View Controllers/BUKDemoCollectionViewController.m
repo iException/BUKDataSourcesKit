@@ -46,10 +46,16 @@
         view.titleLabel.text = [NSString stringWithFormat:@"Section Header %ld", (long)indexPath.section];
     }];
 
+    BUKCollectionViewSelection *selection = [[BUKCollectionViewSelection alloc] initWithSelectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
+        NSLog(@"Selected item at index path: %@", indexPath);
+    } deselectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
+        NSLog(@"Deselected item at index path: %@", indexPath);
+    }];
+
     NSMutableArray<BUKCollectionViewItem *> *items = [NSMutableArray array];
     for (NSInteger i = 0; i < 100; i++) {
         BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:[NSString stringWithFormat:@"Item %ld", (long)i] subtitle:@"Subtitle"];
-        BUKCollectionViewItem *item = [[BUKCollectionViewItem alloc] initWithObject:viewModel];
+        BUKCollectionViewItem *item = [[BUKCollectionViewItem alloc] initWithObject:viewModel cellFactory:nil supplementaryViewFactory:nil selection:selection];
         [items addObject:item];
     }
 

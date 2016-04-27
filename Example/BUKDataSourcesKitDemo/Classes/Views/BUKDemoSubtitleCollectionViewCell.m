@@ -51,6 +51,34 @@
 }
 
 
+#pragma mark - UICollectionViewCell
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+
+    if (highlighted) {
+        self.backgroundColor = [UIColor lightGrayColor];
+    } else {
+        if (self.selected) {
+            self.backgroundColor = [UIColor cyanColor];
+        } else {
+            self.backgroundColor = [UIColor whiteColor];
+        }
+    }
+}
+
+
+-(void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+
+    if (selected) {
+        self.backgroundColor = [UIColor cyanColor];
+    } else {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+}
+
+
 #pragma mark - Private
 
 - (void)setupViewConstraints {
