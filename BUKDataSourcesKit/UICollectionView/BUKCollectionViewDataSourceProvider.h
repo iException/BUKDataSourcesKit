@@ -21,6 +21,8 @@
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 @property (nonatomic) BOOL automaticallyDeselectItems;
+@property (nonatomic) BOOL automaticallyRegisterCells;
+@property (nonatomic) BOOL automaticallyRegisterSupplementaryViews;
 
 + (instancetype)provider;
 + (instancetype)providerWithCollectionView:(UICollectionView *)collectionView;

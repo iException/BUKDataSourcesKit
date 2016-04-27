@@ -106,6 +106,9 @@
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
     if ((self = [super init])) {
+        _automaticallyDeselectItems = YES;
+        _automaticallyRegisterCells = YES;
+        _automaticallyRegisterSupplementaryViews = YES;
         _collectionView = collectionView;
         _sections = sections;
         _cellFactory = cellFactory;
@@ -170,6 +173,10 @@
 
 
 - (void)refreshRegisteredCellIdentifiers {
+    if (!self.automaticallyRegisterCells) {
+        return;
+    }
+
     [self.sections enumerateObjectsUsingBlock:^(BUKCollectionViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
         [section.items enumerateObjectsUsingBlock:^(BUKCollectionViewItem * _Nonnull item, NSUInteger j, BOOL * _Nonnull stop) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:i];
@@ -211,6 +218,10 @@
 
 
 - (void)refreshRegisteredSupplementaryViewIdentifiers {
+    if (!self.automaticallyRegisterSupplementaryViews) {
+        return;
+    }
+
     [self.sections enumerateObjectsUsingBlock:^(BUKCollectionViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
         [section.items enumerateObjectsUsingBlock:^(BUKCollectionViewItem * _Nonnull item, NSUInteger j, BOOL * _Nonnull stop) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:i];
