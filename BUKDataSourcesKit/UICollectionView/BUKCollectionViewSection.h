@@ -20,9 +20,12 @@
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 
-- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)section;
++ (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
++ (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory;
+
 - (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
-- (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory NS_DESIGNATED_INITIALIZER;
 
 - (__kindof BUKCollectionViewItem *)itemAtIndex:(NSInteger)index;
 

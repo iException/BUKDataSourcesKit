@@ -11,6 +11,23 @@
 
 @implementation BUKCollectionViewItem
 
+#pragma mark - Class Methods
+
++ (instancetype)item {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)itemWithObject:(id)object {
+    return [[self alloc] initWithObject:object];
+}
+
+
++ (instancetype)itemWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory selection:(id<BUKCollectionViewSelectionProtocol>)selection {
+    return [[self alloc] initWithObject:object cellFactory:cellFactory supplementaryViewFactory:supplementaryViewFactory selection:selection];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)initWithObject:(id)object cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory selection:(id<BUKCollectionViewSelectionProtocol>)selection {

@@ -23,6 +23,7 @@
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
 
++ (instancetype)provider;
 + (instancetype)providerWithTableView:(UITableView *)tableView;
 + (instancetype)providerWithTableView:(UITableView *)tableView
                              sections:(NSArray<BUKTableViewSection *> *)sections;
@@ -43,5 +44,6 @@
 
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index;
 - (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)refresh;
 
 @end

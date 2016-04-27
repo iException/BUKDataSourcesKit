@@ -24,6 +24,28 @@
 
 @implementation BUKCollectionViewDataSourceProvider
 
+#pragma mark - Class Methods
+
++ (instancetype)provider {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)providerWithCollectionView:(UICollectionView *)collectionView {
+    return [[self alloc] initWithCollectionView:collectionView];
+}
+
+
++ (instancetype)providerWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections {
+    return [[self alloc] initWithCollectionView:collectionView sections:sections];
+}
+
+
++ (instancetype)providerWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
+    return [[self alloc] initWithCollectionView:collectionView sections:sections cellFactory:cellFactory supplementaryViewFactory:supplementaryViewFactory];
+}
+
+
 #pragma mark - Accessors
 
 @synthesize registeredCellIdentifiers = _registeredCellIdentifiers;
@@ -82,14 +104,19 @@
 
 #pragma mark - Initializer
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<BUKCollectionViewSection *> *)sections {
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<__kindof BUKCollectionViewSection *> *)sections cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
     if ((self = [super init])) {
         _collectionView = collectionView;
         _sections = sections;
+        _cellFactory = cellFactory;
+        _supplementaryViewFactory = supplementaryViewFactory;
         [self updateCollectionView];
     }
-
     return self;
+}
+
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView sections:(NSArray<BUKCollectionViewSection *> *)sections {
+    return [self initWithCollectionView:collectionView sections:sections cellFactory:nil supplementaryViewFactory:nil];
 }
 
 

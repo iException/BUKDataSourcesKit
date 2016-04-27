@@ -17,6 +17,8 @@ typedef void (^BUKCollectionViewCellConfigurationHandler)(__kindof UICollectionV
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, copy, readonly) BUKCollectionViewCellConfigurationHandler cellConfigurator;
 
++ (instancetype)factoryWithCellClass:(Class)cellClass configurator:(BUKCollectionViewCellConfigurationHandler)configurator;
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithCellClass:(Class)cellClass configurator:(BUKCollectionViewCellConfigurationHandler)configurator NS_DESIGNATED_INITIALIZER;
 

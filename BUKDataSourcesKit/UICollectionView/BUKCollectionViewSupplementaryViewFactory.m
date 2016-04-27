@@ -11,6 +11,13 @@
 
 @implementation BUKCollectionViewSupplementaryViewFactory
 
+#pragma mark - Class Methods
+
++ (instancetype)factoryWithSupplementaryViewClass:(Class)supplementaryViewClass kind:(NSString *)kind configurator:(BUKCollectionSupplementaryViewConfigurationHandler)configurator {
+    return [[self alloc] initWithSupplementaryViewClass:supplementaryViewClass kind:kind configurator:configurator];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)initWithSupplementaryViewClass:(Class)supplementaryViewClass kind:(NSString *)kind configurator:(BUKCollectionSupplementaryViewConfigurationHandler)configurator {

@@ -11,6 +11,13 @@
 
 @implementation BUKCollectionViewCellFactory
 
+#pragma mark - Class Methods
+
++ (instancetype)factoryWithCellClass:(Class)cellClass configurator:(BUKCollectionViewCellConfigurationHandler)configurator {
+    return [[self alloc] initWithCellClass:cellClass configurator:configurator];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)initWithCellClass:(Class)cellClass configurator:(BUKCollectionViewCellConfigurationHandler)configurator {

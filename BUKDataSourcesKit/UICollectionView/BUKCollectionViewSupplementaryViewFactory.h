@@ -18,6 +18,8 @@ typedef void (^BUKCollectionSupplementaryViewConfigurationHandler)(__kindof UICo
 @property (nonatomic, copy, readonly) NSString *supplementaryViewKind;
 @property (nonatomic, copy, readonly) BUKCollectionSupplementaryViewConfigurationHandler viewConfigurator;
 
++ (instancetype)factoryWithSupplementaryViewClass:(Class)supplementaryViewClass kind:(NSString *)kind configurator:(BUKCollectionSupplementaryViewConfigurationHandler)configurator;
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithSupplementaryViewClass:(Class)supplementaryViewClass kind:(NSString *)kind configurator:(BUKCollectionSupplementaryViewConfigurationHandler)configurator NS_DESIGNATED_INITIALIZER;
 

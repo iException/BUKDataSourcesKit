@@ -11,13 +11,30 @@
 
 @implementation BUKCollectionViewSection
 
+#pragma mark - Class Methods
+
++ (instancetype)section {
+    return [[self alloc] init];
+}
+
+
++ (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items {
+    return [[self alloc] initWithItems:items];
+}
+
+
++ (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
+    return [[self alloc] initWithItems:items cellFactory:cellFactory supplementaryViewFactory:supplementaryViewFactory];
+}
+
+
 #pragma mark - Initializer
 
-- (instancetype)initWithItems:(NSArray<BUKCollectionViewItem *> *)items supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
     if ((self = [super init])) {
         _items = [items copy];
-        _supplementaryViewFactory = supplementaryViewFactory;
         _cellFactory = cellFactory;
+        _supplementaryViewFactory = supplementaryViewFactory;
     }
 
     return self;
@@ -25,7 +42,12 @@
 
 
 - (instancetype)initWithItems:(NSArray<BUKCollectionViewItem *> *)items {
-    return [self initWithItems:items supplementaryViewFactory:nil cellFactory:nil];
+    return [self initWithItems:items cellFactory:nil supplementaryViewFactory:nil];
+}
+
+
+- (instancetype)init {
+    return [self initWithItems:nil];
 }
 
 

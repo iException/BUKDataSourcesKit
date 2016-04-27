@@ -26,6 +26,11 @@
 
 #pragma mark - Class Methods
 
++ (instancetype)provider {
+    return [[self alloc] init];
+}
+
+
 + (instancetype)providerWithTableView:(UITableView *)tableView {
     return [[self alloc] initWithTableView:tableView];
 }
@@ -158,19 +163,19 @@
 }
 
 
+- (void)refresh {
+    [self refreshRegisteredCellIdentifiers];
+    [self refreshRegisteredHeaderFooterViewIdentifiers];
+    [self refreshTableSections];
+}
+
+
 #pragma mark - Private
 
 - (void)updateTableView {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self refresh];
-}
-
-
-- (void)refresh {
-    [self refreshRegisteredCellIdentifiers];
-    [self refreshRegisteredHeaderFooterViewIdentifiers];
-    [self refreshTableSections];
 }
 
 
