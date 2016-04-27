@@ -74,12 +74,10 @@
 
     section2.rows = mutableValue1Rows;
 
-    BUKTableViewRowHeightInfo *rowHeightInfo = [[BUKTableViewRowHeightInfo alloc] init];
-    rowHeightInfo.height = 60.0f;
+    BUKTableViewRowHeightInfo *rowHeightInfo = [BUKTableViewRowHeightInfo heightInfoWithDefaultHeight:60.0f calculator:nil];
     section2.rowHeightInfo = rowHeightInfo;
 
-    BUKTableViewSectionHeaderFooterHeightInfo *sectionHeaderHeightInfo = [[BUKTableViewSectionHeaderFooterHeightInfo alloc] init];
-    sectionHeaderHeightInfo.height = 50.0f;
+    BUKTableViewSectionHeaderFooterHeightInfo *sectionHeaderHeightInfo = [BUKTableViewSectionHeaderFooterHeightInfo heightInfoWithDefaultHeight:50.0f calculator:nil];
     section2.headerHeightInfo = sectionHeaderHeightInfo;
 
     // Setup data source

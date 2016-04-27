@@ -9,8 +9,18 @@
 #import "BUKTableViewRowHeightInfoProtocol.h"
 
 
+typedef CGFloat (^BUKTableViewRowHeightCalculator)(BUKTableViewRow *row, NSIndexPath *indexPath);
+
+
 @interface BUKTableViewRowHeightInfo : NSObject <BUKTableViewRowHeightInfoProtocol>
 
-@property (nonatomic) CGFloat height;
+@property (nonatomic) CGFloat defaultHeight;
+@property (nonatomic, copy) BUKTableViewRowHeightCalculator heightCalculator;
+@property (nonatomic) BOOL usesCache;
+
++ (instancetype)heightInfoWithDefaultHeight:(CGFloat)defaultHeight calculator:(BUKTableViewRowHeightCalculator)calculator;
+
+- (instancetype)initWithDefaultHeight:(CGFloat)defaultHeight calculator:(BUKTableViewRowHeightCalculator)calculator NS_DESIGNATED_INITIALIZER;
+- (void)clearCache;
 
 @end
