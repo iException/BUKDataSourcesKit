@@ -23,8 +23,6 @@
 
 - (instancetype)init {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(100.0f, 60.0f);
-    flowLayout.headerReferenceSize = CGSizeMake(0, 30.0f);
     return [super initWithCollectionViewLayout:flowLayout];
 }
 
@@ -35,6 +33,8 @@
     [super viewDidLoad];
     self.title = @"Collection View";
     self.collectionView.backgroundColor = [UIColor whiteColor];
+
+    BUKCollectionViewFlowLayoutDataSourceProvider *provider = [[BUKCollectionViewFlowLayoutDataSourceProvider alloc] initWithCollectionView:self.collectionView];
 
     BUKCollectionViewCellFactory *cellFactory = [[BUKCollectionViewCellFactory alloc] initWithCellClass:[BUKDemoSubtitleCollectionViewCell class] configurator:^( BUKDemoSubtitleCollectionViewCell *cell, BUKCollectionViewItem *item, UICollectionView *collectionView, NSIndexPath *indexPath) {
         BUKDemoTextViewModel *viewModel = item.object;
@@ -61,9 +61,19 @@
 
     BUKCollectionViewFlowLayoutSection *section = [[BUKCollectionViewFlowLayoutSection alloc] initWithItems:items];
 
-    self.dataSourceProvider.cellFactory = cellFactory;
-    self.dataSourceProvider.supplementaryViewFactory = supplementaryViewFactory;
-    self.dataSourceProvider.sections = @[section];
+    BUKCollectionViewSectionFlowLayoutInfo *sectionFlowLayoutInfo = [BUKCollectionViewSectionFlowLayoutInfo layoutInfo];
+    sectionFlowLayoutInfo.minimumLineSpacing = 10.0f;
+    sectionFlowLayoutInfo.headerReferenceSize = CGSizeMake(0, 100.0f);
+    section.sectionFlowLayoutInfo = sectionFlowLayoutInfo;
+
+    provider.itemFlowLayoutInfo = [BUKCollectionViewItemFlowLayoutInfo layoutInfoWithDefaultItemSize:CGSizeZero calculator:^CGSize(BUKCollectionViewItem *item, NSIndexPath *indexPath, UICollectionView *collectionView, UICollectionViewLayout *layout) {
+        return CGSizeMake(collectionView.bounds.size.width / 4.0f, 80.0f);
+    }];
+    provider.cellFactory = cellFactory;
+    provider.supplementaryViewFactory = supplementaryViewFactory;
+    provider.sections = @[section];
+
+    self.dataSourceProvider = provider;
 }
 
 @end

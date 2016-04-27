@@ -28,10 +28,7 @@
 #pragma mark - Accessors
 
 - (void)setDefaultHeight:(CGFloat)defaultHeight {
-    if (defaultHeight < 0.0f) {
-        return;
-    }
-
+    NSAssert(defaultHeight >= 0.0f, @"Default section header/footer height must be non-negtive!");
     _defaultHeight = defaultHeight;
 }
 
@@ -52,6 +49,7 @@
 
 
 - (instancetype)initWithDefaultHeight:(CGFloat)defaultHeight calculator:(BUKTableViewSectionHeaderFooterHeightCalculator)calculator {
+    NSAssert(defaultHeight >= 0.0f, @"Default section header/footer height must be non-negtive!");
     if ((self = [super init])) {
         _defaultHeight = defaultHeight;
         _heightCalculator = [calculator copy];

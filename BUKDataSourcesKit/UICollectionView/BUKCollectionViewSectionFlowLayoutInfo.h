@@ -17,4 +17,6 @@
 @property (nonatomic) CGSize footerReferenceSize;
 @property (nonatomic) UIEdgeInsets sectionInset;
 
++ (instancetype)layoutInfo;
+
 @end

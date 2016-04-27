@@ -9,8 +9,18 @@
 #import "BUKCollectionViewFlowLayoutInfoProtocol.h"
 
 
+typedef CGSize (^BUKCollectionViewItemSizeCalculator)(BUKCollectionViewItem *item, NSIndexPath *indexPath, UICollectionView *collectionView, UICollectionViewLayout *layout);
+
+
 @interface BUKCollectionViewItemFlowLayoutInfo : NSObject <BUKCollectionViewItemFlowLayoutInfoProtocol>
 
-@property (nonatomic) CGSize itemSize;
+@property (nonatomic) CGSize defaultItemSize;
+@property (nonatomic, copy) BUKCollectionViewItemSizeCalculator itemSizeCalculator;
+@property (nonatomic) BOOL usesCache;
+
++ (instancetype)layoutInfoWithDefaultItemSize:(CGSize)size calculator:(BUKCollectionViewItemSizeCalculator)calculator;
+
+- (instancetype)initWithDefaultItemSize:(CGSize)size calculator:(BUKCollectionViewItemSizeCalculator)calculator NS_DESIGNATED_INITIALIZER;
+- (void)clearCache;
 
 @end

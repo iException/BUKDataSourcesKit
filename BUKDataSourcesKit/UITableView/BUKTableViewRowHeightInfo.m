@@ -27,10 +27,7 @@
 #pragma mark - Accessors
 
 - (void)setDefaultHeight:(CGFloat)defaultHeight {
-    if (defaultHeight < 0.0f) {
-        return;
-    }
-
+    NSAssert(defaultHeight >= 0.0f, @"Default row height must be non-negtive!");
     _defaultHeight = defaultHeight;
 }
 
@@ -51,10 +48,11 @@
 
 
 - (instancetype)initWithDefaultHeight:(CGFloat)defaultHeight calculator:(BUKTableViewRowHeightCalculator)calculator {
+    NSAssert(defaultHeight >= 0.0f, @"Default row height must be non-negtive!");
     if ((self = [super init])) {
-        _defaultHeight = defaultHeight;
         _heightCalculator = [calculator copy];
         _usesCache = NO;
+        _defaultHeight = defaultHeight;
     }
     return self;
 }

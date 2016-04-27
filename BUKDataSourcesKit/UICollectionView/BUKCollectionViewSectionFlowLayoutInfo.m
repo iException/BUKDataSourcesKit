@@ -11,6 +11,13 @@
 
 @implementation BUKCollectionViewSectionFlowLayoutInfo
 
+#pragma mark - Class Methods
+
++ (instancetype)layoutInfo {
+    return [[self alloc] init];
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)init {
