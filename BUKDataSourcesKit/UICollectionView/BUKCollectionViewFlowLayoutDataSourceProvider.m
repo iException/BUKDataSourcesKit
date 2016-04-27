@@ -1,5 +1,5 @@
 //
-//  BUKFlowLayoutCollectionViewDataSourceProvider.m
+//  BUKCollectionViewFlowLayoutDataSourceProvider.m
 //  BUKDataSourcesKit
 //
 //  Created by Yiming Tang on 4/20/16.

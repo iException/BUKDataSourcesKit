@@ -1,5 +1,5 @@
 //
-//  BUKCollectionViewSectionFlowLayoutInfoProtocol.h
+//  BUKCollectionViewFlowLayoutInfoProtocol.h
 //  BUKDataSourcesKit
 //
 //  Created by Yiming Tang on 4/22/16.
