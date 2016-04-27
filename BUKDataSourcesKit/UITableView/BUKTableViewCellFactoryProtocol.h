@@ -17,6 +17,5 @@
 - (Class)cellClassForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)reuseIdentifierForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath;
 - (void)configureCell:(__kindof UITableViewCell *)cell withRow:(BUKTableViewRow *)row inTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)heightForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath;
 
 @end

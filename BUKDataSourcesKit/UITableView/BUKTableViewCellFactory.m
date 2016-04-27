@@ -17,16 +17,6 @@
     return [[self alloc] initWithCellClass:cellClass configurator:configurator];
 }
 
-#pragma mark - Accessors
-
-- (void)setCellHeight:(CGFloat)cellHeight {
-    if (cellHeight < 0.0f) {
-        return;
-    }
-
-    _cellHeight = cellHeight;
-}
-
 
 #pragma mark - Initializer
 
@@ -37,7 +27,6 @@
         _cellClass = cellClass;
         _reuseIdentifier = NSStringFromClass(cellClass);
         _cellConfigurator = [configurator copy];
-        _cellHeight = 50.0f;
     }
     return self;
 }
@@ -59,11 +48,6 @@
     if (self.cellConfigurator) {
         self.cellConfigurator(cell, row, tableView, indexPath);
     }
-}
-
-
-- (CGFloat)heightForRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath {
-    return self.cellHeight;
 }
 
 @end

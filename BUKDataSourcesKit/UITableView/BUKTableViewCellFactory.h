@@ -16,7 +16,6 @@ typedef void (^BUKTableViewCellConfigurationHandler)(__kindof UITableViewCell *c
 @property (nonatomic, readonly) Class cellClass;
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, copy, readonly) BUKTableViewCellConfigurationHandler cellConfigurator;
-@property (nonatomic) CGFloat cellHeight;
 
 + (instancetype)factoryWithCellClass:(Class)cellClass configurator:(BUKTableViewCellConfigurationHandler)configurator;
 

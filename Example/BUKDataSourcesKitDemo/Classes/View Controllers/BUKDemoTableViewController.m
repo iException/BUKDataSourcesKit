@@ -35,7 +35,7 @@
     }];
 
     BUKTableViewSelection *selection = [BUKTableViewSelection selectionWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
-        NSLog(@"Selected");
+        NSLog(@"Selected row at index path: %@", indexPath);
     } deselectionHandler:nil];
 
     // Create rows in section 1
@@ -49,12 +49,13 @@
     section1.rows = mutableSubtitleRows;
 
     // Section 2
+    // Header
     BUKTableViewHeaderFooterViewFactory *imageHeaderViewFactory = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[BUKDemoTableViewHeaderFooterView class] configurator:^(BUKDemoTableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
         view.titleLabel.text = @"Section 2 Header";
     }];
-    imageHeaderViewFactory.viewHeight = 52.0f;
-    
+    // Footer
     BUKTableViewHeaderFooterViewFactory *imageFooterViewFactory = [BUKTableViewHeaderFooterViewFactory factoryWithTitle:@"Section 2 Footer"];
+
     BUKTableViewSection *section2 = [BUKTableViewSection sectionWithRows:nil headerViewFactory:imageHeaderViewFactory footerViewFactory:imageFooterViewFactory];
 
     BUKTableViewCellFactory *value1CellFactory = [BUKTableViewCellFactory factoryWithCellClass:[BUKDemoValue1TableViewCell class] configurator:^(BUKDemoValue1TableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
@@ -62,7 +63,6 @@
         cell.textLabel.text = viewModel.title;
         cell.detailTextLabel.text = viewModel.subtitle;
     }];
-    value1CellFactory.cellHeight = 40.0f;
 
     // Create rows in section 2
     NSMutableArray<BUKTableViewRow *> *mutableValue1Rows = [[NSMutableArray alloc] init];
@@ -73,6 +73,14 @@
     }
 
     section2.rows = mutableValue1Rows;
+
+    BUKTableViewRowHeightInfo *rowHeightInfo = [[BUKTableViewRowHeightInfo alloc] init];
+    rowHeightInfo.height = 60.0f;
+    section2.rowHeightInfo = rowHeightInfo;
+
+    BUKTableViewSectionHeaderFooterHeightInfo *sectionHeaderHeightInfo = [[BUKTableViewSectionHeaderFooterHeightInfo alloc] init];
+    sectionHeaderHeightInfo.height = 50.0f;
+    section2.headerHeightInfo = sectionHeaderHeightInfo;
 
     // Setup data source
     self.dataSourceProvider.sections = @[section1, section2];

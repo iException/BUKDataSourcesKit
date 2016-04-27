@@ -12,12 +12,17 @@
 @class BUKTableViewRow;
 @protocol BUKTableViewCellFactoryProtocol;
 @protocol BUKTableViewHeaderFooterViewFactoryProtocol;
+@protocol BUKTableViewRowHeightInfoProtocol;
+@protocol BUKTableViewSectionHeaderFooterHeightInfoProtocol;
 
 @interface BUKTableViewSection : NSObject
 
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
+@property (nonatomic) id<BUKTableViewRowHeightInfoProtocol> rowHeightInfo;
+@property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> headerHeightInfo;
+@property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> footerHeightInfo;
 @property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
 @property (nonatomic) id object;
 

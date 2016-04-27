@@ -12,6 +12,8 @@
 #import "BUKTableViewCellFactoryProtocol.h"
 #import "BUKTableViewHeaderFooterViewFactoryProtocol.h"
 #import "BUKTableViewSelectionProtocol.h"
+#import "BUKTableViewRowHeightInfoProtocol.h"
+#import "BUKTableViewSectionHeaderFooterHeightInfoProtocol.h"
 
 
 @interface BUKTableViewDataSourceProvider ()
@@ -291,6 +293,33 @@
 }
 
 
+- (id<BUKTableViewRowHeightInfoProtocol>)rowHeightInfoForRow:(BUKTableViewRow *)row inSection:(BUKTableViewSection *)section {
+    if (row.heightInfo) {
+        return row.heightInfo;
+    }
+    if (section.rowHeightInfo) {
+        return section.rowHeightInfo;
+    }
+    return self.rowHeightInfo;
+}
+
+
+- (id<BUKTableViewSectionHeaderFooterHeightInfoProtocol>)headerHeightInfoForSection:(BUKTableViewSection *)section {
+    if (section.headerHeightInfo) {
+        return section.headerHeightInfo;
+    }
+    return self.sectionHeaderHeightInfo;
+}
+
+
+- (id<BUKTableViewSectionHeaderFooterHeightInfoProtocol>)footerHeightInfoForSection:(BUKTableViewSection *)section {
+    if (section.footerHeightInfo) {
+        return section.footerHeightInfo;
+    }
+    return self.sectionFooterHeightInfo;
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -398,12 +427,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
     BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
-    id<BUKTableViewCellFactoryProtocol> cellFactory = [self cellFactoryForRow:row inSection:section];
-    if (!cellFactory) {
+    id<BUKTableViewRowHeightInfoProtocol> rowHeightInfo = [self rowHeightInfoForRow:row inSection:section];
+    if (!rowHeightInfo) {
         return tableView.rowHeight;
     }
 
-    return [cellFactory heightForRow:row atIndexPath:indexPath];
+    return [rowHeightInfo heightForRow:row atIndexPath:indexPath];
 }
 
 
@@ -423,23 +452,23 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
-    if (!headerViewFactory) {
-        return 0;
+    id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> heightInfo = [self headerHeightInfoForSection:section];
+    if (!heightInfo) {
+        return tableView.sectionHeaderHeight;
     }
 
-    return [headerViewFactory heightForSection:section atIndex:index];
+    return [heightInfo headerFooterHeightForSection:section atIndex:index];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
-    if (!footerViewFactory) {
-        return 0;
+    id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> heightInfo = [self footerHeightInfoForSection:section];
+    if (!heightInfo) {
+        return tableView.sectionFooterHeight;
     }
 
-    return [footerViewFactory heightForSection:section atIndex:index];
+    return [heightInfo headerFooterHeightForSection:section atIndex:index];
 }
 
 @end

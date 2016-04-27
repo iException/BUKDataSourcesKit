@@ -11,11 +11,13 @@
 
 @protocol BUKTableViewCellFactoryProtocol;
 @protocol BUKTableViewSelectionProtocol;
+@protocol BUKTableViewRowHeightInfoProtocol;
 
 @interface BUKTableViewRow : NSObject
 
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKTableViewSelectionProtocol> selection;
+@property (nonatomic) id<BUKTableViewRowHeightInfoProtocol> heightInfo;
 @property (nonatomic) id object;
 
 + (instancetype)row;

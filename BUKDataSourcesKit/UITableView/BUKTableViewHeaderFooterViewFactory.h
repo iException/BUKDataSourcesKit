@@ -17,7 +17,6 @@ typedef void (^BUKTableViewHeaderFooterViewConfigurationHandler)(__kindof UITabl
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, copy, readonly) BUKTableViewHeaderFooterViewConfigurationHandler viewConfigurator;
 @property (nonatomic, copy, readonly) NSString *title;
-@property (nonatomic) CGFloat viewHeight;
 
 + (instancetype)factoryWithTitle:(NSString *)title;
 + (instancetype)factoryWithViewClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator;

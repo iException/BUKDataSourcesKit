@@ -22,17 +22,6 @@
 }
 
 
-#pragma mark - Accessors
-
-- (void)setViewHeight:(CGFloat)height {
-    if (height < 0.0f) {
-        return;
-    }
-
-    _viewHeight = height;
-}
-
-
 #pragma mark - Initializer
 
 - (instancetype)initWithViewClass:(Class)viewClass configurator:(BUKTableViewHeaderFooterViewConfigurationHandler)configurator {
@@ -42,7 +31,6 @@
         _viewClass = viewClass;
         _viewConfigurator = [configurator copy];
         _reuseIdentifier = NSStringFromClass(viewClass);
-        _viewHeight = UITableViewAutomaticDimension;
     }
 
     return self;
@@ -52,7 +40,6 @@
 - (instancetype)initWithTitle:(NSString *)title {
     if ((self = [super init])) {
         _title = [title copy];
-        _viewHeight = UITableViewAutomaticDimension;
     }
 
     return self;
@@ -80,11 +67,6 @@
     if (self.viewConfigurator) {
         self.viewConfigurator(view, section, tableView, index);
     }
-}
-
-
-- (CGFloat)heightForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index {
-    return self.viewHeight;
 }
 
 @end

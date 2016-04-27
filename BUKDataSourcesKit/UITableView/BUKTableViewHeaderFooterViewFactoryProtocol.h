@@ -18,6 +18,5 @@
 - (NSString *)reuseIdentifierForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 - (Class)headerFooterViewClassForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 - (void)configureView:(__kindof UITableViewHeaderFooterView *)view withSection:(BUKTableViewSection *)section inTableView:(UITableView *)tableView atIndex:(NSInteger)index;
-- (CGFloat)heightForSection:(BUKTableViewSection *)section atIndex:(NSInteger)index;
 
 @end
