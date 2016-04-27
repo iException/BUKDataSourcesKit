@@ -21,6 +21,8 @@
 @property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic) BOOL automaticallyDeselectRows;
+@property (nonatomic) BOOL automaticallyRegisterCells;
+@property (nonatomic) BOOL automaticallyRegisterSectionHeaderFooters;
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory;
 @property (nonatomic) id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory;

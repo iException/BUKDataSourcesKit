@@ -117,6 +117,8 @@
         NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
 
         _automaticallyDeselectRows = YES;
+        _automaticallyRegisterCells = YES;
+        _automaticallyRegisterSectionHeaderFooters = YES;
         _tableView = tableView;
         _sections = sections;
         _cellFactory = cellFactory;
@@ -187,6 +189,10 @@
 
 
 - (void)refreshRegisteredCellIdentifiers {
+    if (!self.automaticallyRegisterCells) {
+        return;
+    }
+
     [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
         [section.rows enumerateObjectsUsingBlock:^(BUKTableViewRow * _Nonnull row, NSUInteger j, BOOL * _Nonnull stop) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
@@ -228,6 +234,10 @@
 
 
 - (void)refreshRegisteredHeaderFooterViewIdentifiers {
+    if (!self.automaticallyRegisterSectionHeaderFooters) {
+        return;
+    }
+
     [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
         id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
         [self registerHeaderFooterViewIfNecessary:headerViewFactory section:section index:idx];
