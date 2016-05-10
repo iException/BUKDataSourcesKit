@@ -342,8 +342,8 @@
 
 
 - (id<BUKTableViewSelectionProtocol>)rowSelectionForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BUKTableViewRow *row = [self rowAtIndexPath:indexPath];
     BUKTableViewSection *section = [self sectionAtIndex:indexPath.section];
+    BUKTableViewRow *row = [section rowAtIndex:indexPath.row];
     return [self rowSelectionForRow:row inSection:section];
 }
 

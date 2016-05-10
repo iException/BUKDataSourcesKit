@@ -13,6 +13,8 @@
 @class BUKCollectionViewItem;
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
+@protocol BUKCollectionViewSelectionProtocol;
+
 
 @interface BUKCollectionViewDataSourceProvider : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -20,6 +22,7 @@
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
+@property (nonatomic) id<BUKCollectionViewSelectionProtocol> itemSelection;
 @property (nonatomic) BOOL automaticallyDeselectItems;
 @property (nonatomic) BOOL automaticallyRegisterCells;
 @property (nonatomic) BOOL automaticallyRegisterSupplementaryViews;

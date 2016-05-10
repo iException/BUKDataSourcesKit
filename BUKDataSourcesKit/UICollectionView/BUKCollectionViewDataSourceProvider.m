@@ -279,6 +279,24 @@
 }
 
 
+- (id<BUKCollectionViewSelectionProtocol>)itemSelectionForItem:(BUKCollectionViewItem *)item inSection:(BUKCollectionViewSection *)section {
+    if (item.selection) {
+        return item.selection;
+    }
+    if (section.itemSelection) {
+        return section.itemSelection;
+    }
+    return self.itemSelection;
+}
+
+
+- (id<BUKCollectionViewSelectionProtocol>)itemSelectionForItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewSection *section = [self sectionAtIndex:indexPath.section];
+    BUKCollectionViewItem *item = [section itemAtIndex:indexPath.item];
+    return [self itemSelectionForItem:item inSection:section];
+}
+
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -318,9 +336,9 @@
 #pragma mark - UICollectionViewDelegate
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:shouldHighlightItem:atIndexPath:)]) {
-        return [item.selection collectionView:collectionView shouldHighlightItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:shouldHighlightItem:atIndexPath:)]) {
+        return [selection collectionView:collectionView shouldHighlightItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     } else {
         return YES;
     }
@@ -328,25 +346,25 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:didHighlightItem:atIndexPath:)]) {
-        [item.selection collectionView:collectionView didHighlightItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:didHighlightItem:atIndexPath:)]) {
+        [selection collectionView:collectionView didHighlightItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:didUnhighlightItem:atIndexPath:)]) {
-        [item.selection collectionView:collectionView didUnhighlightItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:didUnhighlightItem:atIndexPath:)]) {
+        [selection collectionView:collectionView didUnhighlightItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
 
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:shouldSelectItem:atIndexPath:)]) {
-        return [item.selection collectionView:collectionView shouldSelectItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:shouldSelectItem:atIndexPath:)]) {
+        return [selection collectionView:collectionView shouldSelectItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     } else {
         return YES;
     }
@@ -354,9 +372,9 @@
 
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:shouldDeselectItem:atIndexPath:)]) {
-        return [item.selection collectionView:collectionView shouldDeselectItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:shouldDeselectItem:atIndexPath:)]) {
+        return [selection collectionView:collectionView shouldDeselectItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     } else {
         return YES;
     }
@@ -368,17 +386,17 @@
         [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     }
 
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:didSelectItem:atIndexPath:)]) {
-        [item.selection collectionView:collectionView didSelectItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:didSelectItem:atIndexPath:)]) {
+        [selection collectionView:collectionView didSelectItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
-    if ([item.selection respondsToSelector:@selector(collectionView:didDeselectItem:atIndexPath:)]) {
-        [item.selection collectionView:collectionView didDeselectItem:item atIndexPath:indexPath];
+    id<BUKCollectionViewSelectionProtocol> selection = [self itemSelectionForItemAtIndexPath:indexPath];
+    if ([selection respondsToSelector:@selector(collectionView:didDeselectItem:atIndexPath:)]) {
+        [selection collectionView:collectionView didDeselectItem:[self itemAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
 
