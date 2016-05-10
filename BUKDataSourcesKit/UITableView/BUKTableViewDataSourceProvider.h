@@ -15,6 +15,7 @@
 @protocol BUKTableViewHeaderFooterViewFactoryProtocol;
 @protocol BUKTableViewRowHeightInfoProtocol;
 @protocol BUKTableViewSectionHeaderFooterHeightInfoProtocol;
+@protocol BUKTableViewSelectionProtocol;
 
 @interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource, UITableViewDelegate>
 
@@ -29,6 +30,7 @@
 @property (nonatomic) id<BUKTableViewRowHeightInfoProtocol> rowHeightInfo;
 @property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> sectionHeaderHeightInfo;
 @property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> sectionFooterHeightInfo;
+@property (nonatomic) id<BUKTableViewSelectionProtocol> rowSelection;
 
 + (instancetype)provider;
 + (instancetype)providerWithTableView:(UITableView *)tableView;

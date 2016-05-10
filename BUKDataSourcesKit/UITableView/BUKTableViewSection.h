@@ -14,6 +14,8 @@
 @protocol BUKTableViewHeaderFooterViewFactoryProtocol;
 @protocol BUKTableViewRowHeightInfoProtocol;
 @protocol BUKTableViewSectionHeaderFooterHeightInfoProtocol;
+@protocol BUKTableViewSelectionProtocol;
+
 
 @interface BUKTableViewSection : NSObject
 
@@ -23,6 +25,7 @@
 @property (nonatomic) id<BUKTableViewRowHeightInfoProtocol> rowHeightInfo;
 @property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> headerHeightInfo;
 @property (nonatomic) id<BUKTableViewSectionHeaderFooterHeightInfoProtocol> footerHeightInfo;
+@property (nonatomic) id<BUKTableViewSelectionProtocol> rowSelection;
 @property (nonatomic, copy) NSArray<BUKTableViewRow *> *rows;
 @property (nonatomic) id object;
 
