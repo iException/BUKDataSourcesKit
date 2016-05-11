@@ -374,13 +374,15 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    return [section.headerViewFactory titleForSection:section atIndex:index];
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
+    return [headerViewFactory titleForSection:section atIndex:index];
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)index {
     BUKTableViewSection *section = [self sectionAtIndex:index];
-    return [section.footerViewFactory titleForSection:section atIndex:index];
+    id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
+    return [footerViewFactory titleForSection:section atIndex:index];
 }
 
 
