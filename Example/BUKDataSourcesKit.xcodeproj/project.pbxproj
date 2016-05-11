@@ -19,7 +19,7 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */; };
 		682A4872C5F0CE8FDD033CFD /* Pods_BUKDataSourcesKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E263799B563822124BD82D2B /* Pods_BUKDataSourcesKitDemo.framework */; };
 		DC641DDE572BFAE9685F2971 /* Pods_BUKDataSourcesKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED7AB59563B3A593C2906C /* Pods_BUKDataSourcesKitTests.framework */; };
 		F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */; };
@@ -33,6 +33,7 @@
 		F13860521CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */; };
 		F13860551CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */; };
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
+		F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +67,7 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewRowTests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6CC1028D4BC7D85EECC551F8 /* Pods-BUKDataSourcesKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BUKDataSourcesKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BUKDataSourcesKitTests/Pods-BUKDataSourcesKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		CA973C1CF0CD332B518D6AC7 /* Pods-BUKDataSourcesKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BUKDataSourcesKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BUKDataSourcesKitTests/Pods-BUKDataSourcesKitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		F13860531CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoCollectionViewSectionHeaderView.h; sourceTree = "<group>"; };
 		F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewSectionHeaderView.m; sourceTree = "<group>"; };
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSectionTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +181,8 @@
 			children = (
 				6003F5B6195388D20070C39A /* Other Sources */,
 				F111A8A31CBE164C002FE5E6 /* Resources */,
-				6003F5BB195388D20070C39A /* Tests.m */,
+				6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */,
+				F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -517,7 +520,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */,
+				6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
