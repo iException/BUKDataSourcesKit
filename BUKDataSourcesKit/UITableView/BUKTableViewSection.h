@@ -31,22 +31,22 @@
 
 + (instancetype)section;
 + (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows;
-+ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows
-              headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
-              footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
-+ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows
-              headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
-              footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
-                    cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory;
++ (instancetype)sectionWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+                                        rows:(NSArray<BUKTableViewRow *> *)rows
+                           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
++ (instancetype)sectionWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+                                        rows:(NSArray<BUKTableViewRow *> *)rows
+                           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
+                                 cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory;
 
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows;
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows
-           headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
-           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows
-           headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
-           footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
-                 cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+                                     rows:(NSArray<BUKTableViewRow *> *)rows
+                        footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory;
+- (instancetype)initWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory
+                                     rows:(NSArray<BUKTableViewRow *> *)rows
+                        footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory
+                              cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory NS_DESIGNATED_INITIALIZER;
 
 - (BUKTableViewRow *)rowAtIndex:(NSInteger)index;
 

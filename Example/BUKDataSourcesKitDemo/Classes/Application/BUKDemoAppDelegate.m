@@ -7,7 +7,7 @@
 //
 
 #import "BUKDemoAppDelegate.h"
-#import "BUKDemoViewController.h"
+#import "BUKDemoRootViewController.h"
 
 
 @implementation BUKDemoAppDelegate
@@ -28,7 +28,7 @@
 #pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    BUKDemoViewController *demoViewController = [[BUKDemoViewController alloc] init];
+    BUKDemoRootViewController *demoViewController = [[BUKDemoRootViewController alloc] init];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:demoViewController];
     [self.window makeKeyAndVisible];
     return YES;

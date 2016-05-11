@@ -7,6 +7,6 @@
 //
 
 
-@interface BUKDemoTableViewController : BUKTableViewController
+@interface BUKDemoSimpleTableViewController : BUKTableViewController
 
 @end

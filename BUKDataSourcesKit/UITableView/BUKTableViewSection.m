@@ -23,13 +23,13 @@
 }
 
 
-+ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
-    return [[self alloc] initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory];
++ (instancetype)sectionWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory rows:(NSArray<BUKTableViewRow *> *)rows footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    return [[self alloc] initWithHeaderViewFactory:headerViewFactory rows:rows footerViewFactory:footerViewFactory];
 }
 
 
-+ (instancetype)sectionWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
-    return [[self alloc] initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory cellFactory:cellFactory];
++ (instancetype)sectionWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory rows:(NSArray<BUKTableViewRow *> *)rows footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+    return [[self alloc] initWithHeaderViewFactory:headerViewFactory rows:rows footerViewFactory:footerViewFactory cellFactory:cellFactory];
 }
 
 
@@ -41,16 +41,16 @@
 
 
 - (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows {
-    return [self initWithRows:rows headerViewFactory:nil footerViewFactory:nil];
+    return [self initWithHeaderViewFactory:nil rows:rows footerViewFactory:nil];
 }
 
 
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
-    return [self initWithRows:rows headerViewFactory:headerViewFactory footerViewFactory:footerViewFactory cellFactory:nil];
+- (instancetype)initWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory rows:(NSArray<BUKTableViewRow *> *)rows footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory {
+    return [self initWithHeaderViewFactory:headerViewFactory rows:rows footerViewFactory:footerViewFactory cellFactory:nil];
 }
 
 
-- (instancetype)initWithRows:(NSArray<BUKTableViewRow *> *)rows headerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
+- (instancetype)initWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory rows:(NSArray<BUKTableViewRow *> *)rows footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
     if ((self = [super init])) {
         _rows = [rows copy];
         _headerViewFactory = headerViewFactory;

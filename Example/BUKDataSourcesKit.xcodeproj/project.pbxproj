@@ -13,7 +13,7 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* BUKDemoAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BUKDemoViewController.m */; };
+		6003F5A7195388D20070C39A /* BUKDemoRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BUKDemoRootViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -23,7 +23,7 @@
 		682A4872C5F0CE8FDD033CFD /* Pods_BUKDataSourcesKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E263799B563822124BD82D2B /* Pods_BUKDataSourcesKitDemo.framework */; };
 		DC641DDE572BFAE9685F2971 /* Pods_BUKDataSourcesKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ED7AB59563B3A593C2906C /* Pods_BUKDataSourcesKitTests.framework */; };
 		F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */; };
-		F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */; };
+		F111A8B11CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B01CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m */; };
 		F111A8B91CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */; };
 		F111A8C31CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8C21CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m */; };
 		F128CB031CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB021CBF9DFC000ADB19 /* BUKDemoValue1TableViewCell.m */; };
@@ -59,8 +59,8 @@
 		6003F59B195388D20070C39A /* BUKDataSourcesKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BUKDataSourcesKit-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* BUKDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKDemoAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* BUKDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKDemoAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* BUKDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKDemoViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* BUKDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKDemoViewController.m; sourceTree = "<group>"; };
+		6003F5A5195388D20070C39A /* BUKDemoRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUKDemoRootViewController.h; sourceTree = "<group>"; };
+		6003F5A6195388D20070C39A /* BUKDemoRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUKDemoRootViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* BUKDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUKDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -73,8 +73,8 @@
 		E263799B563822124BD82D2B /* Pods_BUKDataSourcesKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BUKDataSourcesKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F111A8AC1CBE4523002FE5E6 /* BUKDemoCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoCollectionViewController.h; sourceTree = "<group>"; };
 		F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewController.m; sourceTree = "<group>"; };
-		F111A8AF1CBE4543002FE5E6 /* BUKDemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTableViewController.h; sourceTree = "<group>"; };
-		F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoTableViewController.m; sourceTree = "<group>"; };
+		F111A8AF1CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoSimpleTableViewController.h; sourceTree = "<group>"; };
+		F111A8B01CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoSimpleTableViewController.m; sourceTree = "<group>"; };
 		F111A8B71CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoSubtitleTableViewCell.h; sourceTree = "<group>"; };
 		F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoSubtitleTableViewCell.m; sourceTree = "<group>"; };
 		F111A8C11CBF7F9D002FE5E6 /* BUKDemoTextViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoTextViewModel.h; sourceTree = "<group>"; };
@@ -215,12 +215,10 @@
 		F111A89E1CBE15F6002FE5E6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F111A8AC1CBE4523002FE5E6 /* BUKDemoCollectionViewController.h */,
-				F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */,
-				F111A8AF1CBE4543002FE5E6 /* BUKDemoTableViewController.h */,
-				F111A8B01CBE4543002FE5E6 /* BUKDemoTableViewController.m */,
-				6003F5A5195388D20070C39A /* BUKDemoViewController.h */,
-				6003F5A6195388D20070C39A /* BUKDemoViewController.m */,
+				6003F5A5195388D20070C39A /* BUKDemoRootViewController.h */,
+				6003F5A6195388D20070C39A /* BUKDemoRootViewController.m */,
+				F17DADD21CE1E8B300922C78 /* Collection */,
+				F17DADD11CE1E8A600922C78 /* Table */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -282,6 +280,24 @@
 				6003F5B7195388D20070C39A /* Tests-Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F17DADD11CE1E8A600922C78 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				F111A8AF1CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.h */,
+				F111A8B01CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		F17DADD21CE1E8B300922C78 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				F111A8AC1CBE4523002FE5E6 /* BUKDemoCollectionViewController.h */,
+				F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */,
+			);
+			name = Collection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,13 +498,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* BUKDemoAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* BUKDemoViewController.m in Sources */,
+				6003F5A7195388D20070C39A /* BUKDemoRootViewController.m in Sources */,
 				F111A8C31CBF7F9D002FE5E6 /* BUKDemoTextViewModel.m in Sources */,
 				F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */,
 				F13860521CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F128CB0C1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m in Sources */,
-				F111A8B11CBE4543002FE5E6 /* BUKDemoTableViewController.m in Sources */,
+				F111A8B11CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m in Sources */,
 				F128CB091CBF9EF2000ADB19 /* BUKDemoImageViewModel.m in Sources */,
 				F13860551CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m in Sources */,
 				F128CB061CBF9E0C000ADB19 /* BUKDemoValue2TableViewCell.m in Sources */,
