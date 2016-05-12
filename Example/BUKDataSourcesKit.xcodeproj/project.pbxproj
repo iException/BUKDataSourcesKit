@@ -38,6 +38,7 @@
 		F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */; };
 		F1A0722C1CE4524100C50DB9 /* BUKTableViewSelectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */; };
 		F1A0722E1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */; };
+		F1A072301CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722F1CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewHeaderFooterViewFactoryTests.m; sourceTree = "<group>"; };
 		F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSelectionTests.m; sourceTree = "<group>"; };
 		F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewRowHeightInfoTests.m; sourceTree = "<group>"; };
+		F1A0722F1CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSectionHeaderFooterHeightInfoTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */,
 				F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */,
 				F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */,
+				F1A0722F1CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */,
+				F1A072301CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m in Sources */,
 				F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */,
 				F1A0722C1CE4524100C50DB9 /* BUKTableViewSelectionTests.m in Sources */,
 				6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */,
