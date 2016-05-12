@@ -32,8 +32,10 @@
 		F128CB0C1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F128CB0B1CC08C1D000ADB19 /* BUKDemoTableViewHeaderFooterView.m */; };
 		F13860521CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */; };
 		F13860551CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */; };
+		F1517F141CE426C800D989E9 /* BUKTableViewCellFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1517F131CE426C800D989E9 /* BUKTableViewCellFactoryTests.m */; };
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 		F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */; };
+		F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,8 +94,10 @@
 		F13860511CCE16FB004ED4F0 /* BUKDemoSubtitleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoSubtitleCollectionViewCell.m; sourceTree = "<group>"; };
 		F13860531CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUKDemoCollectionViewSectionHeaderView.h; sourceTree = "<group>"; };
 		F13860541CCE1A15004ED4F0 /* BUKDemoCollectionViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKDemoCollectionViewSectionHeaderView.m; sourceTree = "<group>"; };
+		F1517F131CE426C800D989E9 /* BUKTableViewCellFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewCellFactoryTests.m; sourceTree = "<group>"; };
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSectionTests.m; sourceTree = "<group>"; };
+		F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewHeaderFooterViewFactoryTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 				F111A8A31CBE164C002FE5E6 /* Resources */,
 				6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */,
 				F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */,
+				F1517F131CE426C800D989E9 /* BUKTableViewCellFactoryTests.m */,
+				F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -520,8 +526,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */,
 				F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */,
 				6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */,
+				F1517F141CE426C800D989E9 /* BUKTableViewCellFactoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

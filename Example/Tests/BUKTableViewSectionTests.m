@@ -25,7 +25,9 @@ describe(@"BUKTableViewSection", ^{
     });
 
     describe(@"rows", ^{
+
         __block BUKTableViewSection *section;
+
         beforeEach(^{
             section = [[BUKTableViewSection alloc] init];
         });
@@ -42,6 +44,10 @@ describe(@"BUKTableViewSection", ^{
         it(@"should raise an exception if index is out of bounds", ^{
             section.rows = @[OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class])];
             expect(^{ [section rowAtIndex:3]; }).to.raiseAny();
+        });
+
+        afterEach(^{
+            section = nil;
         });
     });
 });
