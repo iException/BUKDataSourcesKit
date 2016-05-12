@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'BUKDataSourcesKitDemo' do
-  pod "BUKDataSourcesKit", :path => "../"
+  pod 'BUKDataSourcesKit', :path => '../'
 
   target 'BUKDataSourcesKitTests' do
     inherit! :search_paths

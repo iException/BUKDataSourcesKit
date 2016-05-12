@@ -2,9 +2,9 @@
 
 #ifdef __OBJC__
 
-#import <Specta/Specta.h>
-#import <Expecta/Expecta.h>
-#import <OCMock/OCMock.h>
-#import <BUKDataSourcesKit/BUKDataSourcesKit.h>
+    @import Specta;
+    @import Expecta;
+    @import OCMock;
+    @import BUKDataSourcesKit;
 
 #endif
