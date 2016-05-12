@@ -43,7 +43,7 @@
 #pragma mark - Initializer
 
 - (instancetype)init {
-    return [self initWithDefaultHeight:UITableViewAutomaticDimension calculator:nil];
+    return [self initWithDefaultHeight:40.0f calculator:nil];
 }
 
 

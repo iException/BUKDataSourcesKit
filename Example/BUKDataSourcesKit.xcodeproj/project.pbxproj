@@ -36,6 +36,8 @@
 		F172A33D1C9C03FC00AA9F43 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */; };
 		F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */; };
 		F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */; };
+		F1A0722C1CE4524100C50DB9 /* BUKTableViewSelectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */; };
+		F1A0722E1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,8 @@
 		F172A33C1C9C03FC00AA9F43 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSectionTests.m; sourceTree = "<group>"; };
 		F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewHeaderFooterViewFactoryTests.m; sourceTree = "<group>"; };
+		F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSelectionTests.m; sourceTree = "<group>"; };
+		F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewRowHeightInfoTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,8 @@
 				F17DADD31CE3400900922C78 /* BUKTableViewSectionTests.m */,
 				F1517F131CE426C800D989E9 /* BUKTableViewCellFactoryTests.m */,
 				F1A072291CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m */,
+				F1A0722B1CE4524100C50DB9 /* BUKTableViewSelectionTests.m */,
+				F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -528,7 +534,9 @@
 			files = (
 				F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */,
 				F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */,
+				F1A0722C1CE4524100C50DB9 /* BUKTableViewSelectionTests.m in Sources */,
 				6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */,
+				F1A0722E1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m in Sources */,
 				F1517F141CE426C800D989E9 /* BUKTableViewCellFactoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
