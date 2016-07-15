@@ -223,6 +223,10 @@
     }
 
     [self.sections enumerateObjectsUsingBlock:^(BUKCollectionViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
+        // Should try to register supplementary view for every section even if there's no items in the section.
+        // e.g. A flow layout section has a section header and no items.
+        [self registerSupplementaryViewIfNecessary:[self supplementaryViewFactoryForItem:nil inSection:section] item:nil indexPath:[NSIndexPath indexPathWithIndex:0]];
+
         [section.items enumerateObjectsUsingBlock:^(BUKCollectionViewItem * _Nonnull item, NSUInteger j, BOOL * _Nonnull stop) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:i];
             id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory = [self supplementaryViewFactoryForItem:item inSection:section];
@@ -323,7 +327,10 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     BUKCollectionViewSection *section = [self sectionAtIndex:indexPath.section];
-    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    BUKCollectionViewItem *item = nil;
+    if (section.items.count > 0) {
+        item = [self itemAtIndexPath:indexPath];
+    }
     id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory = [self supplementaryViewFactoryForItem:item inSection:section];
     NSAssert(supplementaryViewFactory != nil, @"Supplementary view factory must exist!!!");
     NSString *reuseIdentifier = [supplementaryViewFactory reuseIdentifierForItem:item kind:kind atIndexPath:indexPath];
