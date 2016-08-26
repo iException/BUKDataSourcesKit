@@ -12,9 +12,10 @@
 #import "BUKCollectionViewCellFactoryProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 #import "BUKCollectionViewSelectionProtocol.h"
+#import "BUKCollectionViewSectionProtocol.h"
 
 
-@interface BUKCollectionViewDataSourceProvider ()
+@interface BUKCollectionViewDataSourceProvider () <BUKCollectionViewSectionProtocol>
 
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredSupplementaryViewIdentifiers;
@@ -113,6 +114,9 @@
         _sections = sections;
         _cellFactory = cellFactory;
         _supplementaryViewFactory = supplementaryViewFactory;
+        [_sections enumerateObjectsUsingBlock:^(__kindof BUKCollectionViewSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.modifyDelegate = self;
+        }];
         [self updateCollectionView];
     }
     return self;
@@ -407,4 +411,11 @@
     }
 }
 
+#pragma mark - BUKCollectionViewSectionProtocol
+- (void)sectionNeedReload:(BUKCollectionViewSection *)section
+{
+    NSInteger index = [self.sections indexOfObject:section];
+    NSIndexSet *sectionIndexSet = [NSIndexSet indexSetWithIndex:index];
+    [self.collectionView reloadSections:sectionIndexSet];
+}
 @end

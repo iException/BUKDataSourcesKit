@@ -61,7 +61,9 @@
                                                      rows:@[
             [BUKTableViewRow rowWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"Basic Usage" subtitle:@"One cell style and one kind of model"] cellFactory:nil
                                  selection:[BUKTableViewSelection selectionWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {
-                                               NSLog(@"Show basic usage");
+                                                NSLog(@"Show basic usage");
+                                                BUKDemoCollectionViewController *controller = [BUKDemoCollectionViewController new];
+                                                [self.navigationController pushViewController:controller animated:YES];
                                            } deselectionHandler:nil]],
             [BUKTableViewRow rowWithObject:[BUKDemoTextViewModel viewModelWithTitle:@"Advanced Usage" subtitle:@"Many kinds of cells and models"] cellFactory:nil
                                  selection:[BUKTableViewSelection selectionWithSelectionHandler:^(UITableView *tableView, BUKTableViewRow *row, NSIndexPath *indexPath) {

@@ -14,6 +14,8 @@
 
 @interface BUKDemoCollectionViewController ()
 
+@property (nonatomic, assign) BOOL isLong;
+
 @end
 
 
@@ -48,13 +50,15 @@
 
     BUKCollectionViewSelection *selection = [[BUKCollectionViewSelection alloc] initWithSelectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
         NSLog(@"Selected item at index path: %@", indexPath);
+        self.isLong = !self.isLong;
+        [self.collectionView reloadData];
     } deselectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
         NSLog(@"Deselected item at index path: %@", indexPath);
     }];
 
     NSMutableArray<BUKCollectionViewItem *> *items = [NSMutableArray array];
     for (NSInteger i = 0; i < 100; i++) {
-        BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:[NSString stringWithFormat:@"Item %ld", (long)i] subtitle:@"Subtitle"];
+        BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:[NSString stringWithFormat:@"%ld", (long)i] subtitle:@"Subtitle"];
         BUKCollectionViewItem *item = [[BUKCollectionViewItem alloc] initWithObject:viewModel cellFactory:nil supplementaryViewFactory:nil selection:selection];
         [items addObject:item];
     }
@@ -67,7 +71,11 @@
     section.sectionFlowLayoutInfo = sectionFlowLayoutInfo;
 
     provider.itemFlowLayoutInfo = [BUKCollectionViewItemFlowLayoutInfo layoutInfoWithDefaultItemSize:CGSizeZero calculator:^CGSize(BUKCollectionViewItem *item, NSIndexPath *indexPath, UICollectionView *collectionView, UICollectionViewLayout *layout) {
-        return CGSizeMake(collectionView.bounds.size.width / 4.0f, 80.0f);
+        if (self.isLong) {
+            return CGSizeMake(collectionView.bounds.size.width / 4.0f, 160.0f);
+        } else {
+            return CGSizeMake(collectionView.bounds.size.width / 4.0f, 80.0f);
+        }
     }];
     provider.cellFactory = cellFactory;
     provider.supplementaryViewFactory = supplementaryViewFactory;
