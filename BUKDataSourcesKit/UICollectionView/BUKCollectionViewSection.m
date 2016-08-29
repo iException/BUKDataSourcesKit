@@ -7,7 +7,6 @@
 //
 
 #import "BUKCollectionViewSection.h"
-#import "BUKCollectionViewSectionProtocol.h"
 
 @implementation BUKCollectionViewSection
 
@@ -64,7 +63,7 @@
 
 #pragma mark - Dynamics
 // dynamics
-- (void)insertItem:(BUKCollectionViewItem *)item index:(NSInteger)index
+- (void)insertItem:(BUKCollectionViewItem *)item atIndex:(NSInteger)index
 {
     if (index < 0 || index > self.items.count || !item) {
         return;
@@ -72,7 +71,6 @@
     NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
     [items insertObject:item atIndex:index];
     _items = [items copy];
-    [self reloadSection];
 }
 
 - (void)removeItemAtIndex:(NSInteger)index
@@ -83,19 +81,10 @@
     NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
     [items removeObjectAtIndex:index];
     _items = [items copy];
-    [self reloadSection];
 }
 
 - (void)replaceItemsWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items
 {
     _items = items;
-    [self reloadSection];
-}
-
-- (void)reloadSection
-{
-    if ([self.modifyDelegate respondsToSelector:@selector(sectionNeedReload:)]) {
-        [self.modifyDelegate sectionNeedReload:self];
-    }
 }
 @end

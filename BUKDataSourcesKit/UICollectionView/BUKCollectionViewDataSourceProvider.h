@@ -18,7 +18,7 @@
 
 @interface BUKCollectionViewDataSourceProvider : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
+@property (nonatomic, readonly, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
@@ -41,8 +41,12 @@
 - (void)refresh;
 
 // dynamics
-- (void)insertSection:(BUKCollectionViewSection *)section index:(NSInteger)index;
+- (void)insertSection:(BUKCollectionViewSection *)section atIndex:(NSInteger)index;
 - (void)removeSectionAtIndex:(NSInteger)index;
-- (void)insertItem:(BUKCollectionViewItem *)item indexPath:(NSIndexPath *)indexPath;
+- (void)insertItem:(BUKCollectionViewItem *)item atIndexPath:(NSIndexPath *)indexPath;
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)insertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKCollectionViewSection *)section;
+- (void)replaceSectionsWithSections:(NSArray<__kindof BUKCollectionViewSection *> *)sections;
+
 @end

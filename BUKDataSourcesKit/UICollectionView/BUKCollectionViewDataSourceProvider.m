@@ -12,11 +12,11 @@
 #import "BUKCollectionViewCellFactoryProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 #import "BUKCollectionViewSelectionProtocol.h"
-#import "BUKCollectionViewSectionProtocol.h"
 
 
-@interface BUKCollectionViewDataSourceProvider () <BUKCollectionViewSectionProtocol>
+@interface BUKCollectionViewDataSourceProvider ()
 
+@property (nonatomic, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredSupplementaryViewIdentifiers;
 
@@ -24,6 +24,7 @@
 
 
 @implementation BUKCollectionViewDataSourceProvider
+@synthesize sections = _sections;
 
 #pragma mark - Class Methods
 
@@ -85,9 +86,6 @@
 - (void)setSections:(NSArray<BUKCollectionViewSection *> *)sections {
     NSAssert([NSThread isMainThread], @"You must access BUKCollectionViewDataSourceProvider from the main thread.");
     _sections = [sections copy];
-    [_sections enumerateObjectsUsingBlock:^(__kindof BUKCollectionViewSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.modifyDelegate = self;
-    }];
     [self refresh];
 }
 
@@ -114,9 +112,9 @@
         _automaticallyRegisterCells = YES;
         _automaticallyRegisterSupplementaryViews = YES;
         _collectionView = collectionView;
-        _sections = sections;
         _cellFactory = cellFactory;
         _supplementaryViewFactory = supplementaryViewFactory;
+        self.sections = sections;
         [self updateCollectionView];
     }
     return self;
@@ -411,23 +409,15 @@
     }
 }
 
-#pragma mark - BUKCollectionViewSectionProtocol
-- (void)sectionNeedReload:(BUKCollectionViewSection *)section
-{
-    NSInteger index = [self.sections indexOfObject:section];
-    NSIndexSet *sectionIndexSet = [NSIndexSet indexSetWithIndex:index];
-    [self.collectionView reloadSections:sectionIndexSet];
-}
-
 #pragma mark - Dynamics
-- (void)insertSection:(BUKCollectionViewSection *)section index:(NSInteger)index
+- (void)insertSection:(BUKCollectionViewSection *)section atIndex:(NSInteger)index
 {
     if (index < 0 || index > self.sections.count || !section) {
         return;
     }
     NSMutableArray *sections = [[NSMutableArray alloc] initWithArray:self.sections?:@[]];
     [sections insertObject:sections atIndex:index];
-    _sections = [sections copy];
+    self.sections = [sections copy];
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
 }
 
@@ -438,11 +428,11 @@
     }
     NSMutableArray *sections = [[NSMutableArray alloc] initWithArray:self.sections?:@[]];
     [sections removeObjectAtIndex:index];
-    _sections = [sections copy];
+    self.sections = [sections copy];
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
 }
 
-- (void)insertItem:(BUKCollectionViewItem *)item indexPath:(NSIndexPath *)indexPath
+- (void)insertItem:(BUKCollectionViewItem *)item atIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section < 0 || indexPath.section >= self.sections.count || !item) {
         return;
@@ -451,7 +441,8 @@
     if (indexPath.row < 0 || indexPath.row > section.items.count) {
         return;
     }
-    [section insertItem:item index:indexPath.row];
+    [section insertItem:item atIndex:indexPath.row];
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
 }
 
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath
@@ -464,6 +455,82 @@
         return;
     }
     [section removeItemAtIndex:indexPath.row];
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
 }
 
+- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKCollectionViewSection *)section
+{
+    if (index < 0 || !self.sections.count || index >= self.sections.count) {
+        return;
+    }
+    NSMutableArray *sections = [[NSMutableArray alloc] initWithArray:self.sections?:@[]];
+    sections[index] = section;
+    self.sections = [sections copy];
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+}
+
+- (void)replaceSectionsWithSections:(NSArray<__kindof BUKCollectionViewSection *> *)sections
+{
+    _sections = sections;
+    [self.collectionView reloadData];
+}
+
+- (void)insertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+{
+    if (!items.count || items.count != indexPaths.count) {
+        return;
+    }
+    NSMutableArray<NSIndexPath *> *sortedIndexPaths = [[NSMutableArray alloc] initWithArray:indexPaths];
+    [sortedIndexPaths sortUsingComparator:^NSComparisonResult(NSIndexPath * _Nonnull indexPath1, NSIndexPath * _Nonnull indexPath2) {
+        if (indexPath1.section == indexPath2.section) {
+            NSInteger row1 = indexPath1.row;
+            NSInteger row2 = indexPath2.row;
+            if (row1 > row2) {
+                return NSOrderedDescending;
+            }
+            if (row1 < row2) {
+                return NSOrderedAscending;
+            }
+            return NSOrderedSame;
+        }
+        NSInteger section1 = indexPath1.section;
+        NSInteger section2 = indexPath2.section;
+        if (section1 > section2) {
+            return NSOrderedDescending;
+        }
+        if (section1 < section2) {
+            return NSOrderedAscending;
+        }
+        return NSOrderedSame;
+    }];
+    NSMutableArray *sections = [[NSMutableArray alloc] initWithArray:self.sections?:@[]];
+    __block BOOL modified = NO;
+    [sortedIndexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger index, BOOL * _Nonnull stop) {
+        NSLog(@"indexPath: %@", indexPath);
+        if (indexPath.section < 0 || indexPath.section >= self.sections.count) {
+            stop = YES;
+        }
+        BUKCollectionViewSection *section = self.sections[indexPath.section];
+        if (indexPath.row < 0 || indexPath.row > section.items.count) {
+            stop = YES;
+        }
+        modified = YES;
+        BUKCollectionViewItem *item = items[index];
+        [section insertItem:item atIndex:indexPath.row];
+    }];
+    if (!modified) {
+        return;
+    }
+    self.sections = [sections copy];
+    [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+}
+
+#pragma mark - getters
+- (NSArray<BUKCollectionViewSection *> *)sections
+{
+    if (!_sections) {
+        _sections = @[];
+    }
+    return _sections;
+}
 @end

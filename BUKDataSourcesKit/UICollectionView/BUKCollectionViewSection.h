@@ -12,8 +12,6 @@
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
 @protocol BUKCollectionViewSelectionProtocol;
-@protocol BUKCollectionViewSectionProtocol;
-
 
 @interface BUKCollectionViewSection : NSObject
 
@@ -22,7 +20,6 @@
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 @property (nonatomic) id<BUKCollectionViewSelectionProtocol> itemSelection;
-@property (nonatomic) id<BUKCollectionViewSectionProtocol> modifyDelegate;
 
 + (instancetype)section;
 + (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
@@ -34,7 +31,7 @@
 - (__kindof BUKCollectionViewItem *)itemAtIndex:(NSInteger)index;
 
 // dynamics
-- (void)insertItem:(BUKCollectionViewItem *)item index:(NSInteger)index;
+- (void)insertItem:(BUKCollectionViewItem *)item atIndex:(NSInteger)index;
 - (void)removeItemAtIndex:(NSInteger)index;
 - (void)replaceItemsWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
 

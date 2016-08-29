@@ -19,7 +19,7 @@
 @dynamic flowLayoutSections;
 
 - (void)setFlowLayoutSections:(NSArray<BUKCollectionViewFlowLayoutSection *> *)flowLayoutSections {
-    self.sections = flowLayoutSections;
+    [self replaceSectionsWithSections:flowLayoutSections];
 }
 
 
