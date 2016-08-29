@@ -21,7 +21,6 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */; };
 		F111A8AE1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8AD1CBE4523002FE5E6 /* BUKDemoCollectionViewController.m */; };
 		F111A8B11CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B01CBE4543002FE5E6 /* BUKDemoSimpleTableViewController.m */; };
 		F111A8B91CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F111A8B81CBF708E002FE5E6 /* BUKDemoSubtitleTableViewCell.m */; };
@@ -40,6 +39,10 @@
 		F1A0722E1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */; };
 		F1A072301CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A0722F1CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m */; };
 		F1A072321CE47CCA00C50DB9 /* BUKTableViewDataSourceProviderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A072311CE47CCA00C50DB9 /* BUKTableViewDataSourceProviderTests.m */; };
+		F4351A851D748C7000F4F667 /* BUKTableViewRowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* BUKTableViewRowTests.m */; };
+		F4351A891D748CBB00F4F667 /* BUKCollectionViewSectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4351A881D748CBB00F4F667 /* BUKCollectionViewSectionTests.m */; };
+		F4351A8B1D74944000F4F667 /* BUKCollectionViewCellFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4351A8A1D74944000F4F667 /* BUKCollectionViewCellFactoryTests.m */; };
+		F4DF83811D748B4F00B5E81F /* BUKCollectionViewItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DF837E1D74888100B5E81F /* BUKCollectionViewItemTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,9 @@
 		F1A0722D1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewRowHeightInfoTests.m; sourceTree = "<group>"; };
 		F1A0722F1CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewSectionHeaderFooterHeightInfoTests.m; sourceTree = "<group>"; };
 		F1A072311CE47CCA00C50DB9 /* BUKTableViewDataSourceProviderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKTableViewDataSourceProviderTests.m; sourceTree = "<group>"; };
+		F4351A881D748CBB00F4F667 /* BUKCollectionViewSectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKCollectionViewSectionTests.m; sourceTree = "<group>"; };
+		F4351A8A1D74944000F4F667 /* BUKCollectionViewCellFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKCollectionViewCellFactoryTests.m; sourceTree = "<group>"; };
+		F4DF837E1D74888100B5E81F /* BUKCollectionViewItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUKCollectionViewItemTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F4DF837B1D74873300B5E81F /* UICollectionView */,
 				F1A072331CE5A03600C50DB9 /* UITableView */,
 				6003F5B6195388D20070C39A /* Other Sources */,
 				F111A8A31CBE164C002FE5E6 /* Resources */,
@@ -327,6 +334,16 @@
 				F1A072311CE47CCA00C50DB9 /* BUKTableViewDataSourceProviderTests.m */,
 			);
 			name = UITableView;
+			sourceTree = "<group>";
+		};
+		F4DF837B1D74873300B5E81F /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F4DF837E1D74888100B5E81F /* BUKCollectionViewItemTests.m */,
+				F4351A881D748CBB00F4F667 /* BUKCollectionViewSectionTests.m */,
+				F4351A8A1D74944000F4F667 /* BUKCollectionViewCellFactoryTests.m */,
+			);
+			name = UICollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,14 +563,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4351A851D748C7000F4F667 /* BUKTableViewRowTests.m in Sources */,
+				F4DF83811D748B4F00B5E81F /* BUKCollectionViewItemTests.m in Sources */,
 				F1A0722A1CE431F400C50DB9 /* BUKTableViewHeaderFooterViewFactoryTests.m in Sources */,
 				F1A072301CE4726400C50DB9 /* BUKTableViewSectionHeaderFooterHeightInfoTests.m in Sources */,
 				F17DADD41CE3400900922C78 /* BUKTableViewSectionTests.m in Sources */,
 				F1A0722C1CE4524100C50DB9 /* BUKTableViewSelectionTests.m in Sources */,
-				6003F5BC195388D20070C39A /* BUKTableViewRowTests.m in Sources */,
 				F1A0722E1CE45E5500C50DB9 /* BUKTableViewRowHeightInfoTests.m in Sources */,
 				F1A072321CE47CCA00C50DB9 /* BUKTableViewDataSourceProviderTests.m in Sources */,
 				F1517F141CE426C800D989E9 /* BUKTableViewCellFactoryTests.m in Sources */,
+				F4351A891D748CBB00F4F667 /* BUKCollectionViewSectionTests.m in Sources */,
+				F4351A8B1D74944000F4F667 /* BUKCollectionViewCellFactoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
