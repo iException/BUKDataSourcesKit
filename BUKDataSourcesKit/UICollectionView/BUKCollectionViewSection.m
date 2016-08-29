@@ -8,6 +8,12 @@
 
 #import "BUKCollectionViewSection.h"
 
+@interface BUKCollectionViewSection ()
+
+@property (nonatomic, strong) NSMutableArray<__kindof BUKCollectionViewItem *> *mutableItems;
+
+@end
+
 @implementation BUKCollectionViewSection
 
 #pragma mark - Class Methods
@@ -31,7 +37,7 @@
 
 - (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
     if ((self = [super init])) {
-        _items = [items copy];
+        _mutableItems = [[NSMutableArray alloc] initWithArray:[items copy]];
         _cellFactory = cellFactory;
         _supplementaryViewFactory = supplementaryViewFactory;
     }
@@ -68,9 +74,7 @@
     if (index < 0 || index > self.items.count || !item) {
         return;
     }
-    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
-    [items insertObject:item atIndex:index];
-    _items = [items copy];
+    [self.mutableItems insertObject:item atIndex:index];
 }
 
 - (void)removeItemAtIndex:(NSInteger)index
@@ -78,13 +82,18 @@
     if (index < 0 || index >= self.items.count || !self.items.count) {
         return;
     }
-    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
-    [items removeObjectAtIndex:index];
-    _items = [items copy];
+    [self.mutableItems removeObjectAtIndex:index];
 }
 
-- (void)replaceItemsWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items
+#pragma mark - setters
+- (void)setItems:(NSArray<__kindof BUKCollectionViewItem *> *)items
 {
-    _items = items;
+    _mutableItems = [[NSMutableArray alloc] initWithArray:items];
+}
+
+#pragma mark - getters
+- (NSArray<BUKCollectionViewItem *> *)items
+{
+    return _mutableItems;
 }
 @end

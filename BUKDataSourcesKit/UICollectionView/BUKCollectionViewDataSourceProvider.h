@@ -14,15 +14,16 @@
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
 @protocol BUKCollectionViewSelectionProtocol;
-
+@protocol BUKCollectionViewDataSourceProviderDelegate;
 
 @interface BUKCollectionViewDataSourceProvider : NSObject <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, readonly, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
+@property (nonatomic, copy) NSArray<__kindof BUKCollectionViewSection *> *sections;
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 @property (nonatomic) id<BUKCollectionViewSelectionProtocol> itemSelection;
+@property (nonatomic) id<BUKCollectionViewDataSourceProviderDelegate> delegate;
 @property (nonatomic) BOOL automaticallyDeselectItems;
 @property (nonatomic) BOOL automaticallyRegisterCells;
 @property (nonatomic) BOOL automaticallyRegisterSupplementaryViews;
@@ -47,6 +48,5 @@
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)insertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 - (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKCollectionViewSection *)section;
-- (void)replaceSectionsWithSections:(NSArray<__kindof BUKCollectionViewSection *> *)sections;
 
 @end

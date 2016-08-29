@@ -16,7 +16,7 @@
 @dynamic flowLayoutItems;
 
 - (void)setFlowLayoutItems:(NSArray<BUKCollectionViewFlowLayoutItem *> *)flowLayoutItems {
-    [self replaceItemsWithItems:flowLayoutItems];
+    self.items = flowLayoutItems;
 }
 
 

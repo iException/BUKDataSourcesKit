@@ -15,7 +15,7 @@
 
 @interface BUKCollectionViewSection : NSObject
 
-@property (nonatomic, readonly) NSArray<__kindof BUKCollectionViewItem *> *items;
+@property (nonatomic) NSArray<__kindof BUKCollectionViewItem *> *items;
 @property (nonatomic) id object;
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
@@ -33,6 +33,5 @@
 // dynamics
 - (void)insertItem:(BUKCollectionViewItem *)item atIndex:(NSInteger)index;
 - (void)removeItemAtIndex:(NSInteger)index;
-- (void)replaceItemsWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
 
 @end

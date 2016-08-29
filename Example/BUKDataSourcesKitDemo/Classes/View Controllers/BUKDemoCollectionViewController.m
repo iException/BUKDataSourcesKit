@@ -9,10 +9,11 @@
 #import "BUKDemoCollectionViewController.h"
 #import "BUKDemoSubtitleCollectionViewCell.h"
 #import "BUKDemoCollectionViewSectionHeaderView.h"
+#import "BUKCollectionViewDataSourceProviderDelegate.h"
 #import "BUKDemoTextViewModel.h"
 
 
-@interface BUKDemoCollectionViewController ()
+@interface BUKDemoCollectionViewController () <BUKCollectionViewDataSourceProviderDelegate>
 
 @property (nonatomic, assign) BOOL isLong;
 @property (nonatomic, strong) UIButton *addButton;
@@ -86,13 +87,20 @@
     }];
     provider.supplementaryViewFactory = supplementaryViewFactory;
     provider.cellFactory = cellFactory;
+    provider.delegate = self;
 
     self.dataSourceProvider = provider;
 }
 
+#pragma mark - BUKCollectionViewDataSourceProviderDelegate
+- (void)provider:(BUKCollectionViewDataSourceProvider *)provider didInsertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+{
+    [provider.collectionView reloadData];
+}
+
 #pragma mark - action handler
 
-- (void)addNew
+- (void)insertOne
 {
     BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:@"NEW" subtitle:@"new"];
     BUKCollectionViewItem *item = [[BUKCollectionViewItem alloc] initWithObject:viewModel cellFactory:nil supplementaryViewFactory:nil selection: [[BUKCollectionViewSelection alloc] initWithSelectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
@@ -143,9 +151,9 @@
     if (!_addButton) {
         _addButton = [[UIButton alloc] initWithFrame:CGRectMake(0, -40.0, [self buttonWidth], 40.0)];
         _addButton.backgroundColor = [UIColor blackColor];
-        [_addButton setTitle:@"add" forState:UIControlStateNormal];
+        [_addButton setTitle:@"insertOne" forState:UIControlStateNormal];
         [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_addButton addTarget:self action:@selector(addNew) forControlEvents:UIControlEventTouchUpInside];
+        [_addButton addTarget:self action:@selector(insertOne) forControlEvents:UIControlEventTouchUpInside];
     }
     return _addButton;
 }
