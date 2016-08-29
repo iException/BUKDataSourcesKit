@@ -15,6 +15,8 @@
 @interface BUKDemoCollectionViewController ()
 
 @property (nonatomic, assign) BOOL isLong;
+@property (nonatomic, strong) UIButton *addButton;
+@property (nonatomic, strong) BUKCollectionViewFlowLayoutSection *section;
 
 @end
 
@@ -33,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.addButton];
     self.title = @"Collection View";
     self.collectionView.backgroundColor = [UIColor whiteColor];
 
@@ -50,8 +53,7 @@
 
     BUKCollectionViewSelection *selection = [[BUKCollectionViewSelection alloc] initWithSelectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
         NSLog(@"Selected item at index path: %@", indexPath);
-        self.isLong = !self.isLong;
-        [self.collectionView reloadData];
+        [self removeIndexPath:indexPath];
     } deselectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
         NSLog(@"Deselected item at index path: %@", indexPath);
     }];
@@ -63,12 +65,12 @@
         [items addObject:item];
     }
 
-    BUKCollectionViewFlowLayoutSection *section = [[BUKCollectionViewFlowLayoutSection alloc] initWithItems:items];
+    self.section = [[BUKCollectionViewFlowLayoutSection alloc] initWithItems:items];
 
     BUKCollectionViewSectionFlowLayoutInfo *sectionFlowLayoutInfo = [BUKCollectionViewSectionFlowLayoutInfo layoutInfo];
     sectionFlowLayoutInfo.minimumLineSpacing = 10.0f;
     sectionFlowLayoutInfo.headerReferenceSize = CGSizeMake(0, 100.0f);
-    section.sectionFlowLayoutInfo = sectionFlowLayoutInfo;
+    self.section.sectionFlowLayoutInfo = sectionFlowLayoutInfo;
 
     provider.itemFlowLayoutInfo = [BUKCollectionViewItemFlowLayoutInfo layoutInfoWithDefaultItemSize:CGSizeZero calculator:^CGSize(BUKCollectionViewItem *item, NSIndexPath *indexPath, UICollectionView *collectionView, UICollectionViewLayout *layout) {
         if (self.isLong) {
@@ -79,9 +81,40 @@
     }];
     provider.cellFactory = cellFactory;
     provider.supplementaryViewFactory = supplementaryViewFactory;
-    provider.sections = @[section];
+    provider.sections = @[ self.section ];
 
     self.dataSourceProvider = provider;
+}
+
+#pragma mark - action handler
+
+- (void)addNew
+{
+    NSLog(@"add new");
+    BUKDemoTextViewModel *viewModel = [BUKDemoTextViewModel viewModelWithTitle:@"NEW" subtitle:@"new"];
+    BUKCollectionViewItem *item = [[BUKCollectionViewItem alloc] initWithObject:viewModel cellFactory:nil supplementaryViewFactory:nil selection: [[BUKCollectionViewSelection alloc] initWithSelectionHandler:^(UICollectionView *collectionView, BUKCollectionViewItem *item, NSIndexPath *indexPath) {
+        [self removeIndexPath:indexPath];
+    } deselectionHandler:nil]];
+    [self.dataSourceProvider insertItem:item indexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+}
+
+- (void)removeIndexPath:(NSIndexPath *)indexPath
+{
+    [self.dataSourceProvider removeItemAtIndexPath:indexPath];
+}
+
+#pragma mark - getters
+- (UIButton *)addButton
+{
+    if (!_addButton) {
+        _addButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _addButton.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 40.0);
+        _addButton.backgroundColor = [UIColor blackColor];
+        [_addButton setTitle:@"add" forState:UIControlStateNormal];
+        [_addButton addTarget:self action:@selector(addNew) forControlEvents:UIControlEventTouchUpInside];
+        [_addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    return _addButton;
 }
 
 @end

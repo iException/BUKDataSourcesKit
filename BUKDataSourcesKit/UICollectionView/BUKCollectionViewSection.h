@@ -36,7 +36,6 @@
 // dynamics
 - (void)insertItem:(BUKCollectionViewItem *)item index:(NSInteger)index;
 - (void)removeItemAtIndex:(NSInteger)index;
-- (void)addItem:(BUKCollectionViewItem *)item;
 - (void)replaceItemsWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;
 
 @end

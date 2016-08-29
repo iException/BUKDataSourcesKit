@@ -40,4 +40,9 @@
 - (__kindof BUKCollectionViewItem *)itemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)refresh;
 
+// dynamics
+- (void)insertSection:(BUKCollectionViewSection *)section index:(NSInteger)index;
+- (void)removeSectionAtIndex:(NSInteger)index;
+- (void)insertItem:(BUKCollectionViewItem *)item indexPath:(NSIndexPath *)indexPath;
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 @end

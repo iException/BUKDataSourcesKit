@@ -69,7 +69,7 @@
     if (index < 0 || index > self.items.count || !item) {
         return;
     }
-    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
     [items insertObject:item atIndex:index];
     _items = [items copy];
     [self reloadSection];
@@ -80,19 +80,8 @@
     if (index < 0 || index >= self.items.count || !self.items.count) {
         return;
     }
-    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items?:@[]];
     [items removeObjectAtIndex:index];
-    _items = [items copy];
-    [self reloadSection];
-}
-
-- (void)addItem:(BUKCollectionViewItem *)item
-{
-    if (!item) {
-        return;
-    }
-    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:self.items];
-    [items addObject:item];
     _items = [items copy];
     [self reloadSection];
 }
@@ -107,13 +96,6 @@
 {
     if ([self.modifyDelegate respondsToSelector:@selector(sectionNeedReload:)]) {
         [self.modifyDelegate sectionNeedReload:self];
-    }
-}
-
-- (void)reloadSectionAtRange:(NSRange)range
-{
-    if ([self.modifyDelegate respondsToSelector:@selector(section:needReloadAtRange:)]) {
-        [self.modifyDelegate section:self needReloadAtRange:range];
     }
 }
 @end
