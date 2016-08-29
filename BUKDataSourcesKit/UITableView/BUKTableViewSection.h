@@ -50,4 +50,13 @@
 
 - (BUKTableViewRow *)rowAtIndex:(NSInteger)index;
 
+
+#pragma mark - Manipulating Rows
+
+- (void)addRow:(BUKTableViewRow *)row;
+- (void)insertRow:(BUKTableViewRow *)row atIndex:(NSUInteger)index;
+- (void)removeLastRow;
+- (void)removeRowAtIndex:(NSUInteger)index;
+- (void)replaceRowAtIndex:(NSUInteger)index withRow:(BUKTableViewRow *)row;
+
 @end

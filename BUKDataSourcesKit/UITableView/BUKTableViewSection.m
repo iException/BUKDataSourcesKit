@@ -9,7 +9,17 @@
 #import "BUKTableViewSection.h"
 
 
+@interface BUKTableViewSection ()
+
+@property (nonatomic) NSMutableArray<BUKTableViewRow *> *mutableRows;
+
+@end
+
+
 @implementation BUKTableViewSection
+
+@dynamic rows;
+
 
 #pragma mark - Class Methods
 
@@ -33,6 +43,26 @@
 }
 
 
+#pragma mark - Accessors
+
+- (NSArray<BUKTableViewRow *> *)rows {
+    return [self.mutableRows copy];
+}
+
+
+- (void)setRows:(NSArray<BUKTableViewRow *> *)rows {
+    _mutableRows = [rows mutableCopy];
+}
+
+
+- (NSMutableArray<BUKTableViewRow *> *)mutableRows {
+    if (!_mutableRows) {
+        _mutableRows = [NSMutableArray new];
+    }
+    return _mutableRows;
+}
+
+
 #pragma mark - Initializer
 
 - (instancetype)init {
@@ -52,7 +82,7 @@
 
 - (instancetype)initWithHeaderViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)headerViewFactory rows:(NSArray<BUKTableViewRow *> *)rows footerViewFactory:(id<BUKTableViewHeaderFooterViewFactoryProtocol>)footerViewFactory cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory {
     if ((self = [super init])) {
-        _rows = [rows copy];
+        _mutableRows = [rows mutableCopy];
         _headerViewFactory = headerViewFactory;
         _footerViewFactory = footerViewFactory;
         _cellFactory = cellFactory;
@@ -71,6 +101,31 @@
 
     NSAssert1(NO, @"Invalid index: %ld in section", (long)index);
     return nil;
+}
+
+
+- (void)addRow:(BUKTableViewRow *)row {
+    [self.mutableRows addObject:row];
+}
+
+
+- (void)insertRow:(BUKTableViewRow *)row atIndex:(NSUInteger)index {
+    [self.mutableRows insertObject:row atIndex:index];
+}
+
+
+- (void)removeLastRow {
+    [self.mutableRows removeLastObject];
+}
+
+
+- (void)removeRowAtIndex:(NSUInteger)index {
+    [self.mutableRows removeObjectAtIndex:index];
+}
+
+
+- (void)replaceRowAtIndex:(NSUInteger)index withRow:(BUKTableViewRow *)row {
+    [self.mutableRows replaceObjectAtIndex:index withObject:row];
 }
 
 @end
