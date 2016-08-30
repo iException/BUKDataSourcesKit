@@ -1,7 +1,7 @@
 PODS:
   - BUKDataSourcesKit (0.1.0)
   - Expecta (1.0.5)
-  - OCMock (3.3)
+  - OCMock (3.3.1)
   - Specta (1.0.5)
 
 DEPENDENCIES:
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   BUKDataSourcesKit: f85fbb5a2950446e59fe67bc0244ef7a57829498
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  OCMock: d68685bde31f69cb61d518dcb39269080c78b5ed
+  OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
 PODFILE CHECKSUM: a3ab281ab27d8f5f4389c0edb5c9d4b2cd493c17

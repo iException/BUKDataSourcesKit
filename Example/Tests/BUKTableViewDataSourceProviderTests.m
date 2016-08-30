@@ -32,206 +32,235 @@ SpecBegin(BUKTableViewDataSourceProvider)
 describe(@"initializer", ^{
 
     it(@"should have correct default properties", ^{
-        BUKTableViewDataSourceProvider *dataSourceProvider = [[BUKTableViewDataSourceProvider alloc] init];
-        expect(dataSourceProvider.sections).to.beNil();
-        expect(dataSourceProvider.tableView).to.beNil();
-        expect(dataSourceProvider.automaticallyDeselectRows).to.beTruthy();
-        expect(dataSourceProvider.automaticallyRegisterCells).to.beTruthy();
-        expect(dataSourceProvider.automaticallyRegisterSectionHeaderFooters).to.beTruthy();
-        expect(dataSourceProvider.cellFactory).to.beNil();
-        expect(dataSourceProvider.headerViewFactory).to.beNil();
-        expect(dataSourceProvider.footerViewFactory).to.beNil();
-        expect(dataSourceProvider.rowHeightInfo).to.beNil();
-        expect(dataSourceProvider.sectionHeaderHeightInfo).to.beNil();
-        expect(dataSourceProvider.sectionFooterHeightInfo).to.beNil();
-        expect(dataSourceProvider.rowSelection).to.beNil();
+        BUKTableViewDataSourceProvider *provider = [[BUKTableViewDataSourceProvider alloc] init];
+
+        expect(provider.sections).notTo.beNil();
+        expect(provider.sections).to.beEmpty();
+        expect(provider.tableView).to.beNil();
+        expect(provider.automaticallyDeselectRows).to.beTruthy();
+        expect(provider.automaticallyRegisterCells).to.beTruthy();
+        expect(provider.automaticallyRegisterSectionHeaderFooters).to.beTruthy();
+        expect(provider.cellFactory).to.beNil();
+        expect(provider.headerViewFactory).to.beNil();
+        expect(provider.footerViewFactory).to.beNil();
+        expect(provider.rowHeightInfo).to.beNil();
+        expect(provider.sectionHeaderHeightInfo).to.beNil();
+        expect(provider.sectionFooterHeightInfo).to.beNil();
+        expect(provider.rowSelection).to.beNil();
     });
     
     it(@"should be the data source and delegate of the table view", ^{
-        UITableView *tableView = [UITableView new];
-        BUKTableViewDataSourceProvider *dataSourceProvider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:tableView];
+        id tableViewMock = OCMClassMock([UITableView class]);
+        BUKTableViewDataSourceProvider *provider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:tableViewMock];
 
-        expect(dataSourceProvider).to.beIdenticalTo(tableView.dataSource);
-        expect(dataSourceProvider).to.beIdenticalTo(tableView.delegate);
+        OCMVerify([tableViewMock setDataSource:provider]);
+        OCMVerify([tableViewMock setDelegate:provider]);
     });
 
     it(@"should have valid sections", ^{
-        UITableView *tableView = [UITableView new];
-        NSArray<BUKTableViewSection *> *sections = @[[BUKTableViewSection section], [BUKTableViewSection section]];
-        BUKTableViewDataSourceProvider *dataSourceProvider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:tableView sections:sections];
+        id sectionMock0 = OCMClassMock([BUKTableViewSection class]);
+        id sectionMock1 = OCMClassMock([BUKTableViewSection class]);
+        NSArray<BUKTableViewSection *> *sections = @[sectionMock0, sectionMock1];
+        BUKTableViewDataSourceProvider *provider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:nil sections:sections];
 
-        expect(dataSourceProvider.sections).to.haveCountOf(2);
-        expect(dataSourceProvider.sections).to.beIdenticalTo(sections);
+        expect(provider.sections).to.haveCountOf(2);
+        expect(provider.sections[0]).to.equal(sectionMock0);
+        expect(provider.sections[1]).to.equal(sectionMock1);
     });
 
     it(@"should have properties initialized correctly", ^{
-        UITableView *tableView = [UITableView new];
-        NSArray<BUKTableViewSection *> *sections = @[[BUKTableViewSection section], [BUKTableViewSection section]];
-        BUKTableViewCellFactory *cellFactory = [BUKTableViewCellFactory factoryWithCellClass:[UITableViewCell class] configurator:nil];
-        BUKTableViewHeaderFooterViewFactory *headerFactory = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[UITableViewHeaderFooterView class] configurator:nil];
-        BUKTableViewHeaderFooterViewFactory *footerFactory = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[UITableViewHeaderFooterView class] configurator:nil];
-        
-        BUKTableViewDataSourceProvider *dataSourceProvider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:tableView sections:sections cellFactory:cellFactory headerFactory:headerFactory footerFactory:footerFactory];
+        id tableViewMock = OCMClassMock([UITableView class]);
+        NSArray *sectionMocks = @[OCMClassMock([BUKTableViewSection class]), OCMClassMock([BUKTableViewSection class])];
+        id cellFactoryMock = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        id headerFactoryMock = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        id footerFactoryMock = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
 
-        expect(dataSourceProvider.tableView).to.beIdenticalTo(tableView);
-        expect(dataSourceProvider.sections).to.haveCountOf(2);
-        expect(dataSourceProvider.headerViewFactory).to.beIdenticalTo(headerFactory);
-        expect(dataSourceProvider.footerViewFactory).to.beIdenticalTo(footerFactory);
-        expect(dataSourceProvider.cellFactory).to.beIdenticalTo(cellFactory);
+        BUKTableViewDataSourceProvider *provider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:tableViewMock sections:sectionMocks cellFactory:cellFactoryMock headerFactory:headerFactoryMock footerFactory:footerFactoryMock];
+
+        expect(provider.tableView).to.beIdenticalTo(tableViewMock);
+        expect(provider.sections).to.haveCountOf(2);
+        expect(provider.headerViewFactory).to.beIdenticalTo(headerFactoryMock);
+        expect(provider.footerViewFactory).to.beIdenticalTo(footerFactoryMock);
+        expect(provider.cellFactory).to.beIdenticalTo(cellFactoryMock);
     });
 
 });
 
 describe(@"accessors", ^{
     
-    __block BUKTableViewDataSourceProvider *dataSourceProvider;
-    __block BUKTableViewSection *section;
-    __block BUKTableViewRow *row;
+    __block BUKTableViewDataSourceProvider *provider;
+    __block id sectionMock;
+    __block id rowMock;
 
     beforeAll(^{
-        row = [BUKTableViewRow row];
-        section = [BUKTableViewSection section];
-        section.rows = @[row, [BUKTableViewRow row]];
-        BUKTableViewSection *anotherSection = [BUKTableViewSection sectionWithRows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]]];
-        dataSourceProvider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:[UITableView new] sections:@[section, anotherSection]];
+        rowMock = OCMClassMock([BUKTableViewRow class]);
+        sectionMock = OCMClassMock([BUKTableViewSection class]);
+        OCMStub([sectionMock rowAtIndex:0]).andReturn(rowMock);
+        OCMStub([sectionMock rowAtIndex:3]).andThrow([NSException new]);
+        id anotherSectionMock = OCMClassMock([BUKTableViewSection class]);
+
+        provider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:OCMClassMock([UITableView class]) sections:@[sectionMock, anotherSectionMock]];
     });
 
     it(@"should return correct section when index is valid", ^{
-        expect([dataSourceProvider sectionAtIndex:0]).to.beIdenticalTo(section);
+        expect([provider sectionAtIndex:0]).to.beIdenticalTo(sectionMock);
     });
 
     it(@"should raise an exception when section index is out of bounds", ^{
-        expect(^{ [dataSourceProvider sectionAtIndex:3]; }).to.raiseAny();
+        expect(^{ [provider sectionAtIndex:3]; }).to.raiseAny();
     });
 
     it(@"should return correct row when index path is valid", ^{
-        expect([dataSourceProvider rowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).to.beIdenticalTo(row);
+        expect([provider rowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).to.beIdenticalTo(rowMock);
     });
 
     it(@"should raise an exception when row index path is not valid", ^{
-        expect(^{ [dataSourceProvider rowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]; }).to.raiseAny();
+        expect(^{ [provider rowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]; }).to.raiseAny();
     });
 
     it(@"should update table view correctly", ^{
-        UITableView *oldTableView = dataSourceProvider.tableView;
-        UITableView *newTableView = [UITableView new];
+        id oldTableViewMock = provider.tableView;
+        id newTableViewMock = OCMClassMock([UITableView class]);
 
-        dataSourceProvider.tableView = newTableView;
+        provider.tableView = newTableViewMock;
 
-        expect(oldTableView.dataSource).to.beNil();
-        expect(oldTableView.delegate).to.beNil();
-        expect(newTableView.dataSource).to.beIdenticalTo(dataSourceProvider);
-        expect(newTableView.delegate).to.beIdenticalTo(dataSourceProvider);
+        OCMVerify([oldTableViewMock setDataSource:[OCMArg isNil]]);
+        OCMVerify([oldTableViewMock setDelegate:[OCMArg isNil]]);
+        OCMVerify([newTableViewMock setDataSource:provider]);
+        OCMVerify([newTableViewMock setDelegate:provider]);
     });
 
     afterAll(^{
-        dataSourceProvider = nil;
-        section = nil;
-        row = nil;
+        provider = nil;
+        sectionMock = nil;
+        rowMock = nil;
     });
 });
 
 describe(@"number of things", ^{
-    __block BUKTableViewDataSourceProvider *dataSourceProvider;
-    __block UITableView *tableView;
+    __block BUKTableViewDataSourceProvider *provider;
+    __block id tableViewMock;
 
     beforeAll(^{
-        tableView = [UITableView new];
+        tableViewMock = OCMClassMock([UITableView class]);
     });
 
     beforeEach(^{
-        dataSourceProvider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
+        provider = [BUKTableViewDataSourceProvider providerWithTableView:tableViewMock];
     });
 
     it(@"should have correct number of sections", ^{
-        expect([tableView numberOfSections]).to.equal(0);
+        expect([provider numberOfSectionsInTableView:tableViewMock]).to.equal(0);
 
-        dataSourceProvider.sections = @[[BUKTableViewSection section], [BUKTableViewSection section]];
-        expect([tableView numberOfSections]).to.equal(2);
+        provider.sections = @[OCMClassMock([BUKTableViewSection class]), OCMClassMock([BUKTableViewSection class])];
+        expect([provider numberOfSectionsInTableView:tableViewMock]).to.equal(2);
 
-        dataSourceProvider.sections = nil;
-        expect([tableView numberOfSections]).to.equal(0);
+        provider.sections = nil;
+        expect([provider numberOfSectionsInTableView:tableViewMock]).to.equal(0);
     });
 
     it(@"should have correct number of rows in each section", ^{
-        dataSourceProvider.sections = @[
-            [BUKTableViewSection sectionWithRows:@[
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-            ]],
-            [BUKTableViewSection sectionWithRows:@[
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-            ]],
-            [BUKTableViewSection sectionWithRows:@[
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-                [BUKTableViewRow row],
-            ]],
-            [BUKTableViewSection sectionWithRows:@[]],
-        ];
+        id sectionMock0 = OCMClassMock([BUKTableViewSection class]);
+        id sectionMock1 = OCMClassMock([BUKTableViewSection class]);
+        id sectionMock2 = OCMClassMock([BUKTableViewSection class]);
+        id sectionMock3 = OCMClassMock([BUKTableViewSection class]);
 
-        expect([tableView numberOfRowsInSection:0]).to.equal(3);
-        expect([tableView numberOfRowsInSection:1]).to.equal(2);
-        expect([tableView numberOfRowsInSection:2]).to.equal(4);
-        expect([tableView numberOfRowsInSection:3]).to.equal(0);
+        [OCMStub([sectionMock0 rows]) andReturn:@[OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class])]];
+        [OCMStub([sectionMock1 rows]) andReturn:@[OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class])]];
+        [OCMStub([sectionMock2 rows]) andReturn:@[OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class]), OCMClassMock([BUKTableViewRow class])]];
+        OCMStub([sectionMock3 rows]).andReturn(@[]);
+
+        provider.sections = @[sectionMock0, sectionMock1, sectionMock2, sectionMock3];
+
+        expect([provider tableView:tableViewMock numberOfRowsInSection:0]).to.equal(3);
+        expect([provider tableView:tableViewMock numberOfRowsInSection:1]).to.equal(2);
+        expect([provider tableView:tableViewMock numberOfRowsInSection:2]).to.equal(4);
+        expect([provider tableView:tableViewMock numberOfRowsInSection:3]).to.equal(0);
     });
 
     afterEach(^{
-        dataSourceProvider = nil;
+        provider = nil;
     });
 
     afterAll(^{
-        tableView = nil;
+        tableViewMock = nil;
     });
 });
 
 describe(@"cells", ^{
-    __block BUKTableViewDataSourceProvider *dataSourceProvider;
+    __block BUKTableViewDataSourceProvider *provider;
     __block UITableView *tableView;
 
     beforeAll(^{
         tableView = [UITableView new];
-        dataSourceProvider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
-        dataSourceProvider.cellFactory = [BUKTableViewCellFactory factoryWithCellClass:[UITableViewCell class] configurator:^(__kindof UITableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        provider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
+
+        id globalCellFactoryMock = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        OCMStub([globalCellFactoryMock cellClassForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn([UITableViewCell class]);
+        OCMStub([globalCellFactoryMock reuseIdentifierForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn(@"UITableViewCell");
+        OCMStub([globalCellFactoryMock configureCell:[OCMArg isKindOfClass:[UITableViewCell class]] withRow:OCMOCK_ANY inTableView:tableView atIndexPath:[OCMArg isKindOfClass:[NSIndexPath class]]]).andDo(^(NSInvocation *invocation) {
+            UITableViewCell *cell;
+            [invocation getArgument:&cell atIndex:2];
             cell.textLabel.text = @"aaa";
-        }];
+        });
 
-        BUKTableViewCellFactory *rowCellFactory1 = [BUKTableViewCellFactory factoryWithCellClass:[BUKExampleTableViewCell class] configurator:^(__kindof UITableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        provider.cellFactory = globalCellFactoryMock;
+
+        id rowCellFactoryMock0 = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        OCMStub([rowCellFactoryMock0 cellClassForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn([BUKExampleTableViewCell class]);
+        OCMStub([rowCellFactoryMock0 reuseIdentifierForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn(@"BUKExampleTableViewCell");
+        OCMStub([rowCellFactoryMock0 configureCell:[OCMArg isKindOfClass:[UITableViewCell class]] withRow:OCMOCK_ANY inTableView:tableView atIndexPath:[OCMArg isKindOfClass:[NSIndexPath class]]]).andDo(^(NSInvocation *invocation) {
+            BUKExampleTableViewCell *cell;
+            [invocation getArgument:&cell atIndex:2];
             cell.textLabel.text = @"bbb";
-        }];
+        });
 
-        BUKTableViewCellFactory *rowCellFactory2 = [BUKTableViewCellFactory factoryWithCellClass:[BUKExampleTableViewCell class] configurator:^(__kindof UITableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        id rowCellFactoryMock1 = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        OCMStub([rowCellFactoryMock1 cellClassForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn([BUKExampleTableViewCell class]);
+        OCMStub([rowCellFactoryMock1 reuseIdentifierForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn(@"BUKExampleTableViewCell");
+        OCMStub([rowCellFactoryMock1 configureCell:[OCMArg isKindOfClass:[UITableViewCell class]] withRow:OCMOCK_ANY inTableView:tableView atIndexPath:[OCMArg isKindOfClass:[NSIndexPath class]]]).andDo(^(NSInvocation *invocation) {
+            BUKExampleTableViewCell *cell;
+            [invocation getArgument:&cell atIndex:2];
             cell.textLabel.text = @"ccc";
-        }];
+        });
 
-        BUKTableViewCellFactory *sectionCellFactory1 = [BUKTableViewCellFactory factoryWithCellClass:[UITableViewCell class] configurator:^(__kindof UITableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        id sectionCellFactoryMock0 = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        OCMStub([sectionCellFactoryMock0 cellClassForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn([UITableViewCell class]);
+        OCMStub([sectionCellFactoryMock0 reuseIdentifierForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn(@"UITableViewCell");
+        OCMStub([sectionCellFactoryMock0 configureCell:[OCMArg isKindOfClass:[UITableViewCell class]] withRow:OCMOCK_ANY inTableView:tableView atIndexPath:[OCMArg isKindOfClass:[NSIndexPath class]]]).andDo(^(NSInvocation *invocation) {
+            UITableViewCell *cell;
+            [invocation getArgument:&cell atIndex:2];
             cell.textLabel.text = @"sss";
-        }];
+        });
 
-        BUKTableViewCellFactory *sectionCellFactory2 = [BUKTableViewCellFactory factoryWithCellClass:[BUKExampleTableViewCell class] configurator:^(__kindof UITableViewCell *cell, BUKTableViewRow *row, UITableView *tableView, NSIndexPath *indexPath) {
+        id sectionCellFactoryMock1 = OCMProtocolMock(@protocol(BUKTableViewCellFactoryProtocol));
+        OCMStub([sectionCellFactoryMock1 cellClassForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn([BUKExampleTableViewCell class]);
+        OCMStub([sectionCellFactoryMock1 reuseIdentifierForRow:OCMOCK_ANY atIndexPath:OCMOCK_ANY]).andReturn(@"BUKExampleTableViewCell");
+        OCMStub([sectionCellFactoryMock1 configureCell:[OCMArg isKindOfClass:[UITableViewCell class]] withRow:OCMOCK_ANY inTableView:tableView atIndexPath:[OCMArg isKindOfClass:[NSIndexPath class]]]).andDo(^(NSInvocation *invocation) {
+            BUKExampleTableViewCell *cell;
+            [invocation getArgument:&cell atIndex:2];
             cell.textLabel.text = @"ttt";
-        }];
+        });
 
-        dataSourceProvider.sections = @[
+        // NOTE: Should do mocking too.
+        provider.sections = @[
             // Section 0
             [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:@[
                 [BUKTableViewRow row],
-                [BUKTableViewRow rowWithObject:nil cellFactory:rowCellFactory1 selection:nil],
+                [BUKTableViewRow rowWithObject:nil cellFactory:rowCellFactoryMock0 selection:nil],
                 [BUKTableViewRow row]
-            ] footerViewFactory:nil cellFactory:sectionCellFactory1],
+            ] footerViewFactory:nil cellFactory:sectionCellFactoryMock0],
 
             // Section 1
             [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:@[
                 [BUKTableViewRow row],
                 [BUKTableViewRow row],
-            ] footerViewFactory:nil cellFactory:sectionCellFactory2],
+            ] footerViewFactory:nil cellFactory:sectionCellFactoryMock1],
+
             // Section 2
             [BUKTableViewSection sectionWithRows:@[
                 [BUKTableViewRow row],
-                [BUKTableViewRow rowWithObject:nil cellFactory:rowCellFactory2 selection:nil],
+                [BUKTableViewRow rowWithObject:nil cellFactory:rowCellFactoryMock1 selection:nil],
                 [BUKTableViewRow row],
                 [BUKTableViewRow row],
             ]],
@@ -239,31 +268,31 @@ describe(@"cells", ^{
     });
 
     it(@"should use provider's cell factory when neither of the row and its section has a cell factory", ^{
-        UITableViewCell *cell = [dataSourceProvider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+        UITableViewCell *cell = [provider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
         
         expect(cell).to.beMemberOf([UITableViewCell class]);
         expect(cell.textLabel.text).to.equal(@"aaa");
     });
 
     it(@"should use the rows cell factory when the row has a cell factory", ^{
-        UITableViewCell *cell = [dataSourceProvider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        UITableViewCell *cell = [provider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
         
         expect(cell).to.beMemberOf([BUKExampleTableViewCell class]);
         expect(cell.textLabel.text).to.equal(@"bbb");
         
-        cell = [dataSourceProvider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
+        cell = [provider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:2]];
         
         expect(cell).to.beMemberOf([BUKExampleTableViewCell class]);
         expect(cell.textLabel.text).to.equal(@"ccc");
     });
 
     it(@"should use the section's cell factory when row's is nil and section's cell factory exists", ^{
-        UITableViewCell *cell = [dataSourceProvider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        UITableViewCell *cell = [provider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 
         expect(cell).to.beMemberOf([BUKExampleTableViewCell class]);
         expect(cell.textLabel.text).to.equal(@"ttt");
 
-        cell = [dataSourceProvider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        cell = [provider tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 
         expect(cell).to.beMemberOf([UITableViewCell class]);
         expect(cell.textLabel.text).to.equal(@"sss");
@@ -271,109 +300,148 @@ describe(@"cells", ^{
 
     afterAll(^{
         tableView = nil;
-        dataSourceProvider = nil;
+        provider = nil;
     });
 });
 
 describe(@"section header/footer titles", ^{
-    __block BUKTableViewDataSourceProvider *dataSourceProvider;
+    __block BUKTableViewDataSourceProvider *provider;
     __block UITableView *tableView;
 
     beforeAll(^{
         tableView = [UITableView new];
-        dataSourceProvider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
-        BUKTableViewHeaderFooterViewFactory *viewFactory1 = [BUKTableViewHeaderFooterViewFactory factoryWithTitle:@"Header"];
-        BUKTableViewHeaderFooterViewFactory *viewFactory2 = [BUKTableViewHeaderFooterViewFactory factoryWithTitle:@"Footer"];
-        BUKTableViewHeaderFooterViewFactory *viewFactory3 = [BUKTableViewHeaderFooterViewFactory factoryWithTitle:@"Shoulder"];
-        BUKTableViewHeaderFooterViewFactory *viewFactory4 = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[UITableViewHeaderFooterView class] configurator:^(__kindof UITableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
-            view.textLabel.text = @"Toes";
-        }];
-        BUKTableViewHeaderFooterViewFactory *viewFactory5 = [BUKTableViewHeaderFooterViewFactory factoryWithTitle:@"Legs"];
+        provider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
 
-        dataSourceProvider.sections = @[
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory1 rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:viewFactory2],
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory3 rows:@[[BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:viewFactory4],
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory4 rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:viewFactory5],
-            [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:nil],
+        id viewFactoryMock0 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock0 titleForSection:OCMOCK_ANY atIndex:0]).andReturn(@"Header") ignoringNonObjectArgs];
+
+        id viewFactoryMock1 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock1 titleForSection:OCMOCK_ANY atIndex:0]).andReturn(@"Footer") ignoringNonObjectArgs];
+
+        id viewFactoryMock2 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock2 titleForSection:OCMOCK_ANY atIndex:0]).andReturn(@"Shoulder") ignoringNonObjectArgs];
+
+        id viewFactoryMock3 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock3 reuseIdentifierForSection:OCMOCK_ANY atIndex:0]).andReturn(@"UITableViewHeaderFooterView") ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock3 headerFooterViewClassForSection:OCMOCK_ANY atIndex:0]).andReturn([UITableViewHeaderFooterView class]) ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock3 configureView:[OCMArg isKindOfClass:[UITableViewHeaderFooterView class]] withSection:OCMOCK_ANY inTableView:tableView atIndex:0]).andDo(^(NSInvocation *invocation) {
+            UITableViewHeaderFooterView *view;
+            [invocation getArgument:&view atIndex:2];
+            view.textLabel.text = @"Toes";
+        }) ignoringNonObjectArgs];
+
+        id viewFactoryMock4 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock4 titleForSection:OCMOCK_ANY atIndex:0]).andReturn(@"Legs") ignoringNonObjectArgs];
+
+        provider.sections = @[
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock0 rows:nil footerViewFactory:viewFactoryMock1],
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock2 rows:nil footerViewFactory:viewFactoryMock3],
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock3 rows:nil footerViewFactory:viewFactoryMock4],
+            [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:nil footerViewFactory:nil],
         ];
 
-        dataSourceProvider.headerViewFactory = viewFactory1;
+        provider.headerViewFactory = viewFactoryMock0;
     });
 
     it(@"should return correct header titles", ^{
-        expect([dataSourceProvider tableView:tableView titleForHeaderInSection:0]).to.equal(@"Header");
-        expect([dataSourceProvider tableView:tableView titleForHeaderInSection:1]).to.equal(@"Shoulder");
-        expect([dataSourceProvider tableView:tableView titleForHeaderInSection:2]).to.beNil();
-        expect([dataSourceProvider tableView:tableView titleForHeaderInSection:3]).to.equal(@"Header");
+        expect([provider tableView:tableView titleForHeaderInSection:0]).to.equal(@"Header");
+        expect([provider tableView:tableView titleForHeaderInSection:1]).to.equal(@"Shoulder");
+        expect([provider tableView:tableView titleForHeaderInSection:2]).to.beNil();
+        expect([provider tableView:tableView titleForHeaderInSection:3]).to.equal(@"Header");
     });
 
     it(@"should return correct footer titles", ^{
-        expect([dataSourceProvider tableView:tableView titleForFooterInSection:0]).to.equal(@"Footer");
-        expect([dataSourceProvider tableView:tableView titleForFooterInSection:1]).to.beNil();
-        expect([dataSourceProvider tableView:tableView titleForFooterInSection:2]).to.equal(@"Legs");
-        expect([dataSourceProvider tableView:tableView titleForFooterInSection:3]).to.beNil();
+        expect([provider tableView:tableView titleForFooterInSection:0]).to.equal(@"Footer");
+        expect([provider tableView:tableView titleForFooterInSection:1]).to.beNil();
+        expect([provider tableView:tableView titleForFooterInSection:2]).to.equal(@"Legs");
+        expect([provider tableView:tableView titleForFooterInSection:3]).to.beNil();
     });
 });
 
+
 describe(@"section header/footer views", ^{
-    __block BUKTableViewDataSourceProvider *dataSourceProvider;
+    __block BUKTableViewDataSourceProvider *provider;
     __block UITableView *tableView;
 
     beforeAll(^{
         tableView = [UITableView new];
-        dataSourceProvider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
-        BUKTableViewHeaderFooterViewFactory *viewFactory1 = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[UITableViewHeaderFooterView class] configurator:^(__kindof UITableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
-            view.textLabel.text = @"header";
-        }];
-        BUKTableViewHeaderFooterViewFactory *viewFactory2 = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[BUKExampleTableViewHeaderFooterView class] configurator:^(__kindof UITableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
-            view.textLabel.text = @"another header";
-        }];
-        BUKTableViewHeaderFooterViewFactory *viewFactory3 = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[UITableViewHeaderFooterView class] configurator:^(__kindof UITableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
-            view.textLabel.text = @"footer";
-        }];
-        BUKTableViewHeaderFooterViewFactory *viewFactory4 = [BUKTableViewHeaderFooterViewFactory factoryWithViewClass:[BUKExampleTableViewHeaderFooterView class] configurator:^(__kindof UITableViewHeaderFooterView *view, BUKTableViewSection *section, UITableView *tableView, NSInteger index) {
-            view.textLabel.text = @"another footer";
-        }];
+        provider = [BUKTableViewDataSourceProvider providerWithTableView:tableView];
 
-        dataSourceProvider.sections = @[
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory1 rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:viewFactory3],
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory2 rows:@[[BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:viewFactory4],
-            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactory2 rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:nil],
-            [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:@[[BUKTableViewRow row], [BUKTableViewRow row], [BUKTableViewRow row]] footerViewFactory:nil],
+        id viewFactoryMock0 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock0 reuseIdentifierForSection:OCMOCK_ANY atIndex:0]).andReturn(@"UITableViewHeaderFooterView") ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock0 headerFooterViewClassForSection:OCMOCK_ANY atIndex:0]).andReturn([UITableViewHeaderFooterView class]) ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock0 configureView:[OCMArg isKindOfClass:[UITableViewHeaderFooterView class]] withSection:OCMOCK_ANY inTableView:tableView atIndex:0]).andDo(^(NSInvocation *invocation) {
+            UITableViewHeaderFooterView *view;
+            [invocation getArgument:&view atIndex:2];
+            view.textLabel.text = @"header";
+        }) ignoringNonObjectArgs];
+
+        id viewFactoryMock1 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock1 reuseIdentifierForSection:OCMOCK_ANY atIndex:0]).andReturn(@"BUKExampleTableViewHeaderFooterView") ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock1 headerFooterViewClassForSection:OCMOCK_ANY atIndex:0]).andReturn([BUKExampleTableViewHeaderFooterView class]) ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock1 configureView:[OCMArg isKindOfClass:[BUKExampleTableViewHeaderFooterView class]] withSection:OCMOCK_ANY inTableView:tableView atIndex:0]).andDo(^(NSInvocation *invocation) {
+            UITableViewHeaderFooterView *view;
+            [invocation getArgument:&view atIndex:2];
+            view.textLabel.text = @"another header";
+        }) ignoringNonObjectArgs];
+
+        id viewFactoryMock2 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock2 reuseIdentifierForSection:OCMOCK_ANY atIndex:0]).andReturn(@"UITableViewHeaderFooterView") ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock2 headerFooterViewClassForSection:OCMOCK_ANY atIndex:0]).andReturn([UITableViewHeaderFooterView class]) ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock2 configureView:[OCMArg isKindOfClass:[UITableViewHeaderFooterView class]] withSection:OCMOCK_ANY inTableView:tableView atIndex:0]).andDo(^(NSInvocation *invocation) {
+            UITableViewHeaderFooterView *view;
+            [invocation getArgument:&view atIndex:2];
+            view.textLabel.text = @"footer";
+        }) ignoringNonObjectArgs];
+
+        id viewFactoryMock3 = OCMProtocolMock(@protocol(BUKTableViewHeaderFooterViewFactoryProtocol));
+        [OCMStub([viewFactoryMock3 reuseIdentifierForSection:OCMOCK_ANY atIndex:0]).andReturn(@"BUKExampleTableViewHeaderFooterView") ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock3 headerFooterViewClassForSection:OCMOCK_ANY atIndex:0]).andReturn([BUKExampleTableViewHeaderFooterView class]) ignoringNonObjectArgs];
+        [OCMStub([viewFactoryMock3 configureView:[OCMArg isKindOfClass:[BUKExampleTableViewHeaderFooterView class]] withSection:OCMOCK_ANY inTableView:tableView atIndex:0]).andDo(^(NSInvocation *invocation) {
+            UITableViewHeaderFooterView *view;
+            [invocation getArgument:&view atIndex:2];
+            view.textLabel.text = @"another footer";
+        }) ignoringNonObjectArgs];
+
+        provider.sections = @[
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock0 rows:nil footerViewFactory:viewFactoryMock2],
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock1 rows:nil footerViewFactory:viewFactoryMock3],
+            [BUKTableViewSection sectionWithHeaderViewFactory:viewFactoryMock1 rows:nil footerViewFactory:nil],
+            [BUKTableViewSection sectionWithHeaderViewFactory:nil rows:nil footerViewFactory:nil],
         ];
         
-        dataSourceProvider.headerViewFactory = viewFactory1;
+        provider.headerViewFactory = viewFactoryMock0;
     });
 
     it(@"should return correct section header views", ^{
-        UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForHeaderInSection:0];
+        UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForHeaderInSection:0];
 
         expect(view).to.beMemberOf([UITableViewHeaderFooterView class]);
         expect(view.textLabel.text).to.equal(@"header");
 
-        view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForHeaderInSection:1];
+        view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForHeaderInSection:1];
 
         expect(view).to.beMemberOf([BUKExampleTableViewHeaderFooterView class]);
         expect(view.textLabel.text).to.equal(@"another header");
 
-        view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForHeaderInSection:3];
+        view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForHeaderInSection:3];
 
         expect(view).to.beMemberOf([UITableViewHeaderFooterView class]);
         expect(view.textLabel.text).to.equal(@"header");
     });
 
     it(@"should return correct section footer views", ^{
-        UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForFooterInSection:0];
+        UITableViewHeaderFooterView *view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForFooterInSection:0];
 
         expect(view).to.beMemberOf([UITableViewHeaderFooterView class]);
         expect(view.textLabel.text).to.equal(@"footer");
 
-        view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForFooterInSection:1];
+        view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForFooterInSection:1];
 
         expect(view).to.beMemberOf([BUKExampleTableViewHeaderFooterView class]);
         expect(view.textLabel.text).to.equal(@"another footer");
 
-        view = (UITableViewHeaderFooterView *)[dataSourceProvider tableView:tableView viewForFooterInSection:2];
+        view = (UITableViewHeaderFooterView *)[provider tableView:tableView viewForFooterInSection:2];
 
         expect(view).to.beNil();
     });
