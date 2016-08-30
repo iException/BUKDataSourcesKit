@@ -356,6 +356,11 @@ describe(@"section header/footer titles", ^{
         expect([provider tableView:tableView titleForFooterInSection:2]).to.equal(@"Legs");
         expect([provider tableView:tableView titleForFooterInSection:3]).to.beNil();
     });
+
+    afterAll(^{
+        provider = nil;
+        tableView = nil;
+    });
 });
 
 
@@ -445,6 +450,80 @@ describe(@"section header/footer views", ^{
 
         expect(view).to.beNil();
     });
+
+    afterAll(^{
+        tableView = nil;
+        provider = nil;
+    });
+});
+
+
+describe(@"dynamic sections", ^{
+
+    __block BUKTableViewDataSourceProvider *provider;
+    __block BUKTableViewRow *sectionMock0;
+    __block BUKTableViewRow *sectionMock1;
+
+    beforeAll(^{
+        sectionMock0 = OCMClassMock([BUKTableViewSection class]);
+        sectionMock1 = OCMClassMock([BUKTableViewSection class]);
+    });
+
+    beforeEach(^{
+        provider = [[BUKTableViewDataSourceProvider alloc] initWithTableView:nil sections:@[sectionMock0, sectionMock1]];
+    });
+
+    it(@"should increase count after adding a new section", ^{
+        [provider addSection:OCMClassMock([BUKTableViewRow class])];
+
+        expect(provider.sections).to.haveACountOf(3);
+    });
+
+    it(@"should decrease count after removing a section", ^{
+        [provider removeSectionAtIndex:1];
+
+        expect(provider.sections).to.haveACountOf(1);
+    });
+
+    it(@"should raise an exception if removing a section at an out-of-bounds index", ^{
+        expect(^{ [provider sectionAtIndex:3]; }).to.raiseAny();
+    });
+
+    it(@"should remove last section", ^{
+        [provider removeLastSection];
+
+        expect(provider.sections).to.haveACountOf(1);
+        expect(provider.sections.lastObject).toNot.equal(sectionMock1);
+    });
+
+    it(@"should replace section", ^{
+        id sectionMock = OCMClassMock([BUKTableViewSection class]);
+        [provider replaceSectionAtIndex:0 withSection:sectionMock];
+
+        expect(provider.sections[0]).to.equal(sectionMock);
+        expect(provider.sections[1]).to.equal(sectionMock1);
+        expect(provider.sections).to.haveACountOf(2);
+    });
+
+    it(@"should inset a section", ^{
+        id sectionMock = OCMClassMock([BUKTableViewSection class]);
+        [provider insertSection:sectionMock atIndex:1];
+
+        expect(provider.sections[0]).to.equal(sectionMock0);
+        expect(provider.sections[1]).to.equal(sectionMock);
+        expect(provider.sections[2]).to.equal(sectionMock1);
+        expect(provider.sections).to.haveACountOf(3);
+    });
+
+    afterEach(^{
+        provider = nil;
+    });
+
+    afterAll(^{
+        sectionMock0 = nil;
+        sectionMock1 = nil;
+    });
+
 });
 
 SpecEnd
