@@ -18,6 +18,7 @@
 
 @interface BUKTableViewDataSourceProvider ()
 
+@property (nonatomic) NSMutableArray<BUKTableViewSection *> *mutableSections;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredHeaderFooterViewIdentifiers;
 
@@ -50,6 +51,7 @@
 
 #pragma mark - Accessors
 
+@dynamic sections;
 @synthesize registeredCellIdentifiers = _registeredCellIdentifiers;
 @synthesize registeredHeaderFooterViewIdentifiers = _registeredHeaderFooterViewIdentifiers;
 
@@ -82,9 +84,22 @@
 }
 
 
+- (NSMutableArray<BUKTableViewSection *> *)mutableSections {
+    if (!_mutableSections) {
+        _mutableSections = [NSMutableArray new];
+    }
+    return _mutableSections;
+}
+
+
+- (NSArray<BUKTableViewSection *> *)sections {
+    return [self.mutableSections copy];
+}
+
+
 - (void)setSections:(NSArray<BUKTableViewSection *> *)sections {
     NSAssert([NSThread isMainThread], @"You must access BUKTableViewDataSourceProvider from the main thread.");
-    _sections = sections;
+    self.mutableSections = [sections mutableCopy];
     [self refresh];
 }
 
@@ -120,7 +135,7 @@
         _automaticallyRegisterCells = YES;
         _automaticallyRegisterSectionHeaderFooters = YES;
         _tableView = tableView;
-        _sections = sections;
+        _mutableSections = [sections mutableCopy];
         _cellFactory = cellFactory;
         _headerViewFactory = headerFactory;
         _footerViewFactory = footerFactory;
@@ -147,12 +162,12 @@
 #pragma mark - Public
 
 - (BUKTableViewSection *)sectionAtIndex:(NSInteger)index {
-    if (self.sections.count <= index) {
+    if (self.mutableSections.count <= index) {
         NSAssert1(NO, @"Invalid section index: %ld", (long)index);
         return nil;
     }
 
-    return self.sections[index];
+    return self.mutableSections[index];
 }
 
 
@@ -171,6 +186,33 @@
     [self refreshRegisteredCellIdentifiers];
     [self refreshRegisteredHeaderFooterViewIdentifiers];
     [self refreshTableSections];
+}
+
+
+#pragma mark - Manipulating Sections
+
+- (void)addSection:(BUKTableViewSection *)section {
+    [self.mutableSections addObject:section];
+}
+
+
+- (void)insertSection:(BUKTableViewSection *)section atIndex:(NSUInteger)index {
+    [self.mutableSections insertObject:section atIndex:index];
+}
+
+
+- (void)removeLastSection {
+    [self.mutableSections removeLastObject];
+}
+
+
+- (void)removeSectionAtIndex:(NSUInteger)index {
+    [self.mutableSections removeObjectAtIndex:index];
+}
+
+
+- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKTableViewSection *)section {
+    [self.mutableSections replaceObjectAtIndex:index withObject:section];
 }
 
 
@@ -193,7 +235,7 @@
         return;
     }
 
-    [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
+    [self.mutableSections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger i, BOOL * _Nonnull stop) {
         [section.rows enumerateObjectsUsingBlock:^(BUKTableViewRow * _Nonnull row, NSUInteger j, BOOL * _Nonnull stop) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:j inSection:i];
             id<BUKTableViewCellFactoryProtocol> cellFactory = [self cellFactoryForRow:row inSection:section];
@@ -238,7 +280,7 @@
         return;
     }
 
-    [self.sections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.mutableSections enumerateObjectsUsingBlock:^(BUKTableViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
         id<BUKTableViewHeaderFooterViewFactoryProtocol> headerViewFactory = [self headerViewFactoryForSection:section];
         [self registerHeaderFooterViewIfNecessary:headerViewFactory section:section index:idx];
         id<BUKTableViewHeaderFooterViewFactoryProtocol> footerViewFactory = [self footerViewFactoryForSection:section];
@@ -351,7 +393,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sections.count;
+    return self.mutableSections.count;
 }
 
 
