@@ -12,10 +12,12 @@
 #import "BUKCollectionViewCellFactoryProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 #import "BUKCollectionViewSelectionProtocol.h"
+#import "BUKCollectionViewDataSourceProviderDelegate.h"
 
 
-@interface BUKCollectionViewDataSourceProvider ()
+@interface BUKCollectionViewDataSourceProvider () <BUKCollectionViewSectionDelegate>
 
+@property (nonatomic, copy) NSMutableArray<__kindof BUKCollectionViewSection *> *mutableSections;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredSupplementaryViewIdentifiers;
 
@@ -83,7 +85,10 @@
 
 - (void)setSections:(NSArray<BUKCollectionViewSection *> *)sections {
     NSAssert([NSThread isMainThread], @"You must access BUKCollectionViewDataSourceProvider from the main thread.");
-    _sections = [sections copy];
+    _mutableSections = [[NSMutableArray alloc] initWithArray:[sections copy]];
+    [_mutableSections enumerateObjectsUsingBlock:^(__kindof BUKCollectionViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
+        section.delegate = self;
+    }];
     [self refresh];
 }
 
@@ -110,9 +115,9 @@
         _automaticallyRegisterCells = YES;
         _automaticallyRegisterSupplementaryViews = YES;
         _collectionView = collectionView;
-        _sections = sections;
         _cellFactory = cellFactory;
         _supplementaryViewFactory = supplementaryViewFactory;
+        self.sections = sections;
         [self updateCollectionView];
     }
     return self;
@@ -162,6 +167,22 @@
     return nil;
 }
 
+#pragma mark - BUKCollectionViewSectionDelegate
+- (void)sectionNeedReload:(BUKCollectionViewSection *)section atItem:(NSInteger)item
+{
+    NSInteger sectionIndex = [self.sections indexOfObject:section];
+    if (sectionIndex >= 0) {
+        [self.collectionView reloadItemsAtIndexPaths:[NSIndexPath indexPathForItem:item inSection:sectionIndex]];
+    }
+}
+
+- (void)sectionNeedReload:(BUKCollectionViewSection *)section
+{
+    NSInteger sectionIndex = [self.sections indexOfObject:section];
+    if (sectionIndex >= 0) {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+    }
+}
 
 #pragma mark - Private
 
@@ -407,4 +428,125 @@
     }
 }
 
+#pragma mark - Dynamics
+- (void)insertSection:(BUKCollectionViewSection *)section atIndex:(NSInteger)index
+{
+    if (index < 0 || index > self.sections.count || !section) {
+        return;
+    }
+    [self.mutableSections insertObject:section atIndex:index];
+    if ([self.delegate respondsToSelector:@selector(provider:didInsertSection:atIndex:)]) {
+        [self.delegate provider:self didInsertSection:section atIndex:index];
+    } else {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+    }
+}
+
+- (void)removeSectionAtIndex:(NSInteger)index
+{
+    if (index < 0 || index >= self.sections.count || !self.sections.count) {
+        return;
+    }
+    [self.mutableSections removeObjectAtIndex:index];
+    if ([self.delegate respondsToSelector:@selector(provider:didRemoveSectionAtIndex:)]) {
+        [self.delegate provider:self didRemoveSectionAtIndex:index];
+    } else {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+    }
+}
+
+- (void)insertItem:(BUKCollectionViewItem *)item atIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section < 0 || indexPath.section >= self.sections.count || !item) {
+        return;
+    }
+    BUKCollectionViewSection *section = self.sections[indexPath.section];
+    if (indexPath.row < 0 || indexPath.row > section.items.count) {
+        return;
+    }
+    [section insertItem:item atIndex:indexPath.row];
+
+    if ([self.delegate respondsToSelector:@selector(provider:didInsertItem:atIndexPath:)]) {
+        [self.delegate provider:self didInsertItem:item atIndexPath:indexPath];
+    } else {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+    }
+}
+
+- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section < 0 || indexPath.section >= self.sections.count) {
+        return;
+    }
+    BUKCollectionViewSection *section = self.sections[indexPath.section];
+    if (indexPath.row < 0 || indexPath.row >= section.items.count) {
+        return;
+    }
+    [section removeItemAtIndex:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(provider:didRemoveItemAtIndexPath:)]) {
+        [self.delegate provider:self didRemoveItemAtIndexPath:indexPath];
+    } else {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+    }
+}
+
+- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKCollectionViewSection *)section
+{
+    if (index < 0 || !self.sections.count || index >= self.sections.count) {
+        return;
+    }
+    [self.mutableSections replaceObjectAtIndex:index withObject:section];
+    if ([self.delegate respondsToSelector:@selector(provider:didReplaceSectionAtIndex:withSection:)]) {
+        [self.delegate provider:self didReplaceSectionAtIndex:index withSection:section];
+    } else {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+    }
+}
+
+- (void)insertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+{
+    if (!items.count || items.count != indexPaths.count) {
+        return;
+    }
+    NSMutableIndexSet *modifiedSet = [NSMutableIndexSet indexSet];
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger index, BOOL * _Nonnull stop) {
+        if (indexPath.section < 0 || indexPath.section >= self.sections.count) {
+            *stop = YES;
+        }
+        BUKCollectionViewSection *section = self.sections[indexPath.section];
+        if (indexPath.row < 0 || indexPath.row > section.items.count) {
+            *stop = YES;
+        }
+        BUKCollectionViewItem *item = items[index];
+        [section insertItem:item atIndex:indexPath.row];
+        [modifiedSet addIndex:indexPath.section];
+    }];
+    if (!modifiedSet.count) {
+        return;
+    }
+    if ([self.delegate respondsToSelector:@selector(provider:didInsertItems:atIndexPaths:)]) {
+        [self.delegate provider:self didInsertItems:items atIndexPaths:indexPaths];
+    } else {
+        [self.collectionView reloadSections:modifiedSet];
+    }
+}
+
+- (void)reload
+{
+    [self.collectionView reloadData];
+}
+
+#pragma mark - getters
+- (NSMutableArray<BUKCollectionViewSection *> *)mutableSections
+{
+    if (!_mutableSections) {
+        _mutableSections = [NSMutableArray array];
+    }
+    return _mutableSections;
+}
+
+- (NSArray<BUKCollectionViewSection *> *)sections
+{
+    return _mutableSections;
+}
 @end

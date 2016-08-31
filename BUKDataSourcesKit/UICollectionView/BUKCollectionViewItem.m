@@ -8,7 +8,6 @@
 
 #import "BUKCollectionViewItem.h"
 
-
 @implementation BUKCollectionViewItem
 
 #pragma mark - Class Methods
@@ -48,6 +47,13 @@
 
 - (instancetype)init {
     return [self initWithObject:nil];
+}
+
+- (void)reloadItem
+{
+    if ([self.delegate respondsToSelector:@selector(itemNeedReload:)]) {
+        [self.delegate itemNeedReload:self];
+    }
 }
 
 @end

@@ -12,7 +12,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   BUKDataSourcesKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   BUKDataSourcesKit: f85fbb5a2950446e59fe67bc0244ef7a57829498
