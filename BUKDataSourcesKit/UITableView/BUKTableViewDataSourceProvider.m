@@ -189,33 +189,6 @@
 }
 
 
-#pragma mark - Manipulating Sections
-
-- (void)addSection:(BUKTableViewSection *)section {
-    [self.mutableSections addObject:section];
-}
-
-
-- (void)insertSection:(BUKTableViewSection *)section atIndex:(NSUInteger)index {
-    [self.mutableSections insertObject:section atIndex:index];
-}
-
-
-- (void)removeLastSection {
-    [self.mutableSections removeLastObject];
-}
-
-
-- (void)removeSectionAtIndex:(NSUInteger)index {
-    [self.mutableSections removeObjectAtIndex:index];
-}
-
-
-- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKTableViewSection *)section {
-    [self.mutableSections replaceObjectAtIndex:index withObject:section];
-}
-
-
 #pragma mark - Private
 
 - (void)updateTableView {
@@ -541,6 +514,40 @@
     }
 
     return [heightInfo headerFooterHeightForSection:section atIndex:index];
+}
+
+@end
+
+
+@implementation BUKTableViewDataSourceProvider (ManipulatingSections)
+
+- (void)addSection:(BUKTableViewSection *)section {
+    [self.mutableSections addObject:section];
+}
+
+
+- (void)insertSection:(BUKTableViewSection *)section atIndex:(NSUInteger)index {
+    [self.mutableSections insertObject:section atIndex:index];
+}
+
+
+- (void)removeLastSection {
+    [self.mutableSections removeLastObject];
+}
+
+
+- (void)removeSectionAtIndex:(NSUInteger)index {
+    [self.mutableSections removeObjectAtIndex:index];
+}
+
+
+- (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKTableViewSection *)section {
+    [self.mutableSections replaceObjectAtIndex:index withObject:section];
+}
+
+
+- (void)removeAllSections {
+    [self.mutableSections removeAllObjects];
 }
 
 @end

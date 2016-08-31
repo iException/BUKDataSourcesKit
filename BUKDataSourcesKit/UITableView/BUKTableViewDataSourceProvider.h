@@ -55,13 +55,16 @@
 - (BUKTableViewRow *)rowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)refresh;
 
+@end
 
-#pragma mark - Manipulating Sections
+
+@interface BUKTableViewDataSourceProvider (ManipulatingSections)
 
 - (void)addSection:(BUKTableViewSection *)section;
 - (void)insertSection:(BUKTableViewSection *)section atIndex:(NSUInteger)index;
 - (void)removeLastSection;
 - (void)removeSectionAtIndex:(NSUInteger)index;
 - (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKTableViewSection *)section;
+- (void)removeAllSections;
 
 @end

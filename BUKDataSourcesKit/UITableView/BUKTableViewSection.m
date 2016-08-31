@@ -103,6 +103,10 @@
     return nil;
 }
 
+@end
+
+
+@implementation BUKTableViewSection (ManipulatingRows)
 
 - (void)addRow:(BUKTableViewRow *)row {
     [self.mutableRows addObject:row];
