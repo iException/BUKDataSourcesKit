@@ -48,5 +48,6 @@
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)insertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 - (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKCollectionViewSection *)section;
+- (void)reload;
 
 @end

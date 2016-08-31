@@ -15,7 +15,7 @@
 #import "BUKCollectionViewDataSourceProviderDelegate.h"
 
 
-@interface BUKCollectionViewDataSourceProvider ()
+@interface BUKCollectionViewDataSourceProvider () <BUKCollectionViewSectionDelegate>
 
 @property (nonatomic, copy) NSMutableArray<__kindof BUKCollectionViewSection *> *mutableSections;
 @property (nonatomic, readonly) NSMutableSet<NSString *> *registeredCellIdentifiers;
@@ -86,6 +86,9 @@
 - (void)setSections:(NSArray<BUKCollectionViewSection *> *)sections {
     NSAssert([NSThread isMainThread], @"You must access BUKCollectionViewDataSourceProvider from the main thread.");
     _mutableSections = [[NSMutableArray alloc] initWithArray:[sections copy]];
+    [_mutableSections enumerateObjectsUsingBlock:^(__kindof BUKCollectionViewSection * _Nonnull section, NSUInteger idx, BOOL * _Nonnull stop) {
+        section.delegate = self;
+    }];
     [self refresh];
 }
 
@@ -164,6 +167,22 @@
     return nil;
 }
 
+#pragma mark - BUKCollectionViewSectionDelegate
+- (void)sectionNeedReload:(BUKCollectionViewSection *)section atItem:(NSInteger)item
+{
+    NSInteger sectionIndex = [self.sections indexOfObject:section];
+    if (sectionIndex >= 0) {
+        [self.collectionView reloadItemsAtIndexPaths:[NSIndexPath indexPathForItem:item inSection:sectionIndex]];
+    }
+}
+
+- (void)sectionNeedReload:(BUKCollectionViewSection *)section
+{
+    NSInteger sectionIndex = [self.sections indexOfObject:section];
+    if (sectionIndex >= 0) {
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+    }
+}
 
 #pragma mark - Private
 
@@ -489,31 +508,8 @@
     if (!items.count || items.count != indexPaths.count) {
         return;
     }
-    NSMutableArray<NSIndexPath *> *sortedIndexPaths = [[NSMutableArray alloc] initWithArray:indexPaths];
-    [sortedIndexPaths sortUsingComparator:^NSComparisonResult(NSIndexPath * _Nonnull indexPath1, NSIndexPath * _Nonnull indexPath2) {
-        if (indexPath1.section == indexPath2.section) {
-            NSInteger row1 = indexPath1.row;
-            NSInteger row2 = indexPath2.row;
-            if (row1 > row2) {
-                return NSOrderedDescending;
-            }
-            if (row1 < row2) {
-                return NSOrderedAscending;
-            }
-            return NSOrderedSame;
-        }
-        NSInteger section1 = indexPath1.section;
-        NSInteger section2 = indexPath2.section;
-        if (section1 > section2) {
-            return NSOrderedDescending;
-        }
-        if (section1 < section2) {
-            return NSOrderedAscending;
-        }
-        return NSOrderedSame;
-    }];
     NSMutableIndexSet *modifiedSet = [NSMutableIndexSet indexSet];
-    [sortedIndexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger index, BOOL * _Nonnull stop) {
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger index, BOOL * _Nonnull stop) {
         if (indexPath.section < 0 || indexPath.section >= self.sections.count) {
             *stop = YES;
         }
@@ -533,6 +529,11 @@
     } else {
         [self.collectionView reloadSections:modifiedSet];
     }
+}
+
+- (void)reload
+{
+    [self.collectionView reloadData];
 }
 
 #pragma mark - getters

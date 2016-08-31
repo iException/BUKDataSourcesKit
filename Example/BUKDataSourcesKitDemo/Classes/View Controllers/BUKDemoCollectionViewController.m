@@ -95,7 +95,12 @@
 #pragma mark - BUKCollectionViewDataSourceProviderDelegate
 - (void)provider:(BUKCollectionViewDataSourceProvider *)provider didInsertItems:(NSArray<__kindof BUKCollectionViewItem *> *)items atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
 {
-    [provider.collectionView reloadData];
+    [provider reload];
+}
+
+- (void)provider:(BUKCollectionViewDataSourceProvider *)provider didRemoveSectionAtIndex:(NSInteger)index
+{
+    [provider.collectionView reloadSections:[NSIndexSet indexSetWithIndex:index]];
 }
 
 #pragma mark - action handler

@@ -7,6 +7,7 @@
 //
 
 #import "BUKCollectionViewSection.h"
+#import "BUKCollectionViewItem.h"
 
 @interface BUKCollectionViewSection ()
 
@@ -37,9 +38,9 @@
 
 - (instancetype)initWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items cellFactory:(id<BUKCollectionViewCellFactoryProtocol>)cellFactory supplementaryViewFactory:(id<BUKCollectionViewSupplementaryViewFactoryProtocol>)supplementaryViewFactory {
     if ((self = [super init])) {
-        _mutableItems = [[NSMutableArray alloc] initWithArray:[items copy]];
         _cellFactory = cellFactory;
         _supplementaryViewFactory = supplementaryViewFactory;
+        [self setItems:[items copy]];
     }
 
     return self;
@@ -67,8 +68,16 @@
     return nil;
 }
 
+#pragma mark - BUKCollectionViewItemDelegate
+- (void)itemNeedReload:(BUKCollectionViewItem *)item
+{
+    NSInteger itemIndex = [self.items indexOfObject:item];
+    if (itemIndex >= 0 && [self.delegate respondsToSelector:@selector(sectionNeedReload:atItem:)]) {
+        [self.delegate sectionNeedReload:self atItem:itemIndex];
+    }
+}
+
 #pragma mark - Dynamics
-// dynamics
 - (void)insertItem:(BUKCollectionViewItem *)item atIndex:(NSInteger)index
 {
     if (index < 0 || index > self.items.count || !item) {
@@ -85,10 +94,20 @@
     [self.mutableItems removeObjectAtIndex:index];
 }
 
+- (void)reload
+{
+    if ([self.delegate respondsToSelector:@selector(sectionNeedReload:)]) {
+        [self.delegate sectionNeedReload:self];
+    }
+}
+
 #pragma mark - setters
 - (void)setItems:(NSArray<__kindof BUKCollectionViewItem *> *)items
 {
     _mutableItems = [[NSMutableArray alloc] initWithArray:items];
+    [_mutableItems enumerateObjectsUsingBlock:^(__kindof BUKCollectionViewItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+        item.delegate = self;
+    }];
 }
 
 #pragma mark - getters
