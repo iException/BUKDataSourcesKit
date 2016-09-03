@@ -13,6 +13,7 @@
 @class BUKCollectionViewItem;
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
+@protocol BUKCollectionViewDisplayProtocol;
 @protocol BUKCollectionViewSelectionProtocol;
 
 
@@ -23,6 +24,7 @@
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 @property (nonatomic) id<BUKCollectionViewSelectionProtocol> itemSelection;
+@property (nonatomic) id<BUKCollectionViewDisplayProtocol> itemDisplay;
 @property (nonatomic) BOOL automaticallyDeselectItems;
 @property (nonatomic) BOOL automaticallyRegisterCells;
 @property (nonatomic) BOOL automaticallyRegisterSupplementaryViews;
