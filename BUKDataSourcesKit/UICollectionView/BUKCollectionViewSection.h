@@ -12,7 +12,7 @@
 @protocol BUKCollectionViewCellFactoryProtocol;
 @protocol BUKCollectionViewSupplementaryViewFactoryProtocol;
 @protocol BUKCollectionViewSelectionProtocol;
-
+@protocol BUKCollectionViewDisplayProtocol;
 
 @interface BUKCollectionViewSection : NSObject
 
@@ -21,6 +21,7 @@
 @property (nonatomic) id<BUKCollectionViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKCollectionViewSupplementaryViewFactoryProtocol> supplementaryViewFactory;
 @property (nonatomic) id<BUKCollectionViewSelectionProtocol> itemSelection;
+@property (nonatomic) id<BUKCollectionViewDisplayProtocol> itemDisplay;
 
 + (instancetype)section;
 + (instancetype)sectionWithItems:(NSArray<__kindof BUKCollectionViewItem *> *)items;

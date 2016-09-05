@@ -12,6 +12,7 @@
 #import "BUKCollectionViewCellFactoryProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 #import "BUKCollectionViewSelectionProtocol.h"
+#import "BUKCollectionViewDisplayProtocol.h"
 
 
 @interface BUKCollectionViewDataSourceProvider ()
@@ -300,6 +301,22 @@
     return [self itemSelectionForItem:item inSection:section];
 }
 
+- (id<BUKCollectionViewDisplayProtocol>)itemDisplayForItem:(BUKCollectionViewItem *)item inSection:(BUKCollectionViewSection *)section {
+    if (item.display) {
+        return item.display;
+    }
+    if (section.itemDisplay) {
+        return section.itemDisplay;
+    }
+    return self.itemDisplay;
+}
+
+- (id<BUKCollectionViewDisplayProtocol>)itemDisplayForItemAtIndexPath:(NSIndexPath *)indexPath {
+    BUKCollectionViewSection *section = [self sectionAtIndex:indexPath.section];
+    BUKCollectionViewItem *item = [section itemAtIndex:indexPath.item];
+    return [self itemDisplayForItem:item inSection:section];
+}
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -324,6 +341,21 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    id<BUKCollectionViewDisplayProtocol> display = [self itemDisplayForItemAtIndexPath:indexPath];
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([display respondsToSelector:@selector(collectionView:willDisplayCell:withModelItem:forItemAtIndexPath:)]) {
+        [display collectionView:collectionView willDisplayCell:cell withModelItem:item forItemAtIndexPath:indexPath];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    id<BUKCollectionViewDisplayProtocol> display = [self itemDisplayForItemAtIndexPath:indexPath];
+    BUKCollectionViewItem *item = [self itemAtIndexPath:indexPath];
+    if ([display respondsToSelector:@selector(collectionView:didEndDisplayingCell:withModelItem:forItemAtIndexPath:)]) {
+        [display collectionView:collectionView didEndDisplayingCell:cell withModelItem:item forItemAtIndexPath:indexPath];
+    }
+}
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     BUKCollectionViewSection *section = [self sectionAtIndex:indexPath.section];
