@@ -21,6 +21,8 @@
 #import "BUKCollectionViewSectionFlowLayoutInfo.h"
 #import "BUKCollectionViewSelection.h"
 #import "BUKCollectionViewSelectionProtocol.h"
+#import "BUKCollectionViewDisplay.h"
+#import "BUKCollectionViewDisplayProtocol.h"
 #import "BUKCollectionViewSupplementaryViewFactory.h"
 #import "BUKCollectionViewSupplementaryViewFactoryProtocol.h"
 
