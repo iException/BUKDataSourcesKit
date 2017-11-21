@@ -11,6 +11,19 @@
 
 @implementation BUKTableViewRow
 
+#pragma mark - Accessors
+
+- (void)setObject:(id)object {
+    if ([self.delegate respondsToSelector:@selector(rowWillChangeContent:)]) {
+        [self.delegate rowWillChangeContent:self];
+    }
+    _object = object;
+    if ([self.delegate respondsToSelector:@selector(rowDidChangeContent:)]) {
+        [self.delegate rowDidChangeContent:self];
+    }
+}
+
+
 #pragma mark - Class Methods
 
 + (instancetype)row {

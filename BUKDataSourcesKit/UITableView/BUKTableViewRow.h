@@ -12,9 +12,11 @@
 @protocol BUKTableViewCellFactoryProtocol;
 @protocol BUKTableViewSelectionProtocol;
 @protocol BUKTableViewRowHeightInfoProtocol;
+@protocol BUKTableViewRowDelegate;
 
 @interface BUKTableViewRow : NSObject
 
+@property (nonatomic, weak) id<BUKTableViewRowDelegate> delegate;
 @property (nonatomic) id<BUKTableViewCellFactoryProtocol> cellFactory;
 @property (nonatomic) id<BUKTableViewSelectionProtocol> selection;
 @property (nonatomic) id<BUKTableViewRowHeightInfoProtocol> heightInfo;
@@ -26,5 +28,14 @@
 
 - (instancetype)initWithObject:(id)object;
 - (instancetype)initWithObject:(id)object cellFactory:(id<BUKTableViewCellFactoryProtocol>)cellFactory selection:(id<BUKTableViewSelectionProtocol>)selection NS_DESIGNATED_INITIALIZER;
+
+@end
+
+
+@protocol BUKTableViewRowDelegate <NSObject>
+
+@optional
+- (void)rowWillChangeContent:(BUKTableViewRow *)row;
+- (void)rowDidChangeContent:(BUKTableViewRow *)row;
 
 @end

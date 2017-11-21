@@ -16,11 +16,14 @@
 @protocol BUKTableViewRowHeightInfoProtocol;
 @protocol BUKTableViewSectionHeaderFooterHeightInfoProtocol;
 @protocol BUKTableViewSelectionProtocol;
+@protocol BUKTableViewDataSourceProviderDelegate;
+
 
 @interface BUKTableViewDataSourceProvider : NSObject <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, copy) NSArray<BUKTableViewSection *> *sections;
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, weak) id<BUKTableViewDataSourceProviderDelegate> delegate;
 @property (nonatomic) BOOL automaticallyDeselectRows;
 @property (nonatomic) BOOL automaticallyRegisterCells;
 @property (nonatomic) BOOL automaticallyRegisterSectionHeaderFooters;
@@ -66,5 +69,23 @@
 - (void)removeSectionAtIndex:(NSUInteger)index;
 - (void)replaceSectionAtIndex:(NSInteger)index withSection:(BUKTableViewSection *)section;
 - (void)removeAllSections;
+
+@end
+
+
+@protocol BUKTableViewDataSourceProviderDelegate <NSObject>
+
+typedef NS_ENUM(NSUInteger, BUKTableViewDataSourceChangeType) {
+    BUKTableViewDataSourceChangeInsert = 1,
+    BUKTableViewDataSourceChangeDelete = 2,
+    BUKTableViewDataSourceChangeMove = 3,
+    BUKTableViewDataSourceChangeUpdate = 4
+};
+
+@optional
+- (void)provider:(BUKTableViewDataSourceProvider *)provider didChangeRow:(BUKTableViewRow *)row atIndexPath:(NSIndexPath *)indexPath forChangeType:(BUKTableViewDataSourceChangeType)type newIndexPath:(NSIndexPath *)newIndexPath;
+- (void)provider:(BUKTableViewDataSourceProvider *)provider didChangeSection:(BUKTableViewSection *)section atIndex:(NSUInteger)sectionIndex forChangeType:(BUKTableViewDataSourceChangeType)type;
+- (void)providerWillChangeContent:(BUKTableViewDataSourceProvider *)controller;
+- (void)providerDidChangeContent:(BUKTableViewDataSourceProvider *)controller;
 
 @end

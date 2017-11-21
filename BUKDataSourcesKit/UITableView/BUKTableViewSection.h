@@ -62,3 +62,12 @@
 - (void)replaceRowAtIndex:(NSUInteger)index withRow:(BUKTableViewRow *)row;
 
 @end
+
+
+@protocol BUKTableViewSectionDelegate <NSObject>
+
+@optional
+- (void)sectionWillChangeContent:(BUKTableViewSection *)section;
+- (void)sectionDidChangeContent:(BUKTableViewSection *)section;
+
+@end
